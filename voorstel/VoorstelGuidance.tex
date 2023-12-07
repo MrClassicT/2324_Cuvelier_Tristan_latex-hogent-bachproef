@@ -1,44 +1,37 @@
-%---------- Inleiding ---------------------------------------------------------
+% -- handige info --
 
-\section{Introductie}%
-\label{sec:introductie}
+% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
+% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
+%   geen onderdeel is van de zin.
+% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
+%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
+%   ...'')
 
-LaTeX (\LaTeX) uitspraak: la-tech; is een populair softwaresysteem in de wetenschappelijke wereld omdat het uitblinkt in het zetten van technische documenten,
-en beschikbaar is voor bijna alle computersystemen \autocite{Wiki23}.
 
-Niet alleen in de wereld van de wetenschap wordt LaTeX gebruikt. Ook studenten op hoge scholen en universiteiten maken er gebruik van voor het schrijven van bachelor- en/of masterproeven.
+% ---- Inleiding ----
 
-Bij het schrijven van, al dan niet wetenschappelijke, teksten is het uitermate belangrijk om aan een correcte vorm van bronvermelding te doen.
+Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
 
-Binnen LaTeX zijn er verschillende manieren om dit aan te pakken. Eén van deze manieren is met behulp van BibLaTeX, een package speciaal gebouwd voor deze taak.
-
-Studenten te HoGent dienen gebruik te maken van deze combinatie bij het schrijven van hun bachelorproef. Ondanks dat lectoren veel moeite steken in het bondig toelichten van het correcte gebruik, worden er nog veel fouten gemaakt op het correct bijhouden van bronnen. 
-Op deze groep zal deze bachelorproef zich focussen, met behulp van een statische analysetool, ook wel linter genoemd, zouden er al veel van de herhalende fouten voorkomen kunnen worden. Een linter is een programma dat broncode of gestructureerde dataformaten kan controleren op stijl, syntax en logische fouten \autocite{Kamunya2023}.
-
-Het zou dus uitermate geschikt zijn om de studenten een linter te laten gebruiken om hen zo te helpen bij het voorkomen of opsporen van de gemaakte fouten. Zo dienen lectoren hen niet keer op keer op dezelfde fouten te wijzen.
-
-BibLaTeX is voortkomende uit BibTex en biedt meer opties om bibliografieën en citaten te configureren \autocite{Cassidy2013}. Hoewel er voor BibTex reeds een linter bestaat, is deze niet compatibel met BibLaTeX.
-
-Het doel van deze bachelorproef is om een analyse \& de software-architectuur uit te werken voor een BibLaTeX linter en er een prototype voor te schrijven in een passende programmeertaal. 
-
-Concreet betekent dit:
 \begin{itemize}
-  \item De lijst van gewenste functionele en niet-functionele requirements aanvullen en structureren naar prioriteiten
-  \item De werking van bestaande linters bestuderen als inspiratiebron
-  \item Een gemotiveerde keuze maken voor de te gebruiken programmeertaal en eventuele libraries
-  \item Een prototype met een minimale set van linting-regels implementeren
-  \item Unit tests schrijven met zo compleet mogelijke code coverage
-  \item CI pipeline opzetten voor packaging en testing
-  \item Documentatie schrijven voor het gebruik en uitbreiden van de linting-regels
+  \item kaderen thema
+  \item de doelgroep
+  \item de probleemstelling en (centrale) onderzoeksvraag
+  \item de onderzoeksdoelstelling
 \end{itemize}
 
-Als eindresultaat voor deze bachelorproef zal er een open-source prototype opgesteld worden waaraan vrijwilligers verder kunnen werken.
+Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. 
+Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+
+De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, 
+ een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+
+Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
+
+Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots
+ Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
 
-%---------- Stand van zaken ---------------------------------------------------
-
-\section{State-of-the-art}%
-\label{sec:state-of-the-art}
+% ---- Stand van zaken -----
 
 Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
 
@@ -52,9 +45,9 @@ Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle no
 
 Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
-%---------- Methodologie ------------------------------------------------------
-\section{Methodologie}%
-\label{sec:methodologie}
+
+
+% ---- Methodologie ----
 
 Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
 
@@ -68,9 +61,8 @@ Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt
 
 Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
 
-%---------- Verwachte resultaten ----------------------------------------------
-\section{Verwacht resultaat, conclusie}%
-\label{sec:verwachte_resultaten}
+
+% ---- Verwachte resultaten ----
 
 Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
 
