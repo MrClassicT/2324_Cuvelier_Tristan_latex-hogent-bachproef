@@ -19,7 +19,7 @@ Het zou dus uitermate geschikt zijn om de studenten een linter te laten gebruike
 
 BibLaTeX is voortkomende uit BibTex en biedt meer opties om bibliografieën en citaten te configureren \autocite{Cassidy2013}. Hoewel er voor BibTex reeds een linter bestaat, is deze niet compatibel met BibLaTeX.
 
-Het doel van deze bachelorproef is om een analyse \& de software-architectuur uit te werken voor een BibLaTeX linter en er een prototype voor te schrijven in een passende programmeertaal. 
+Het doel van deze bachelorproef is om een proof-of-concept, analyse \& de software-architectuur uit te werken voor een BibLaTeX linter en er een prototype voor te schrijven in een passende programmeertaal. 
 
 Concreet betekent dit:
 \begin{itemize}
@@ -40,17 +40,25 @@ Als eindresultaat voor deze bachelorproef zal er een open-source prototype opges
 \section{State-of-the-art}%
 \label{sec:state-of-the-art}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+Op het ogenblik van het schrijven van dit bachelorproefvoorstel, zijn er nog geen optimale BibLaTeX-Linters beschikbaar. De enige beschikbare linter die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van 
+Pez Cuckow \autocite{Cuckow2022}. 
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+----
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+Concreet betekent dit:
+\begin{itemize}
+  \item De lijst van gewenste functionele en niet-functionele requirements aanvullen en structureren naar prioriteiten
+  \item De werking van bestaande linters bestuderen als inspiratiebron
+  \item Een gemotiveerde keuze maken voor de te gebruiken programmeertaal en eventuele libraries
+  \item Een prototype met een minimale set van linting-regels implementeren
+  \item Unit tests schrijven met zo compleet mogelijke code coverage
+  \item CI pipeline opzetten voor packaging en testing
+  \item Documentatie schrijven voor het gebruik en uitbreiden van de linting-regels
+\end{itemize}
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+Als eindresultaat voor deze bachelorproef zal er een open-source prototype opgesteld worden waaraan vrijwilligers verder kunnen werken.
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
