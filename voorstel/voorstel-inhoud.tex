@@ -3,70 +3,85 @@
 \section{Introductie}%
 \label{sec:introductie}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+LaTeX (\LaTeX) uitspraak: la-tech; is een populair softwaresysteem in de wetenschappelijke wereld omdat het uitblinkt in het zetten van technische documenten,
+en beschikbaar is voor bijna alle computersystemen \autocite{Wiki23}.
 
+Niet alleen in de wereld van de wetenschap wordt LaTeX gebruikt. Ook studenten op hoge scholen en universiteiten maken er gebruik van voor het schrijven van bachelor- en/of masterproeven.
+
+Bij het schrijven van, al dan niet wetenschappelijke, teksten is het uitermate belangrijk om aan een correcte vorm van bronvermelding te doen.
+
+Binnen LaTeX zijn er verschillende manieren om dit aan te pakken. Eén van deze manieren is met behulp van BibLaTeX, een package speciaal gebouwd voor deze taak.
+
+Studenten te HoGent dienen gebruik te maken van deze combinatie bij het schrijven van hun bachelorproef. Ondanks dat lectoren veel moeite steken in het bondig toelichten van het correcte gebruik, worden er nog veel fouten gemaakt op het correct bijhouden van bronnen. 
+Op deze groep zal deze bachelorproef zich focussen, met behulp van een statische analysetool, ook wel linter genoemd, zouden er al veel van de herhalende fouten voorkomen kunnen worden. Een linter is een programma dat broncode of gestructureerde dataformaten kan controleren op stijl, syntax en logische fouten \autocite{Kamunya2023}.
+
+Het zou dus uitermate geschikt zijn om de studenten een linter te laten gebruiken om hen zo te helpen bij het voorkomen of opsporen van de gemaakte fouten. Zo dienen lectoren hen niet keer op keer op dezelfde fouten te wijzen.
+
+BibLaTeX is voortkomende uit BibTex en biedt meer opties om bibliografieën en citaten te configureren \autocite{Cassidy2013}. Hoewel er voor BibTex reeds een linter bestaat, is deze niet compatibel met BibLaTeX.
+
+Het doel van deze bachelorproef is om een proof of concept, analyse \& de software-architectuur uit te werken voor een BibLaTeX linter en er een prototype voor te schrijven in een passende programmeertaal. 
+
+Concreet betekent dit:
 \begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
+  \item De lijst van gewenste functionele en niet-functionele requirements aanvullen en structureren naar prioriteiten
+  \item De werking van bestaande linters bestuderen als inspiratiebron
+  \item Een gemotiveerde keuze maken voor de te gebruiken programmeertaal en eventuele libraries
+  \item Een prototype met een minimale set van linting-regels implementeren
+  \item Unit tests schrijven met zo compleet mogelijke code coverage
+  \item CI pipeline opzetten voor packaging en testing
+  \item Documentatie schrijven voor het gebruik en uitbreiden van de linting-regels
 \end{itemize}
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+Als eindresultaat voor deze bachelorproef zal er een open-source prototype opgesteld worden waaraan vrijwilligers verder kunnen werken.
 
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
-
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}%
 \label{sec:state-of-the-art}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+Op het ogenblik van het schrijven van dit bachelorproefvoorstel, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar. De enige beschikbare linter die bestaat voor BibLaTeX voor dit moment, 
+staat op een GitHub-repository van Pez Cuckow. Deze zou wel werkende zijn, maar lijkt niet zo optimaal op het eerste zicht. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow
+is geschreven in Python en heeft een webinterface \autocite{Cuckow2022}. Tijdens het onderzoek naar de werking hiervan, werd er niet in geslaagd om deze werkende te krijgen. Dit is eventueel een opdracht voor tijdens 
+de effectieve uitvoer. Hierdoor mag ook al de conclusie getrokken worden dat de bestaande Linter voor BibLaTeX dus nog zeker niet optimaal is op vlak van \emph{user-friendlyness}, gezien de nodige tijd om hem werkende te krijgen.
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
-
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
-
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
-
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
-
-% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
-% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
-%   geen onderdeel is van de zin.
-% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
-%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
-%   ...'')
-
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+Dit onderzoek zal opgesplitst worden in meerdere fasen. Voor het uitvoeren van dit onderzoek zal wellicht een computer het enige zijn dat verreist is, met uitzondering op technisch inzicht en logisch redeneren.
+Het eindresultaat voor dit onderzoek zal een open-source prototype zijn van een BibLaTeX-linter waaraan vrijwilligers verder kunnen werken. \newline
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+Voor het onderzoek zouden 12 weken ter beschikking gesteld worden. Het is de bedoeling om de fasen te verdelen over deze weken en om alsnog een week of twee over te houden ter 
+reserve voor moesten er fouten bij de schattingen ingeslopen zijn.
+De inschatting van de benodigde tijd zal bepaald worden op basis van het aantal onderzoek dat er moet gebeuren en van het verwachte resultaat aan het einde van deze fase. 
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+\subsection{Fase 1: Literatuurstudie}
+Hier wordt er onderzoek gedaan naar reeds bestaande linters, al da niet gerelateerd aan LaTeX. Er zal gekeken worden naar de programmeertalen waarin deze gemaakt zijn, hun werking, specificaties en functionaliteiten. Daarnaast mag er ook niet vergeten worden om te kijken hoe een CI/CD-pipeline effectief in zijn werk gaat, zodat het mogelijk is om de linter op een efficiënte manier te integreren in workflows.
+Indien er andere
+ relevante zaken opduiken die belang kunnen hebben aan het onderzoek, zullen deze ook worden opgenomen om te onderzoeken. Op deze manier zal er geprobeerd worden een zo volledig mogelijk onderzoek te voeren. 
+Een kijk naar hoe een linter \emph{echt} werkt. Deze kennis zal gebruikt worden als inspiratiebron voor het uiteindelijke proof of concept dat opgesteld zal worden in een latere fase. Een schatting doet geloven dat deze fase een 2 
+tot 3 weken tijd in beslag zal nemen. Aan het einde van deze fase zal er een lijst zijn van bestaande linters die onderzocht werden.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+\subsection{Fase 2: Technische Analyse en Experimenten}
+In deze fase is het doel om de lijst van gewenste functionele en niet-functionele requirements aan te vullen en deze te structureren naargelang hun prioriteit. Onder andere de keuze van de programmeertaal, eventuele libraries en andere softwaretools die gebruikt kunnen en zullen worden voor het maken en opzetten 
+van de proof of concept zullen hier gebeuren. Een eerste poging rond een simpele CI/CD-pipeline zal hier mogelijks ook plaatsvinden. Dit om de werking en configuratie ervan zo goed mogelijk te begrijpen. Van fase 2 wordt er geschat dat deze een 4-tal weken zal innemen.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+\subsection{Fase 3: Software Ontwikkeling (PoC - Proof of Concept)}
+In deze fase gebeurt het uitdagende werk. De proof of concept zal ontwikkeld worden. Een werkend prototype zal opgesteld worden, inclusief testen om de werking te garanderen en om het eenvoudig uitbreidbaar te maken. Niettemin zal er ook uitbundige documentatie geschreven worden zodat 
+alles wat er gebeurd duidelijk is voor elke vrijwilliger die een bijdrage wenst te leveren. Er wordt verwacht dat in deze fase enkel gefocust dient te worden op de effectieve creatie van de linter met behulp van gevonden informatie en bronnen. Echt opzoekwerk zou minimaal moeten zijn in deze fase.
+Aan het einde van deze fase zal er dus een werkend prototype beschikbaar staan op een GitHub-repository van de auteur van dit onderzoek, Tristan Cuvelier. 
+Er wordt verwacht dat deze fase wel enige tijd in beslag zal nemen gezien het verwachtte resultaat en met een ruim genoege marge voor problemen die opduiken tijdens het ontwikkelen van de software. Daarom worden er zeker 4 weken gerekend hiervoor.
 
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+\subsection{Algemeen + Fase 4}
+Naast deze fases is het ook nodig om de bachelorproef zelf uit te schrijven. Het is belangrijk dat dit doorheen de fases heen ook al gebeurd. Zo kunnen de laatste paar weken gebruikt worden om alles op punt te zetten om de finale versie in te dienen.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+Als resultaat voor deze bachelorproef wordt er verwacht dat er een open-source repository van een BibLaTeX-linter ter beschikking komt. Deze zal de studenten en lectoren van HoGent helpen om minder fouten te maken op vlak van bronvermeldingen binnen het schrijven van hun papers. Ook externe personen buiten HoGent zullen gebruik kunnen maken van deze linter.
+Hoewel de linter slechts een prototype zal zijn, is het de bedoeling dat deze als goede basis kan dienen om op relatief eenvoudige wijze aan verder te werken. Dit alles met als ultiem doel de ideale linter te worden voor BibLaTeX. Gezien dat er voorlopig slechts één BibLaTeX-linter online staat die niet snel werkend te krijgen is, zal dit ongetwijfeld een grote meerwaarde bieden aan iedereen die gebruik maakt van BibLaTeX.
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
-
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
-
+Er wordt verwacht dat dit een uitdagende opdracht zal worden waaruit veel geleerd kan worden, `trial and error' samen met grondig onderzoek zullen de basis zijn. Als softwaredeveloperstudent is het een interessante uitdaging om zelf een linter te schrijven voor iets dat een student toegepaste informatica slechts enkele keren gebruikt doorheen de schoolcarrière. Pipelines zijn niet ongekend, maar blijven wel iets minder voorkomend in de tak van development in de richting.
