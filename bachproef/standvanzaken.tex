@@ -22,19 +22,40 @@
 % Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van
 % een paragraaf.
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Dit hoofdstuk licht toe wat een linter is en wat \LaTeX en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het maken van deze proof of concept.
+Dit hoofdstuk licht toe wat een linter is en wat LaTeX(\LaTeX) en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
 
 \section{Wat is een linter?}
-Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het effectieve nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
+Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het het nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
 
-Een linter is een statisch stuk software dat in staat voor het controleren van broncode of andere geformatteerde bestanden op fouten. De fouten kunnen op vlak van syntax zijn, maar ook op vlak van invulling.
+Linten verwijst naar het proces van broncode automatisch te controleren op programmatische en stilistische fouten. Een linter scant programmatisch je code om te controleren of er problemen zijn die kunnen leiden tot bugs of inconsistenties met de code-stijl en -gezondheid. De linter is de tool die gebruikt wordt om de broncode te linten. \autocite{Kamunya2023}
 
-% TODO - Add sources.
+Een linter is dus een statische analysetool, dat broncode of andere gestructureerde data kan analyseren.
 
-% ---
+\section{\LaTeX}
+\LaTeX (uitspraak: LaTech), een uitbreiding op het Tex-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. LaTeX zelf, ontwikkeld door Leslie \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen, en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie. \autocite{Oetiker2023}
 
+\subsection{Werking}
+LaTeX functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen). Dit is anders dan WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. LaTeX vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen. \autocite{Oetiker2023}
+
+\subsection{Voordelen}
+\begin{enumerate}
+    \item Het biedt professionele vormgeving van lay-outs.
+    \item Het ondersteunt de zetting van wiskundige formules.
+    \item Het moedigt aan tot goed gestructureerd schrijven. Dit resulteert in duidelijk georganiseerde documenten.
+    \item Er zijn veel uitbreidingen beschikbaar via packages om functionaliteit zoals PDF-output en betere font-ondersteuning toe te voegen.
+\end{enumerate}
+
+\subsection{Nadelen}
+\begin{enumerate}
+    \item Het instellen van een volledig nieuwe lay-out kan ingewikkeld en tijdrovend zijn.
+    \item Niet ideaal voor zeer ongestructureerde documenten.
+\end{enumerate}
+
+\subsection{Conclusie}
+LaTeX wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Het systeem blijft populair vanwege zijn stabiliteit, de brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd. \autocite{Oetiker2023}
+
+\section{Huidige stand van zaken}
 Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface.\autocite{Cuckow2022} Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er snel gemerkt dat er fouten optraden die niet snel op te lossen waren. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron van waaruit inspiratie gehaald kon worden om zo verder uit te werken.
-
 
 \section{Andere linters}
 Gezien het wat BibLaTeX linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook als hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en BibL.
@@ -46,10 +67,9 @@ Daaruit bleek dat naast de manier van implementeren, de taal waaruit de linter o
 Ruff is een Python linter die door \textcite{Astral2024} ontwikkeld is. In vergelijking met andere Python linters is Ruff veel performanter. Dit is omdat Ruff in tegenstelling tot de concurrenten, geschreven is in Rust in plaats van Python. Op de website van Astral, makers van Ruff, is er een vergelijking te zien tussen Ruff en andere Python linters die wel in Python geschreven zijn. Astral is niet de enige die dit aantoont, ook \textcite{TurnerTrauring2023} schrijft in een artikel dat de snelheid van Ruff zeker merkbaar is en toont dit aan met behulp van uitgevoerde tests. Vooral bij pipelines op virtuele machines gezien deze vCPU's (virtuele processor units) gebruiken en deze meestal trager zijn dan de processing units die terug te vinden zijn in moderne laptops of desktops.
 
 \subsubsection{BibL}
-BibL is een linter voor BibTex, de voorloper van BibLaTeX en is geschreven in Python. Het kijken naar een linter van de voorloper, leek zeer interessant om een goed idee te krijgen van wat er exact verwacht zou kunnen worden bij een linter. Zo is er een hele lijst van regels te zien alsook de projectstructuur en implementatiewijze van zowel lintercode als de testen die ervoor bestaan.\autocite{VanDenKerchove2020}
-
+BibL\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een linter voor BibTex, de voorloper van BibLaTeX en is geschreven in Python. Het kijken naar een linter van de voorloper, leek zeer interessant om een goed idee te krijgen van wat er exact verwacht zou kunnen worden bij een linter. Zo is er een hele lijst van regels te zien alsook de projectstructuur en implementatiewijze van zowel lintercode als de testen die ervoor bestaan. Dit zal ongetwijfeld een grote inspiratie zijn voor de effectieve uitwerking.
+% --- continue reading/working from here. ---
 \section{Programmeertaal}
-
 Wat de programmeertaal voor de proof of concept betreft, wordt er zich beperkt tot Rust, Python en JavaScript. Er zal een beperkt prototype uitgewerkt worden in elk van deze talen en deze zullen met elkaar vergeleken worden om te bepalen welke taal het meest geschikt is. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is.
 
 \subsection{Rust}
