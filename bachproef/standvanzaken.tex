@@ -62,7 +62,7 @@ BibLaTeX is een uitbreiding van LaTeX die bibliografische referenties ondersteun
 BibLaTeX is niet compatibel met BibTeX, maar kan wel BibTeX-bestanden importeren. BibLaTeX ondersteunt UTF-8-codering, terwijl BibTeX alleen ASCII-codering ondersteunt. BibLaTeX biedt ook meer aanpassingsmogelijkheden en stijlen dan BibTeX. BibLaTeX is een krachtig hulpmiddel voor het beheren van bibliografische referenties in LaTeX-documenten en wordt veel gebruikt in academische en wetenschappelijke publicaties.
 
 \section{Huidige stand van zaken}
-Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface.\autocite{Cuckow2022} Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er snel gemerkt dat er fouten optraden die niet snel op te lossen waren. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
+Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er snel gemerkt dat er fouten optraden die niet snel op te lossen waren. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
 
 \section{Andere linters}
 Gezien het wat BibLaTeX linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook als hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en Bibl.
@@ -109,7 +109,7 @@ Open-source software voldoet aan specifieke criteria die het een waardevolle en 
     \item \textbf{Technologie-neutraal} is, zodat het zich kan aanpassen aan veranderende omstandigheden.
 \end{itemize}
 
-Kortom, open-source is toegankelijk, krachtig en bevordert innovatie in de digitale wereld voor iedereen.\autocite{OpenSource2006}
+Kortom, open-source is toegankelijk, krachtig en bevordert innovatie in de digitale wereld voor iedereen \autocite{OpenSource2006}.
 
 Ook deze proof of concept heeft als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
 
@@ -118,17 +118,17 @@ Een Kanban-bord is een visueel hulpmiddel dat teams gebruikt voor het beheren va
 
 De belangrijkste onderdelen van een Kanban-bord zijn de kaarten en kolommen. Kaarten vertegenwoordigen individuele taken en bevatten details zoals beschrijvingen en deadlines. Kolommen vertegenwoordigen verschillende stadia van de workflow, zoals 'te doen', 'bezig', en 'gedaan'. Het beperken van het aantal taken in uitvoering zorgt voor efficiënter werken door de focus te behouden en afleiding te verminderen.
 
-Kanban-borden maken gebruik van zes kernpraktijken: de workflow visualiseren, het werk in uitvoering beperken, workflows beheren, expliciete beleidsregels implementeren, ruimte voor feedback bieden, en voortdurend zoeken naar verbetering. Elk van deze praktijken draagt bij aan het verhogen van flexibiliteit, het reduceren van downtime en het verhogen van de efficiëntie binnen teams.\autocite{Hennigan2024}
+Kanban-borden maken gebruik van zes kernpraktijken: de workflow visualiseren, het werk in uitvoering beperken, workflows beheren, expliciete beleidsregels implementeren, ruimte voor feedback bieden, en voortdurend zoeken naar verbetering. Elk van deze praktijken draagt bij aan het verhogen van flexibiliteit, het reduceren van downtime en het verhogen van de efficiëntie binnen teams \autocite{Hennigan2024}.
 
 Binnen deze proef werd er ook een simpele vorm van een kanbanbord gebruikt om een overzicht te bewaren van welke functionaliteiten er al dan niet afgewerkt waren. Dit was handig om te weten of de MVP (Minimum Viable Product) gehaald kon worden tegen de deadline.
 
 \section{Minimum Viable Product}
-MVP staat voor minimum viable product, wat zich vertaald naar: minimaal levensvatbaar product. Een MVP is een versie van een product dat net voldoende features bevat om het uit te geven aan het doelpubliek om hun behoeften te vervullen. Het moet dus voldoende waarde bieden. \autocite{VanTellingen2022}
+MVP staat voor minimum viable product, wat zich vertaald naar: minimaal levensvatbaar product. Een MVP is een versie van een product dat net voldoende features bevat om het uit te geven aan het doelpubliek om hun behoeften te vervullen. Het moet dus voldoende waarde bieden \autocite{VanTellingen2022}.
 Een MVP kan in deze proef gezien worden als de reeks features die minimaal nodig zijn om de proof of concept een succes te noemen.
 
 \section{Artificiële intelligentie}
-Artificiële Intelligentie is een echte hot-topic sinds 2023. Ook voor het maken van linters is het interessant om Artificiële Intelligentie (AI) uit te testen en met het nut ervan te experimenteren.
+Artificiële Intelligentie gaat al langer mee dan de meeste denken, al sinds de jaren vijftig \autocite{Ida2024}. De geschiedenis zal hier niet besproken worden, maar voor het maken van linters is het interessant om de moderne capaciteiten van Artificiële Intelligentie (AI) uit te testen en met het nut ervan te experimenteren.
 
-Artificiële of kunstmatige intelligentie betreft het vermogen van machines om menselijke intelligentieprocessen zoals leren, redeneren en probleemoplossing te simuleren. Binnen de AI valt machine learning (ML), waarbij algoritmes zonder expliciete programmering kunnen 'leren' van data. Deep learning, een subcategorie van ML, gebruikt diepe neurale netwerken met meerdere lagen om complexe patronen in grote datasets te herkennen. Deze technologieën stellen AI in staat om uiteenlopende toepassingen te hebben, van digitale assistenten tot autonome voertuigen en geavanceerde data-analyse, waarbij ethische overwegingen rondom privacy, autonomie en impact op werkgelegenheid steeds belangrijker worden. \autocite{IBM2023}
+Dankzij zijn vermogen om zelfstandig te leren, is artificiële intelligentie steeds beter in staat om menselijke activiteiten uit te voeren en met succes af te ronden \autocite{Khamis2024}. Ook bij het programmeren van software-tools is dit de dag van vandaag het geval.
 
-Ook in dit onderzoek werd er AI toegepast en zullen er enkele use cases toegelicht worden waarin het nut van AI duidelijk wordt.
+In dit onderzoek werd er AI toegepast en zullen er enkele use cases toegelicht worden waarin het nut van AI duidelijk wordt.
