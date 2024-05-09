@@ -48,7 +48,28 @@
     texcl=false,
 }
 
+%\newmintedfile[pythoncode]{python}{
+%    bgcolor=bg,
+%    fontfamily=tt,
+%    linenos=true,
+%    numberblanklines=true,
+%    numbersep=5pt,
+%    gobble=0,
+%    framesep=2mm,
+%    funcnamehighlighting=true,
+%    tabsize=4,
+%    obeytabs=true,
+%    breaklines=true,
+%    mathescape=false
+%    samepage=false,
+%    showspaces=false,
+%    showtabs =false,
+%    texcl=false,
+%}
+
 % Other packages not already included can be imported here
+\usepackage{multirow} % Nodig om de tabel mooi te tonen.
+\usepackage{pdflscape} % Nodig voor de functionele requirements.
 
 %%---------- Document metadata -------------------------------------------------
 % TODO: Replace this with your own information
@@ -139,7 +160,6 @@
 % vormen. De structuur en titels hangen af van je eigen onderzoek. Je kan bv.
 % elke fase in je onderzoek in een apart hoofdstuk bespreken.
 % TODO - Corpus
-
 \input{fase2}
 \input{fase3}
 %\input{...}
