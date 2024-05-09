@@ -38,11 +38,17 @@ DirtyRat is een JavaScript linter waar op gebotst werd tijdens het onderzoeken n
 Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen zitten met veel meer complexe structureren dan een BibLaTeX bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het dus zeker niet nodig om elke component over te nemen.
 
 \section{Functionele en niet-functionele requirements}
-Nadat de volledige reeks linters was geanalyseerd, kon een lijst van zowel functionele als niet-functionele vereisten worden opgesteld. Dankzij de promotor van deze thesis werd dat proces versneld. Een informatieve lijst werd verstrekt, waarin onder andere een opsomming van de gewenste regels stond. Aangezien de promotor uitgebreide technische kennis van het onderwerp heeft en beschouwd kan worden als de \emph{klant} bij de ontwikkeling van deze tool, werd gefocust op de uitwerking van de specifieke regels volgens zijn wensen.
+Nadat de volledige reeks linters was geanalyseerd, kon een lijst van zowel functionele als niet-functionele vereisten worden opgesteld. Dankzij de promotor van deze thesis werd dat proces versneld. Een informatieve lijst werd verstrekt, waarin onder andere een opsomming van de gewenste regels stond. Aangezien de promotor uitgebreide technische kennis van het onderwerp heeft en beschouwd kan worden als de \emph{klant} bij de ontwikkeling van deze tool, werd gefocust op de uitwerking van de specifieke regels volgens zijn wensen.\newline
 
-Een overzicht van de functionele requirements kan in tabel \ref{tab:functional_requirements} worden bezichtigd. Merk op dat deze lijst slechts een richtlijn is voor tijdens de effectieve uitwerking.
+Een overzicht van de \textbf{functionele requirements} kan in tabel \ref{tab:functional_requirements} worden bezichtigd. Merk op dat deze lijst slechts een richtlijn is voor tijdens de effectieve uitwerking.\newline
 
-Wat de niet-functionele requirements betreft, 
+Wat de \textbf{niet-functionele} requirements betreft:
+\begin{itemize}
+    \item Er wordt gewenst dat de linter gebruikt kan worden vanuit de \textbf{CLI} zodat deze in pipelines gebruikt kan worden.
+    \item De linter dient \textbf{vlot} te werken, zodat de tool strict als handig beschouwd kan worden en zeker niet als iets storend.
+    \item De linter dient \textbf{uitbreidbaar} te zijn eens deze proef-periode is afgelopen. Er wordt duidelijke, gestructureerde en gedocumenteerde code verwacht.
+    \item Er wordt verwacht dat het \textbf{eenvoudig} te gebruiken is, begrijp hieronder dat het beschikbaar zal zijn via een pip-installatie gelijk andere Python modules.
+\end{itemize}
 
 \begin{table}[ht]
     \centering
