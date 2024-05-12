@@ -21,7 +21,16 @@ Gezien er tot op heden slechts één linter beschikbaar was voor BibLaTeX en dez
 
 \subsection{BibLaTeX linter}
 \label{sec:biblatex-linter}
-Zoals reeds vermeld, was er tot op heden nog geen \emph{optimale} BibLaTeX linter beschikbaar. Onderzoek wees uit dat de linter van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLatex-Linter}} de enige linter was die specifiek voor BibLaTeX gemaakt was. Hoewel de linter een web-ui heeft, werd er tijdens dit onderzoek niet in geslaagd om een bestand succesvol te laten valideren. Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
+Zoals reeds vermeld, was er tot op heden nog geen \emph{optimale} BibLaTeX linter beschikbaar. Onderzoek wees uit dat de linter van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLatex-Linter}} de enige linter was die specifiek voor BibLaTeX gemaakt was. Hoewel de linter een web-ui heeft, werd er tijdens dit onderzoek niet in geslaagd om een bestand succesvol te laten valideren. Een poging om een bestand te valideren, leidde tot volgende de foutmelding die te zien is op afbeelding \ref{fig:biblatex-linter-error}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
+    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand.}
+    \label{fig:biblatex-linter-error}
+\end{figure}
+
+Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
 
 
 \subsection{Ruff versus de concurrentie}
@@ -76,6 +85,7 @@ Wat de \textbf{niet-functionele} requirements betreft:
         & - thesis (mastersthesis, phdthesis) - Vereist: author, title, date, type, institution. \\
         \midrule
         \textbf{Shoulds} 
+        & - Geef de voorkeur aan "date" boven "year" en/of "month". \\
         & - Aanbevolen velden \texttt{$(`WARN\_FIELDS`)$} moeten aanwezig en niet leeg zijn. \\
         & - article - Aanbevolen: doi, volume, number, pages. \\
         & - book - Aanbevolen: isbn. \\
@@ -87,7 +97,6 @@ Wat de \textbf{niet-functionele} requirements betreft:
         \midrule
         \textbf{Coulds} & 
           - BibLaTeX-keys moeten overeenkomen met de naam van de auteur. \\
-        & - Geef de voorkeur aan "date" boven "year" en/of "month". \\
         & - Geef de voorkeur aan originele types, niet aan aliassen. \\
         & - Verwijder tekstmarkering van URL. \\
         & - Vermijd het citeren van tertiaire bronnen. \\
