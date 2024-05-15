@@ -1,1 +1,77 @@
 \chapter{Uitwerkingsfase}
+\label{ch:uitwerkingsfase}
+%In deze fase gebeurde het uitdagende werk. De proof of concept werd ontwikkeld op basis van de verkregen bronnen. Een werkende versie werd opgesteld, inclusief testen om de werking te garanderen en om het eenvoudig uitbreidbaar te maken. Niettemin werd er ook documentatie geschreven, zodat alles wat er gebeurde duidelijk was voor elke vrijwilliger die een bijdrage wenste te leveren. Hoewel dit misschien al in fase 2 had mogen plaatsvinden, werd er ook een kanbanbord opgesteld om net iets meer overzicht te bewaren in de vooruitgang van de proof of concept en zodat er een duidelijk zicht was op de haalbaarheid van de MVP.
+
+%Aan het einde van deze fase stond er dus een werkende proof of concept beschikbaar op een GitHub-repository van de auteur van dit onderzoek, Tristan Cuvelier. 
+%Er werd verwacht dat deze fase wel enige tijd in beslag zou nemen gezien het verwachte resultaat en met een marge die ruim genoeg was voor problemen die opdoken tijdens het ontwikkelen van de software.
+
+Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstromen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er dus gekozen voor bibla.
+
+Nu deze lastige zaak afgehandeld is, werd er eerst een hele rebrand uitgevoerd op de fork van bibl; Bibla was geboren.
+
+In het begin was het zeer lastig om eigen regels toe te voegen, dit omdat het ondanks de grondige analyse die erop plaats vond, nog altijd een ongekend project was. Daarom werd er besloten om eerst bestaande regels te controleren en deze te vergelijken met de eigen lijst van functionele requirements.
+Zo konden er enerzijds taken worden geschrapt van zaken die reeds geïmplementeerd waren en kon er een overzicht gemaakt worden van de regels die aangepast diende te worden. 
+
+Op deze manier werd er toch al nuttige vooruitgang geboekt en schepte dit een vertrouwensband met de bestaande code. Eens enkele waren regels aangepast, werden er ook eigen regels opgesteld die nodig waren.
+% ----
+\section{Wijzigingen bibl}
+
+Eens een geldig BibLaTeX-bestand werd gelind door bibl, kon er gezien worden welke regels voor BibLaTeX niet meer van toepassing waren. Volgende regels waren als overtreding gedetecteerd:
+\begin{itemize}
+    \item D00 - Entry not in alphabetical order by key
+    \item M01 - Missing required field
+    \item M02 - Missing optional field
+    \item T00 - Non-ascii character
+    \item T01 - Non-standard whitespace
+    \item T02 - Whitespace end of line
+    \item T03 - Line length exceeding limit
+    \item U00 - Unknown entry type
+    \item E05 - Missing file
+\end{itemize}
+
+D00 is een regel die direct uitgeschakeld mocht worden. De volgorde van de bronnen is bij deze use case van geen belang; daarom staat deze regel in de lijst van te negeren regels. 
+Van regels M01 en M02 is het vrij logisch dat deze als overtreden beschouwd werden initiëel. Gezien BibTeX-bestanden andere velden gebruikten, zijn het deze velden die nu niet langer nodig zijn die als ontbrekend gezien worden. De lijst van entry types en hun velden dienen dus zeker nagekeken te worden. Idem voor regel U00, BibLaTeX kent meer entry types dan BibTeX.
+T00 is een regel die uit het programma mag gehaald worden. Bij BibLaTeX worden er namelijk wel non-ascii characters ondersteund. T01 is een regel die wat meer diepgang vereiste. Het is namelijk zo dat het aantal characters dat als tab gebruikt worden, niet overal gelijk zijn. Voor deze proef werd de gewenste afstand voor een tab gelijk gesteld aan twee spaties. Gezien dit niet altijd het geval is, heeft bibl gelukkig al een optie voorzien om dit eenvoudig in te stellen in de configuratie.
+T02 verwijst naar spaties die op het einde van de regel te vinden waren. Eens die spaties weggehaald werden, was dat in orde. Deze regel mag in principe blijven, het is slechts een kwestie van persoonlijke voorkeur of deze regel al dan niet gewenst is.
+T03 is een regel die kijkt naar het aantal characters die op een regel te vinden zijn. Voor het gemak werd hier niet al te veel aandacht aan gegeven, gezien het niet van groot belang is bij deze use case. 
+E05 is een handige regel voor persoonlijk gemak. Het verwijst naar een ontbrekend bestand dat gelinkt is bij de bron. Gezien deze lijst met geldige referenties via de promotor geleverd werd, is het logisch dat de bestanden waarnaar verwezen worden, niet beschikbaar zijn.
+
+\subsection{Overbodige regels}
+Regel T00 is zoals zonet vermeld bijvoorbeeld een regel die overbodig is, gezien deze kijkt of er non-ascii characters zijn. In BibTeX mochten er enkel ascii-characters gebruikt worden, maar bij BibLaTeX zijn deze wel toegestaan. Deze regel mocht dus weggehaald worden.
+
+
+\subsection{Aangepaste regels}
+
+\subsection{Nieuwe regels}
+Gezien de veranderingen van BibLaTeX ten opzichte met BibTex, diende er ook rekening gehouden te worden met het gebruik van andere velden. Hierbij wordt er gedacht aan bijvoorbeeld het veld 'date' dat de voorkeur krijgt over de verouderde velden 'year', 'month' en 'day'.
+De regel die dit controleert zag er als volgt uit:
+\begin{minted}[samepage, breaklines]{python3}
+    def register_variant_rule(entry_type, field, variant):
+    rule_id = 'E10{}{}'.format(entry_type.capitalize(), field.capitalize())
+    message = "Entry type {} - use {} instead of {}!".format(entry_type, variant, field)
+
+    @register_entry_rule(rule_id, message)
+    def check_variant_field(key, entry, database, entry_type=entry_type, field=field, variant=variant):
+        """Raise a linter warning when a specific field is used instead of its variant.
+
+        This function checks if the variant field is required and if the specific field is present.
+        If these conditions are met, it suggests to use the variant field instead of the specific field.
+
+        :param key: The key of the current bibliography entry
+        :param entry: The current bibliography entry
+        :param database: All bibliography entries
+        :param entry_type: Anchor variable to pass the local variable `entry_type` from outer scope
+        :param field: The field that is being checked
+        :param variant: The field that should be used instead
+        :return: False if the specific field is used instead of its variant, True otherwise
+        """
+        if entry.type == entry_type and field in entry.fields:
+            return False
+        else:
+            return True
+\end{minted}
+
+% TODO HERE=> verwijzen naar documentatie en code verder kort toelichten.
+
+\subsection{Diverse aanpassingen}
+Foutafhandelingen dienen niet direct als een regel gezien te worden, maar ze kunnen wel voorkomen door regels die overtreden worden. Zo was bijvoorbeeld het bevatten van duplicate entry keys een reden waardoor de applicatie het soms begaf. Dit werd opgelost door een 'exception handler', ook wel fout afhandelaar genoemd, toe te voegen. Hoewel dan niet het hele bestand gelind werd, vanwege de vroegtijde fout in het programma, wordt er nu tenminste wel getoond wat er mis is en gewijzigd dient te worden. Hetzelfde werd voorzien voor wanneer er gewoon lege entries waren. 
