@@ -368,3 +368,18 @@ Tot slot rest er nog Rust. Zoals eerder vermeld werd er niet in geslaagd om beid
 
 Het is in principe wel nog perfect mogelijk dat Rust zich beter schaalt naar grotere bestanden toe. Het testbestand bevatte slechts één bron, maar wat als er honderden bronnen in zouden staan? Zou Python's uitvoertijd lineair vergroten of eerder exponentieel? Zou Rust sub-lineair evolueren? Deze vragen zullen binnen dit onderzoek onbeantwoord blijven. Kwestie dat er simpelweg onvoldoende tijd is om in deze scope op te nemen.\newline
 Python is dus de winnaar uit dit onderzoek en zal gebruikt worden om de rest van deze proof of concept mee uit te werken.
+
+\section{bibl}
+Bibl is een BibTeX linter die gevonden werd net voordat er effectief van start werd gegaan met het uitwerken van een eigen linter. Na een grondige analyse, bleek dat bibl een open-source linter was die zeer goed opgebouwd, modulair en efficiënt is. Bibl deed in principe aan alle criteria waaraan de proof of concept linter moest gaan voldoen, en bij deze realisatie ontstond er een nieuwe visie.
+
+Een linter zoals bibl maken, maar dan voor BibLaTeX in plaats van BibTeX, zag er uit als het einddoel. Echter met dat er al wat achterstand was op de planning, zou een eigen linter niet even uitgebreid uitgewerkt klaargeraken. Hoewel het concept van proof of concept misschien toch bereikt zou worden, leek het voordeliger om bibl te proberen gebruiken en dit compatibel te maken met BibLaTeX.
+
+Gezien de verschillen tussen BibTeX en BibLaTeX, was er wel nog twijfel in hoeverre dit effectief ook mogelijk was; alsook met dat bibl pybtex gebruikt als parser. Op de site van pybtex\footnote{\url{https://pybtex.org/}} valt het volgende te lezen: 
+
+\begin{quote}\emph{Pybtex is a BibTeX-compatible bibliography processor written in Python.}\end{quote} 
+
+Dit wilt zeggen dat pybtex verantwoordelijk is voor de data uit de bibliografie bestanden te halen. De quote zegt niet dat het enkel werkende is voor BibTeX-bestanden, maar compatibiliteit met BibLaTeX wordt nergens expliciet vermeld. Het was dus een eigen test dat moest bepalen in hoeverre dit al dan niet een probleem was.
+
+Om dit te testen, werd er gebruik gemaakt van een BibLaTeX-document dat gedeeld werd door de promotor van deze proef. Dit document bevatte geldige bronvermeldingen, wat dus perfect was om te kijken of bibl als basis gebruikt zou kunnen worden. Bibl werd snel geïnstalleerd dankzij de package manager van Python, pip. Vervolgens werd het lint commando uitgevoerd op het geldige BibLaTeX-document en werd er gekeken naar wat bibl ervan vond. 
+
+Bibl crashte niet en toonde een volle lijst opmerkingen; dit was positief. Er waren bestaande regels die met de manier van werken voor BibLaTeX bestanden, nooit in orde zouden komen. Gelukkig is bibl open-source en kan er met de broncode gespeeld worden. Na wat van de linting regels uit te schakelen, werd er op een punt gekomen waaruit geconcludeerd kon worden dat bibl een perfecte basis was.
