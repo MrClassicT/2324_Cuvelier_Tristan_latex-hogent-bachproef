@@ -14,38 +14,37 @@ Met deze lijst kon er dan gekeken worden naar de keuze van de programmeertaal di
 
 Uit de lijst van functionaliteiten werden er 2 gekozen die als eerste uitgewerkt zouden worden om zo een eerste versie van de linter te bekomen. Deze functionaliteiten waren: het detecteren van duplicaten en de detectie om te zien of alle required fields wel aanwezig waren.
 
-\section{Linters onder de loep}
-\label{sec:linters-onder-de-loep}
+% ---
+% \section{Linters onder de loep}
+% \label{sec:linters-onder-de-loep}
 
-Gezien er tot op heden slechts één linter beschikbaar was voor BibLaTeX en deze niet optimaal leek te zijn, werd er besloten om ook eens te kijken naar andere linters die er bestonden. Zo kon er inspiratie opgedaan worden voor de proof of concept die gemaakt zou worden. Linters die werden bekeken zijn: Ruff, Pytype, Flake8, DirtyRat, Bibl en nog enkele andere. De linters diende net zoals het proof of concept open-source en gratis te gebruiken zijn.
+% Gezien er tot op heden slechts één linter beschikbaar was voor BibLaTeX en deze niet optimaal leek te zijn, werd er besloten om ook eens te kijken naar andere linters die er bestonden. Zo kon er inspiratie opgedaan worden voor de proof of concept die gemaakt zou worden. Linters die werden bekeken zijn: Ruff, Pytype, Flake8, DirtyRat, bibl en nog enkele andere. De linters diende net zoals het proof of concept open-source en gratis te gebruiken zijn.
 
-\subsection{BibLaTeX linter}
-\label{sec:biblatex-linter}
-Zoals reeds vermeld, was er tot op heden nog geen \emph{optimale} BibLaTeX linter beschikbaar. Onderzoek wees uit dat de linter van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLatex-Linter}} de enige linter was die specifiek voor BibLaTeX gemaakt was. Hoewel de linter een web-ui heeft, werd er tijdens dit onderzoek niet in geslaagd om een bestand succesvol te laten valideren. Een poging om een bestand te valideren, leidde tot volgende de foutmelding die te zien is op afbeelding \ref{fig:biblatex-linter-error}.
+%  \subsection{BibLaTeX linter}
+% \label{sec:biblatex-linter}
+% Zoals reeds vermeld, was er tot op heden nog geen \emph{optimale} BibLaTeX linter beschikbaar. 
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
-    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand.}
-    \label{fig:biblatex-linter-error}
-\end{figure}
+% Onderzoek wees uit dat de linter van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLatex-Linter}} de enige linter was die specifiek voor BibLaTeX gemaakt was. Hoewel de linter een web-ui heeft, werd er tijdens dit onderzoek niet in geslaagd om een bestand succesvol te laten valideren. Een poging om een bestand te valideren, leidde tot volgende de foutmelding die te zien is op afbeelding \ref{fig:biblatex-linter-error}.
 
-Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
+%     \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand.}
+%     \label{fig:biblatex-linter-error}
+% \end{figure}
+
+% Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
 
 
-\subsection{Ruff versus de concurrentie}
-\label{subsec:ruff}
-Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter geschreven in Rust. Dat is ook direct waar Ruff zich onderscheid van de concurrent Python linters die gewoon in Python geschreven zijn. Rust is een programmeertaal die bekend staat om zeer snel en veilig te zijn. Dit zou dus duidelijk een goede keuze kunnen zijn voor een linter. Daarnaast is Rust ook veel lichter om te draaien op hardware dan Python, gezien Python een interpretatieve taal is en Rust een gecompileerde taal. 
-Dit zou dus ook een goede keuze kunnen zijn voor een linter die in een CI-pipeline gebruikt zou worden. Ook is er slechts één versie van Rust waar steeds op verdergewerkt wordt, hierdoor wensen de developers van de Rust taal ook dat de code die in Rust geschreven wordt, steeds blijft werken. Of het nu over vijf jaar is, of over tien jaar, wat vandaag gecompileerd kan worden, zal ook binnen tien jaar nog steeds gecompileerd kunnen worden. 
+% \subsection{Ruff versus de concurrentie}
+% \label{subsec:ruff}
+% Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter geschreven in Rust. Dat is ook direct waar Ruff zich onderscheid van de concurrent Python linters die gewoon in Python geschreven zijn. Rust is een programmeertaal die bekend staat om zeer snel en veilig te zijn. Dit zou dus duidelijk een goede keuze kunnen zijn voor een linter. Daarnaast is Rust ook veel lichter om te draaien op hardware dan Python, gezien Python een interpretatieve taal is en Rust een gecompileerde taal. 
+% Dit zou dus ook een goede keuze kunnen zijn voor een linter die in een CI-pipeline gebruikt zou worden. Ook is er slechts één versie van Rust waar steeds op verdergewerkt wordt, hierdoor wensen de developers van de Rust taal ook dat de code die in Rust geschreven wordt, steeds blijft werken. Of het nu over vijf jaar is, of over tien jaar, wat vandaag gecompileerd kan worden, zal ook binnen tien jaar nog steeds gecompileerd kunnen worden. 
 
-Ruff zou op bepaalde taken tien tot wel honderd keer sneller kunnen zijn! Dit wekte direct al interesse op om de Rust taal eens op de proef te stellen om te zien of dit ook effectief zo was. 
+% Ruff zou op bepaalde taken tien tot wel honderd keer sneller kunnen zijn! Dit wekte direct al interesse op om de Rust taal eens op de proef te stellen om te zien of dit ook effectief zo was. 
 
-\subsection{DirtyRat}
-\label{subsec:dirtyrat}
-DirtyRat is een JavaScript linter waar op gebotst werd tijdens het onderzoeken naar hoe een linter gemaakt kon worden. Het is een linter die zelf in JavaScript geschreven is en waarvan de stapsgewijze opbouw te vinden is in het artikel van \textcite{BorgesLate2021}. Daarnaast is ook de broncode zelf te vinden op GitHub\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}. Dit was ook de reden waarom er besloten werd om JavaScript als kandidaat-programmeertaal te nemen. 
 
-Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen zitten met veel meer complexe structureren dan een BibLaTeX bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het dus zeker niet nodig om elke component over te nemen.
-
+% ---
 \section{Functionele en niet-functionele requirements}
 Nadat de volledige reeks linters was geanalyseerd, kon een lijst van zowel functionele als niet-functionele vereisten worden opgesteld. Dankzij de promotor van deze thesis werd dat proces versneld. Een informatieve lijst werd verstrekt, waarin onder andere een opsomming van de gewenste regels stond. Aangezien de promotor uitgebreide technische kennis van het onderwerp heeft en beschouwd kan worden als de \emph{klant} bij de ontwikkeling van deze tool, werd gefocust op de uitwerking van de specifieke regels volgens zijn wensen.\newline
 
@@ -121,7 +120,9 @@ Het test .bib bestand dat gebruik werd, zag er als volgt uit:
 {./files/test.bib} % Het test bestand van de proof of concept linters in de 3 programmeertalen.
 
 \subsection{JavaScript}
-JavaScript staat vooral gekend vanwege vanwege het gebruik binnen web applicaties. Het is echter wel een programmeertaal die zeer toegankelijk en gekend is onder de meeste developers. Dit was ook de eerste programmeertaal waarin een testversie werd opgesteld, deze werd dan achteraf verteld naar zowel Python als Rust om te kijken welke van de drie talen het meest geschikt was voor deze case. 
+% Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of GUI gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
+
+JavaScript is een programmeertaal die zeer toegankelijk en gekend is onder de meeste developers. Dit was ook de eerste programmeertaal waarin een testversie werd opgesteld, deze werd dan achteraf verteld naar zowel Python als Rust om te kijken welke van de drie talen het meest geschikt was voor deze case. 
 
 De JavaScript versie was van een persoonlijk perspectief de beste om mee te beginnen gezien dit de meest vertrouwde taal was. Direct kan er al opgemerkt worden dat er gebruik gemaakt werd van modules, dit was noodzakelijk om de linter overzichtelijk, uitbreidbaar en onderhoudbaar te maken. Moest alles in éénzelfde bestand zitten, zou het veel te groot en onoverzichtelijk worden.
 
@@ -369,17 +370,3 @@ Tot slot rest er nog Rust. Zoals eerder vermeld werd er niet in geslaagd om beid
 Het is in principe wel nog perfect mogelijk dat Rust zich beter schaalt naar grotere bestanden toe. Het testbestand bevatte slechts één bron, maar wat als er honderden bronnen in zouden staan? Zou Python's uitvoertijd lineair vergroten of eerder exponentieel? Zou Rust sub-lineair evolueren? Deze vragen zullen binnen dit onderzoek onbeantwoord blijven. Kwestie dat er simpelweg onvoldoende tijd is om in deze scope op te nemen.\newline
 Python is dus de winnaar uit dit onderzoek en zal gebruikt worden om de rest van deze proof of concept mee uit te werken.
 
-\section{bibl}
-Bibl is een BibTeX linter die gevonden werd net voordat er effectief van start werd gegaan met het uitwerken van een eigen linter. Na een grondige analyse, bleek dat bibl een open-source linter was die zeer goed opgebouwd, modulair en efficiënt is. Bibl deed in principe aan alle criteria waaraan de proof of concept linter moest gaan voldoen, en bij deze realisatie ontstond er een nieuwe visie.
-
-Een linter zoals bibl maken, maar dan voor BibLaTeX in plaats van BibTeX, zag er uit als het einddoel. Echter met dat er al wat achterstand was op de planning, zou een eigen linter niet even uitgebreid uitgewerkt klaargeraken. Hoewel het concept van proof of concept misschien toch bereikt zou worden, leek het voordeliger om bibl te proberen gebruiken en dit compatibel te maken met BibLaTeX.
-
-Gezien de verschillen tussen BibTeX en BibLaTeX, was er wel nog twijfel in hoeverre dit effectief ook mogelijk was; alsook met dat bibl pybtex gebruikt als parser. Op de site van pybtex\footnote{\url{https://pybtex.org/}} valt het volgende te lezen: 
-
-\begin{quote}\emph{Pybtex is a BibTeX-compatible bibliography processor written in Python.}\end{quote} 
-
-Dit wilt zeggen dat pybtex verantwoordelijk is voor de data uit de bibliografie bestanden te halen. De quote zegt niet dat het enkel werkende is voor BibTeX\babelhyphen{hard}bestanden, maar compatibiliteit met BibLaTeX wordt nergens expliciet vermeld. Het was dus een eigen test die moest bepalen in hoeverre dit al dan niet een probleem was.
-
-Om dit te testen, werd er gebruik gemaakt van een BibLaTeX\babelhyphen{hard}document dat gedeeld werd door de promotor. Dit document bevatte geldige bronvermeldingen, wat dus perfect was om te kijken of bibl als basis gebruikt zou kunnen worden. Bibl werd snel geïnstalleerd dankzij de package manager van Python, pip. Vervolgens werd het lint commando uitgevoerd op het geldige BibLaTeX\babelhyphen{hard}document en werd er gekeken naar wat bibl ervan vond. 
-
-Bibl crashte niet en toonde een volle lijst opmerkingen; dit was positief. Er waren bestaande regels die met de manier van werken voor BibLaTeX bestanden, nooit in orde zouden komen. Gelukkig is bibl open-source en kan er met de broncode gespeeld worden. Na wat van de linting regels uit te schakelen, werd er op een punt gekomen waaruit geconcludeerd kon worden dat bibl een perfecte basis was.
