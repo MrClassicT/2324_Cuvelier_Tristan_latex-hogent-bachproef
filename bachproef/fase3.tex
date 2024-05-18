@@ -44,6 +44,7 @@ Regel T00 is zoals zonet vermeld bijvoorbeeld een regel die overbodig is, gezien
 
 \subsection{Nieuwe regels}
 Gezien de veranderingen van BibLaTeX ten opzichte met BibTex, diende er ook rekening gehouden te worden met het gebruik van andere velden. Hierbij wordt er gedacht aan bijvoorbeeld het veld 'date' dat de voorkeur krijgt over de verouderde velden 'year', 'month' en 'day'.
+
 De regel die dit controleert zag er als volgt uit:
 \begin{minted}[samepage, breaklines]{python3}
     def register_variant_rule(entry_type, field, variant):
@@ -70,8 +71,8 @@ De regel die dit controleert zag er als volgt uit:
         else:
             return True
 \end{minted}
-
 % TODO HERE=> verwijzen naar documentatie en code verder kort toelichten.
+Als er naar de code gekeken wordt, kan er gezien worden dat er meer documentatie staat dan effectieve regels code. Documentatie is namelijk van groot belang om een zo goed mogelijk overzicht te behouden van 
 
 \subsection{Diverse aanpassingen}
 Foutafhandelingen dienen niet direct als een regel gezien te worden, maar ze kunnen wel voorkomen door regels die overtreden worden. Zo was bijvoorbeeld het bevatten van duplicate entry keys een reden waardoor de applicatie het soms begaf. Dit werd opgelost door een 'exception handler', ook wel fout afhandelaar genoemd, toe te voegen. Hoewel dan niet het hele bestand gelind werd, vanwege de vroegtijde fout in het programma, wordt er nu tenminste wel getoond wat er mis is en gewijzigd dient te worden. Hetzelfde werd voorzien voor wanneer er gewoon lege entries waren. 
