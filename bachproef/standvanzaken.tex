@@ -22,20 +22,22 @@
 % Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van
 % een paragraaf.
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Dit hoofdstuk licht toe wat een linter is en wat LaTeX(\LaTeX) en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
+Dit hoofdstuk licht toe wat een linter is en wat \LaTeX(\LaTeX) en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
 
 \section{Wat is een linter?}
 Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het het nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
 
 \textcite{Kamunya2023} legt uit dat linten verwijst naar het proces van broncode automatisch te controleren op programmatische en stilistische fouten, dit houdt in dat een linter programmatisch je code scant om te controleren of er problemen zijn die kunnen leiden tot bugs of inconsistenties met de code-stijl en -gezondheid. De linter is hierbij de tool die ervoor gebruikt wordt.
 
+Een linter is een statische analysetool omdat het de broncode of andere gestructureerde data analyseert zonder de code daadwerkelijk uit te voeren \autocite{Moeller2023}. Het voert een \emph{statische} analyse uit, wat betekent dat het de code inspecteert op basis van de geschreven tekst en structuur ervan, zonder rekening te houden met de daadwerkelijke uitvoering van de code.
+
 Een linter is dus een statische analysetool, dat broncode of andere gestructureerde data kan analyseren.
 
 \section{\LaTeX}
-\LaTeX (uitspraak: LaTech), een uitbreiding op het Tex-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. LaTeX zelf, ontwikkeld door \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen, en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie \autocite{Oetiker2023}. 
+\LaTeX (uitspraak: LaTech), een uitbreiding op het \TeX-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. \LaTeX; zelf, ontwikkeld door \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen, en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie \autocite{Oetiker2023}. 
 
 \subsection{Werking}
-Personen die al ervaring hebben met LaTeX zullen net als \textcite{Oetiker2023} kunnen bevestigen dat LaTeX functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. LaTeX vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen. 
+Personen die al ervaring hebben met \LaTeX zullen net als \textcite{Oetiker2023} kunnen bevestigen dat \LaTeX functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. \LaTeX vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen. 
 
 \subsection{Voordelen}
 \begin{enumerate}
@@ -49,17 +51,18 @@ Personen die al ervaring hebben met LaTeX zullen net als \textcite{Oetiker2023} 
 \begin{enumerate}
     \item Het instellen van een volledig nieuwe lay-out kan ingewikkeld en tijdrovend zijn.
     \item Niet ideaal voor zeer ongestructureerde documenten.
+    \item Leercurve, de \emph{slechte} gewoontes afleren van typische WYSIWYG programma's vergt enige tijd om aan te wennen.
 \end{enumerate}
 
 \subsection{Conclusie}
-LaTeX \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. 
+\LaTeX \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. 
 De blijvende populariteit is te dus te danken aan de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd. 
  
 \section{BibLaTeX en BibTex}
-BibLaTeX is een uitbreiding van LaTeX die bibliografische referenties ondersteunt. Het is oorspronkelijk ontwikkeld door Philipp Lehman \autocite{Kime2024} en is een van de meest populaire bibliografische pakketten voor LaTeX. BibLaTeX is een vervanging voor BibTeX, dat in 1985 werd ontwikkeld door \textcite{Patashnik1988}. BibTeX is een programma en bestandsformaat dat wordt gebruikt om bibliografische referenties te formatteren en te ordenen. BibLaTeX is een LaTeX-pakket dat de functionaliteit van BibTeX uitbreidt en verbetert. Het biedt meer flexibiliteit en aanpassingsmogelijkheden dan BibTeX en is daarom de voorkeurskeuze voor veel LaTeX-gebruikers.
+BibLaTeX is een uitbreiding van \LaTeX die bibliografische referenties ondersteunt. Het is oorspronkelijk ontwikkeld door Philipp Lehman \autocite{Kime2024} en is een van de meest populaire bibliografische pakketten voor \LaTeX. BibLaTeX is een vervanging voor BibTeX, dat in 1985 werd ontwikkeld door \textcite{Patashnik1988}. BibTeX is een programma en bestandsformaat dat wordt gebruikt om bibliografische referenties te formatteren en te ordenen. BibLaTeX is een \LaTeX-pakket dat de functionaliteit van BibTeX uitbreidt en verbetert. Het biedt meer flexibiliteit en aanpassingsmogelijkheden dan BibTeX en is daarom de voorkeurskeuze voor veel \LaTeX-gebruikers.
 
 \subsection{Compatibiliteit}
-Van \textcite{Oetiker2023} kan geleerd worden dat BibLaTeX niet compatibel is met BibTeX, maar wel BibTeX-bestanden kan importeren. BibLaTeX ondersteunt UTF-8-codering, terwijl BibTeX alleen ASCII-codering ondersteunt. Gezien BibLaTeX een uitbreidig is op BibTeX, biedt het ook meer aanpassingsmogelijkheden en stijlen aan. BibLaTeX is een krachtig hulpmiddel voor het beheren van bibliografische referenties in LaTeX-documenten en wordt veel gebruikt in academische en wetenschappelijke publicaties. 
+Van \textcite{Oetiker2023} kan geleerd worden dat BibLaTeX niet compatibel is met BibTeX, maar wel BibTeX-bestanden kan importeren. BibLaTeX ondersteunt UTF-8-codering, terwijl BibTeX alleen ASCII-codering ondersteunt. Gezien BibLaTeX een uitbreidig is op BibTeX, biedt het ook meer aanpassingsmogelijkheden en stijlen aan. BibLaTeX is een krachtig hulpmiddel voor het beheren van bibliografische referenties in \LaTeX-documenten en wordt veel gebruikt in academische en wetenschappelijke publicaties. 
 
 \section{Huidige stand van zaken}
 Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er snel gemerkt dat er fouten optraden die niet snel op te lossen waren. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
@@ -121,14 +124,3 @@ De belangrijkste onderdelen van een Kanban-bord zijn de kaarten en kolommen. Kaa
 Kanban-borden maken gebruik van zes kernpraktijken: de workflow visualiseren, het werk in uitvoering beperken, workflows beheren, expliciete beleidsregels implementeren, ruimte voor feedback bieden, en voortdurend zoeken naar verbetering. Elk van deze praktijken draagt bij aan het verhogen van flexibiliteit, het reduceren van downtime en het verhogen van de efficiëntie binnen teams \autocite{Hennigan2024}.
 
 Binnen deze proef werd er ook een simpele vorm van een kanbanbord gebruikt om een overzicht te bewaren van welke functionaliteiten er al dan niet afgewerkt waren. Dit was handig om te weten of de MVP (Minimum Viable Product) gehaald kon worden tegen de deadline.
-
-\section{Minimum Viable Product}
-MVP staat voor minimum viable product, wat zich vertaald naar: minimaal levensvatbaar product. Een MVP is een versie van een product dat net voldoende features bevat om het uit te geven aan het doelpubliek om hun behoeften te vervullen. Het moet dus voldoende waarde bieden \autocite{VanTellingen2022}.
-Een MVP kan in deze proef gezien worden als de reeks features die minimaal nodig zijn om de proof of concept een succes te noemen.
-
-\section{Artificiële intelligentie}
-Artificiële Intelligentie gaat al langer mee dan de meeste denken, al sinds de jaren vijftig \autocite{Ida2024}. De geschiedenis zal hier niet besproken worden, maar voor het maken van linters is het interessant om de moderne capaciteiten van Artificiële Intelligentie (AI) uit te testen en met het nut ervan te experimenteren.
-
-Dankzij zijn vermogen om zelfstandig te leren, is artificiële intelligentie steeds beter in staat om menselijke activiteiten uit te voeren en met succes af te ronden \autocite{Khamis2024}. Ook bij het programmeren van software-tools is dit de dag van vandaag het geval.
-
-In dit onderzoek werd er AI toegepast en zullen er enkele use cases toegelicht worden waarin het nut van AI duidelijk wordt.

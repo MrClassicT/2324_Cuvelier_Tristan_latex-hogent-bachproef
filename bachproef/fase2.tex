@@ -227,7 +227,7 @@ Als deze pythoncode vergeleken wordt met de javascript-code, kan er direct opgem
 De twee functionaliteiten werden op een gelijke wijze vertaald en geïmplementeerd in de kleine python poc.
 
 \begin{minted}{python3}
-    def check_for_missing_fields(entry):
+def check_for_missing_fields(entry):
     fields = {}
     for match in field_pattern.finditer(entry['content']):
         key, value1, value2 = match.groups()
