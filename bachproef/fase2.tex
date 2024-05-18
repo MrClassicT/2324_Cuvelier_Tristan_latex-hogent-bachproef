@@ -355,7 +355,7 @@ Na het opstellen van kleine prototypes in elke kandidaat-programmeertaal, werd e
         \bottomrule
     \end{tabular}
     }
-    \caption[Uitvoeringstijdentabel]{Tabel met de uitvoeringstijden van elke poc (in milliseconden).}
+    \caption[Tabel met de uitvoeringstijden van elke poc (in milliseconden)]{De tabel met uitvoeringstijden van elke poc in vergelijking met een andere. Eerst werden JavaScript en Python met elkaar vergeleken omdat deze als eerste waren opgesteld. Achteraf werd een laatst poc in Rust opgezet. Wegens gebrek aan kennis en de tijd om deze kennis op te doen, kon er slechts één van beide controles geïmplementeerd worden. Vandaar dat bij de Rust testen genoteerd staat dat er enkel op duplicaten gecontroleerd werd. Gezien snelheid van belang was, werd JavaScript al uitgeschakeld door Python en was het dus niet nodig om deze nog eens te vergelijken met Rust.}
     \label{tabel:uitvoeringstijden}
     \end{table}
 
@@ -378,8 +378,8 @@ Gezien de verschillen tussen BibTeX en BibLaTeX, was er wel nog twijfel in hoeve
 
 \begin{quote}\emph{Pybtex is a BibTeX-compatible bibliography processor written in Python.}\end{quote} 
 
-Dit wilt zeggen dat pybtex verantwoordelijk is voor de data uit de bibliografie bestanden te halen. De quote zegt niet dat het enkel werkende is voor BibTeX-bestanden, maar compatibiliteit met BibLaTeX wordt nergens expliciet vermeld. Het was dus een eigen test dat moest bepalen in hoeverre dit al dan niet een probleem was.
+Dit wilt zeggen dat pybtex verantwoordelijk is voor de data uit de bibliografie bestanden te halen. De quote zegt niet dat het enkel werkende is voor BibTeX\babelhyphen{hard}bestanden, maar compatibiliteit met BibLaTeX wordt nergens expliciet vermeld. Het was dus een eigen test die moest bepalen in hoeverre dit al dan niet een probleem was.
 
-Om dit te testen, werd er gebruik gemaakt van een BibLaTeX-document dat gedeeld werd door de promotor van deze proef. Dit document bevatte geldige bronvermeldingen, wat dus perfect was om te kijken of bibl als basis gebruikt zou kunnen worden. Bibl werd snel geïnstalleerd dankzij de package manager van Python, pip. Vervolgens werd het lint commando uitgevoerd op het geldige BibLaTeX-document en werd er gekeken naar wat bibl ervan vond. 
+Om dit te testen, werd er gebruik gemaakt van een BibLaTeX\babelhyphen{hard}document dat gedeeld werd door de promotor. Dit document bevatte geldige bronvermeldingen, wat dus perfect was om te kijken of bibl als basis gebruikt zou kunnen worden. Bibl werd snel geïnstalleerd dankzij de package manager van Python, pip. Vervolgens werd het lint commando uitgevoerd op het geldige BibLaTeX\babelhyphen{hard}document en werd er gekeken naar wat bibl ervan vond. 
 
 Bibl crashte niet en toonde een volle lijst opmerkingen; dit was positief. Er waren bestaande regels die met de manier van werken voor BibLaTeX bestanden, nooit in orde zouden komen. Gelukkig is bibl open-source en kan er met de broncode gespeeld worden. Na wat van de linting regels uit te schakelen, werd er op een punt gekomen waaruit geconcludeerd kon worden dat bibl een perfecte basis was.
