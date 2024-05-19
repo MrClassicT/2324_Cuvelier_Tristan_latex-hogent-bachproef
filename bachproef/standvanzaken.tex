@@ -97,22 +97,22 @@ DirtyRat is een JavaScript linter waar op gebotst werd tijdens het onderzoeken n
 Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen zitten met veel meer complexe structureren dan een BibLaTeX bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het dus zeker niet nodig om elke component over te nemen.
 
 
-\subsection{Bibl}
-Bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een linter voor BibTeX, de voorloper van BibLaTeX, geschreven in Python door Arne Van Den Kerchove. Het onderzoeken van een linter voor de voorloper van BibLaTeX leek bijzonder interessant om een goed inzicht te krijgen in wat precies verwacht kan worden van een linter. Bibl biedt een uitgebreide lijst van regels, evenals een gedetailleerde projectstructuur en implementatiewijze van zowel de lintercode als de bijbehorende tests.
+\subsection{bibl}
+bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een linter voor BibTeX, de voorloper van BibLaTeX, geschreven in Python door Arne Van Den Kerchove. Het onderzoeken van een linter voor de voorloper van BibLaTeX leek bijzonder interessant om een goed inzicht te krijgen in wat precies verwacht kan worden van een linter. bibl biedt een uitgebreide lijst van regels, evenals een gedetailleerde projectstructuur en implementatiewijze van zowel de lintercode als de bijbehorende tests.
 
-Bibl werd ontdekt net voordat er begonnen werd met de ontwikkeling van een eigen linter. Na een grondige analyse bleek dat Bibl een goed opgebouwde, modulaire en efficiënte open-source linter is. Bibl voldeed aan vrijwel alle criteria die voor de proof of concept linter waren opgesteld, wat leidde tot een nieuwe visie.
+bibl werd ontdekt net voordat er begonnen werd met de ontwikkeling van een eigen linter. Na een grondige analyse bleek dat bibl een goed opgebouwde, modulaire en efficiënte open-source linter is. bibl voldeed aan vrijwel alle criteria die voor de proof of concept linter waren opgesteld, wat leidde tot een nieuwe visie.
 
-Het maken van een linter zoals Bibl, maar dan voor BibLaTeX in plaats van BibTeX, leek een haalbaar einddoel. Echter, vanwege een achterstand op de planning, zou het niet mogelijk zijn om een eigen linter even uitgebreid uit te werken. Hoewel het concept van een proof of concept wellicht bereikt kon worden, leek het voordeliger om Bibl te proberen gebruiken en compatibel te maken met BibLaTeX.
+Het maken van een linter zoals bibl, maar dan voor BibLaTeX in plaats van BibTeX, leek een haalbaar einddoel. Echter, vanwege een achterstand op de planning, zou het niet mogelijk zijn om een eigen linter even uitgebreid uit te werken. Hoewel het concept van een proof of concept wellicht bereikt kon worden, leek het voordeliger om bibl te proberen gebruiken en compatibel te maken met BibLaTeX.
 
-Gezien de verschillen tussen BibTeX en BibLaTeX, was er enige twijfel over de haalbaarheid hiervan, vooral omdat Bibl gebruik maakt van pybtex als parser. Op de site van pybtex\footnote{\url{https://pybtex.org/}} staat het volgende vermeld:
+Gezien de verschillen tussen BibTeX en BibLaTeX, was er enige twijfel over de haalbaarheid hiervan, vooral omdat bibl gebruik maakt van pybtex als parser. Op de site van pybtex\footnote{\url{https://pybtex.org/}} staat het volgende vermeld:
 
 \begin{quote}\emph{Pybtex is a BibTeX-compatible bibliography processor written in Python.}\end{quote}
 
 Dit impliceert dat pybtex verantwoordelijk is voor het extraheren van gegevens uit bibliografiebestanden. Hoewel de quote niet expliciet vermeldt dat het alleen voor BibTeX-bestanden werkt, wordt compatibiliteit met BibLaTeX nergens expliciet genoemd. Het was dus noodzakelijk om dit zelf te testen.
 
-Voor de test werd een BibLaTeX-document gebruikt dat door de promotor was gedeeld. Dit document bevatte geldige bronvermeldingen en was daarmee perfect geschikt om te onderzoeken of Bibl als basis gebruikt kon worden. Bibl werd snel geïnstalleerd via de Python package manager, pip. Vervolgens werd het lint-commando uitgevoerd op het BibLaTeX-document en werd bekeken wat Bibl rapporteerde.
+Voor de test werd een BibLaTeX-document gebruikt dat door de promotor was gedeeld. Dit document bevatte geldige bronvermeldingen en was daarmee perfect geschikt om te onderzoeken of bibl als basis gebruikt kon worden. bibl werd snel geïnstalleerd via de Python package manager, pip. Vervolgens werd het lint-commando uitgevoerd op het BibLaTeX-document en werd bekeken wat bibl rapporteerde.
 
-Bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een positief resultaat. Er waren echter enkele bestaande regels die niet compatibel waren met BibLaTeX-bestanden. 
+bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een positief resultaat. Er waren echter enkele bestaande regels die niet compatibel waren met BibLaTeX-bestanden. 
 
 \subsubsection{Algemene structuur}
 \begin{figure}[ht]
@@ -878,7 +878,168 @@ Deze functies zijn cruciale hulpmiddelen voor het verwerken en manipuleren van d
 
 % ----
 
+\subsection{Regels}
+Zoals weergegeven in Figuur \ref{fig:bibl_src}, is er een \texttt{rules} map aanwezig. Deze map bevat naast een lege \_\_init\_\_.py ook andere Python-bestanden die de regels van \texttt{bibl} definiëren. De regels zijn onderverdeeld in verschillende categorieën: regels voor de gehele database, regels per entry, regels per veld, regels voor onbekende velden of entrytypes, en tot slot tekstuele regels om de \emph{stijl} consistent te houden en te controleren of er ASCII-tekens worden gebruikt.
 
+In de volgende secties worden enkele regels van elke categorie toegelicht.
+
+
+\subsubsection{database\_rules.py - databaseregels}
+
+De code in dit bestand implementeert linterregels die de consistentie van een compleet BibTeX-bestand controleren. Deze regels worden gebruikt om bepaalde voorwaarden te valideren, zoals de alfabetische volgorde van de entries, de aanwezigheid van de \emph{preamble} (preambule in het Nederlands) op de eerste regel, en mogelijke duplicaten op basis van titels.
+
+\paragraph{Regel voor Preambule op de Eerste Regel}
+
+De regel \texttt{D01}, gedefinieerd door de methode \texttt{line\_length} controleert of de preambule begint op de eerste regel van het document. Indien dit niet het geval is, wordt een linterwaarschuwing gegenereerd.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+@register_text_rule('D01', 'Preamble should begin at first line of document')
+def line_length(line_number, line, text):
+    """Raise a linter warning when the preamble is not on the first line.
+
+    :param line_number: The number of the current line in the bibliography
+    :param line: The content of the current line in the bibliography
+    :param text: The entire bibliography
+    :return: True if no preamble is present or the preamble starts at line 1 of
+    the BibTeX file, False otherwise.
+    """
+    regex = re.compile(r'^\s*@preamble')
+    return not regex.match(line.lower()) or line_number == 0
+\end{minted}
+
+\paragraph{Regel voor Mogelijke Duplicaten op Basis van Titels}
+
+De regel \texttt{D02}, gedefinieerd door de methode \texttt{title\_duplicate} controleert of er mogelijke duplicaten zijn op basis van titels die sterk op elkaar lijken. Indien dit het geval is, wordt ook hiervoor een linterwaarschuwing gegenereerd.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+@register_entry_rule('D02', 'Possible duplicate entry based on similar titles')
+def title_duplicate(key, entry, database):
+    """Raise a linter warning when entries with similar titles are present.
+
+    :param key: The key of the current bibliography entry
+    :param entry: The current bibliography entry
+    :param database: All bibliography entries
+    :return: True if the fuzzy match partial ratio of the title of the current
+    entry with any other entry exceeds 90%, False otherwise.
+    """
+    if 'title' not in entry.fields:
+        return True
+    for e in database.entries.values():
+        if 'title' not in e.fields:
+            continue
+        t1 = unidecode(entry.fields['title']).lower()
+        t2 = unidecode(e.fields['title']).lower()
+        if e != entry and fuzz.partial_ratio(t1, t2) > 90:
+            return False
+    return True
+\end{minted}
+
+%---
+
+\subsubsection{entry\_rules.py - entryregels}
+
+%----
+In dit bestand bevinden zich de regels die per entry gecontroleerd worden. Eén van deze wordt hier meer in detail bekeken.
+
+\paragraph{Regel voor Gebruik van "et al." in het Auteursveld}
+
+De regel \texttt{author\_et\_al} controleert of het auteursveld "et al." bevat en genereert een waarschuwing indien dit het geval is. Deze regel vereist dat auteurs en redacteuren volledig worden gespecificeerd en dat er geen worden weggelaten door het expliciete gebruik van "et al".
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+@register_entry_rule(
+    'E03',
+    'The usage of `et al.` in the author field should be replaced by a list '
+    'of all authors')
+def author_et_al(key, entry, database):
+    """Raise a linter warning when the authors or editors contains 'et al.'.
+
+    Authors and editors should be specifed as a complete list of all names.
+
+    :param key: The key of the current bibliography entry
+    :param entry: The current bibliography entry
+    :param database: All bibliography entries
+    :return: True if none of the author or editor names of the current entry
+    contains the substring 'et al' (case insensitive), False otherwise.
+    """
+    if 'author' not in entry.fields:
+        return True
+    return 'et al' not in entry.fields['author'].lower()
+\end{minted}
+
+Net zoals bij de database regels, is het duidelijk dat er regels op een consistente en duidelijke manier gedefinieerd kunnen worden.
+
+%----
+
+\subsubsection{field\_rules.py - Veldregels}
+
+In deze sectie wordt een codefragment besproken dat dynamisch regels genereert voor het controleren van vereiste velden in verschillende typen BibTeX-entries. Deze regels worden geregistreerd en gebruikt door de linter om te controleren of alle vereiste velden aanwezig zijn in elke entry.
+
+\paragraph{Dynamische generatie van regels}
+
+De volgende code genereert dynamisch regels op basis van de configuratie die is gespecificeerd in de \texttt{type\_spec}-sectie van de configuratie. Voor elk entrytype en elk vereist veld wordt een regel aangemaakt en geregistreerd.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+for entry_type, spec in get_config()['type_spec'].items():
+    for req_field in spec['required']:
+        rule_id = 'M01{}{}'.format(entry_type.capitalize(),
+                                   req_field.capitalize())
+        message = 'Missing required field `{}` for entry type `{}`'
+        message = message.format(req_field, entry_type)
+
+        @register_entry_rule(rule_id, message)
+        def check_required_field_present(key, entry, database,
+                                         entry_type=entry_type,
+                                         req_field=req_field):
+            """Raise a linter warning when not all required fields are present.
+
+            Required fields for an entry type are defined in the configuration
+            with the `required` list of field types for a specific entry
+            type in the `type_spec` dictionary.
+
+            :param key: The key of the current bibliography entry
+            :param entry: The current bibliography entry
+            :param database: All bibliography entries
+            :param entry_type: Anchor variable to pass the local
+            variable `entry_type` from outer scope
+            :param req_field: Anchor variable to pass the local variable
+            `req_field` from outer scope
+            :return: True if the current entry contains all required fields,
+            False otherwise
+            """
+            if entry.type == entry_type:
+                return req_field in entry.fields
+            else:
+                return True
+\end{minted}
+
+\paragraph{Beschrijving van de regel}
+
+De gegenereerde regel \texttt{check\_required\_field\_present} controleert of een BibTeX-entry alle vereiste velden bevat zoals gedefinieerd in de configuratie. Indien een vereist veld ontbreekt, wordt er een linterwaarschuwing gegenereerd.
+
+\begin{itemize}
+    \item \texttt{key}: De sleutel van de huidige BibTeX-entry.
+    \item \texttt{entry}: De huidige BibTeX-entry.
+    \item \texttt{database}: Alle BibTeX-entries.
+    \item \texttt{entry\_type}: De variabele om het lokale \texttt{entry\_type} door te geven vanuit de buitenste scope.
+    \item \texttt{req\_field}: De variabele om het lokale \texttt{req\_field} door te geven vanuit de buitenste scope.
+    \item \texttt{return}: \texttt{True} als de huidige entry alle vereiste velden bevat, anders \texttt{False}.
+\end{itemize}
+
+Deze dynamische benadering maakt het mogelijk om op een flexibele manier regels te definiëren en te controleren of alle noodzakelijke informatie aanwezig is in de BibTeX-entries. Dit helpt bij het handhaven van de volledigheid en correctheid van bibliografische gegevens.
+
+\subsection{Conclusie}
+
+\texttt{bibl} biedt een uitgebreide en flexibele oplossing voor het waarborgen van de consistentie en volledigheid van BibTeX-bibliografische gegevens. Door gebruik te maken van dynamisch gegenereerde linterregels kan het programma verschillende aspecten van een BibTeX-bestand controleren, waaronder de alfabetische volgorde van entries, de correcte opmaak van velden, en de aanwezigheid van alle vereiste velden voor verschillende entrytypes.
+
+De architectuur van \texttt{bibl} maakt het mogelijk om eenvoudig nieuwe regels toe te voegen en bestaande regels aan te passen. Dit wordt bereikt door het gebruik van decorators voor het registreren van regels en hulpfuncties voor specifieke controlemechanismen. Bovendien zorgt de integratie met externe bibliotheken zoals \texttt{fuzzywuzzy} en \texttt{unidecode} voor robuuste en efficiënte tekstverwerkingsmogelijkheden.
+
+De gestructureerde opzet van de configuratiebestanden en de modulariteit van de regels dragen bij aan de onderhoudbaarheid en uitbreidbaarheid van het systeem. Door het volgen van best practices in softwareontwikkeling, zoals het gebruik van duidelijke en gedocumenteerde functies, wordt de leesbaarheid en het begrip van de code vergroot.
+
+Naast het bezitten van een goed doordachte structuur en opbouw is \texttt{bibl} een waardevol hulpmiddel voor iedereen die werkt met BibTeX-bestanden, en draagt het bij aan de professionalisering en kwaliteit van academisch schrijven en onderzoek.
+
+Gezien al deze eigenschappen, is \texttt{bibl} zeker een geschikt voorbeeld voor deze proof of concept. 
+
+% ----
 \section{Open-source}
 Net als bibl, heeft deze proof of concept als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
 Open-source software voldoet aan specifieke criteria die het een waardevolle en veelzijdige keuze maken. Onder deze criteria wordt er iets als open-source erkend:
