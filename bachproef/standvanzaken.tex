@@ -122,9 +122,31 @@ Bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een p
     \label{fig:bibl_repo}
 \end{figure}
 
-De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline, een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python wordt gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip).
+De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline (zie \ref{sec:pipelines}), een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python wordt gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip). In \Ref{sec:bibl-in-depth} wordt er dieper ingegaan op de volledige werking van de linter.
+
+\section{Programmeertaal}
+Wat de programmeertaal voor de proof of concept betreft, werd er zich beperkt tot Rust, Python en JavaScript. Er werd een beperkt prototype uitgewerkt in elk van deze talen en deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt was. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
+
+\subsection{Rust}
+Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen. 
+ 
+Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is dus een goede eigenschap om te hebben.
+
+\subsection{Python}
+Python was wellicht stukken trager in vergelijking met Rust in de test die gevonden werd, maar het blijft wel een taal waar iedereen gemakkelijk mee kan beginnen te werken. Voor het gemak van uitbreidbaarheid is dit dan weer een interessante optie om deze taal in optie te nemen. Zoals eerder vermeld door \textcite{TurnerTrauring2023} zou de performantie vooral bij de pipeline te merken zijn.
+De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zijn een grote zorg zal worden voor deze proof of concept.
+
+\subsection{JavaScript}
+Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of GUI gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
+
+\section{Opbouw linter}
+Aan het begin van dit project werd de beslissing genomen om direct met de ontwikkeling van een prototype aan de slag te gaan, wat leidde tot de zoektocht naar geschikte bronnen. Deze beslissing werd genomen gezien de beperkte tijd en de hoeveelheid aan onderzoek die diende te gebeuren. Indien Rust de taal zou moeten worden, moest deze nog volledig aangeleerd worden en zou er immers geen kostbare tijd verloren mogen gaan.
+
+In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter, als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
+
 
 \section{bibl pakket - diepere blik}
+\label{sec:bibl-in-depth}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{./files/bibl_src.png}
@@ -242,7 +264,7 @@ if __name__ == '__main__':
     cli(prog_name='bibl')
 \end{minted}
 %---
-\subsection{bibl.yml}
+\subsection{bibl.yml - Configuratiebestand}
 Het volgende configuratiebestand is een YAML (.yml) bestand dat de standaardinstellingen voor de bibliografische lintingtool definieert. Dit bestand specificeert welke regels ingeschakeld of uitgeschakeld moeten worden, evenals andere configuratie-opties zoals de maximale regellengte en het aantal inspringende spaties.
 
 \begin{minted}[autogobble, breaklines, linenos]{yaml}
@@ -292,54 +314,574 @@ Hieronder zijn er enkelen opgelijst, maar let op, het zijn ze niet allemaal! Raa
 Deze configuratie-instellingen en type-specificaties vormen de basis voor het configureren en uitvoeren van de bibliografische lintingtool, waarbij consistentie en correctheid van de bibliografische gegevens worden gewaarborgd.
 
 % --------------
-\subsection{config.py}
-% TODO : Continue here! :)
+\subsection{config.py - Configuratielogica}
 
-\subsection{lint.py}
+De volgende code implementeert de logica voor het laden en beheren van configuratie-instellingen voor de bibliografische lintingtool. Deze configuratie-instellingen worden gedefinieerd in een YAML-bestand en geladen bij de initialisatie van de linter.
 
-\subsection{rule.py}
+\begin{minted}[autogobble, breaklines, linenos]{python}
+"""Linter configuration logic."""
+from typing import Dict, Any
 
-\subsection{text\_utils.py}
-% \begin{itemize}
+import pkg_resources
+import yaml
 
-%     \item \textbf{config.py}: Hier wordt het standaard configuratie bestand ingesteld op bibl.yml en wordt er ook de logica bijgehouden om te weten hoe het configuratiebestand geïnterpreteerd dient te worden.
-%     \item \textbf{lint.py}: Dit bestand bevat de algemene linter logica.
-% \end{itemize}
+_config = dict()
+_read_default = False
 
-
-
+_DEFAULT_CONFIG_FILE = 'bibl.yml'
 
 
-rule.py: Dit bestand bevat waarschijnlijk de implementatie van regels of algoritmes specifiek voor het "bibl"-project. Het kan klassen, functies of methoden definiëren gerelateerd aan de kernfunctionaliteit van de toepassing.
-text\_utils.py: Dit bestand bevat waarschijnlijk hulpprogramma's of klassen gerelateerd aan tekstverwerking, -manipulatie of -analyse. Het kan algemene bewerkingen bieden die worden gebruikt in verschillende delen van het project.
+def get_config() -> Dict:
+    """Return the loaded config or instantiate and return default config."""
+    if not _read_default:
+        _load_default_config()
+    return _config
 
-De structuur volgt de standaard Python-pakketlay-out, wat het gemakkelijk maakt om het project te distribueren, te installeren en te gebruiken. Door de bestanden te organiseren in een pakket, kan men modules importeren en functionaliteit van andere delen van het project gebruiken met behulp van relatieve imports (bijvoorbeeld from . import rule).
 
+def set_config(key: str, value: Any, default: bool = False):
+    """Set a value in the configurations.
+
+    :param key: configuration entry key
+    :param value: configuration entry value
+    :param default: If true, set as default value to be overwritten by later
+    """
+    if value is not None:
+        if default:
+            _config.setdefault(key, value)
+        else:
+            _config[key] = value
+        _validate_and_clean_config(_config)
+
+
+def load_config_file(file):
+    """Read a YAML config file and use it as the configuration.
+
+    :param file: .yaml config file path
+    """
+    with open(file) as config_file:
+        config = yaml.load(config_file, Loader=yaml.FullLoader)
+        for k, v in config.items():
+            set_config(k, v)
+
+
+def _load_default_config():
+    global _read_default
+    _read_default = True
+    with open(pkg_resources.resource_filename(__name__,
+                                              _DEFAULT_CONFIG_FILE)) as \
+            default_config_file:
+        default_config = yaml.load(default_config_file, Loader=yaml.FullLoader)
+        for k, v in default_config.items():
+            set_config(k, v, default=True)
+
+
+def _validate_and_clean_config(config):
+    if 'select' in config and 'ignore' in config and config['select'] and \
+            config['ignore']:
+        raise ValueError(
+            "Configuration cannot contain both included and selected and "
+            "ignored rules. Use either include or exclude to select"
+            "enabled rules."
+        )
+\end{minted}
+
+\subsubsection{Beschrijving van de Functies}
+
+\begin{itemize}
+    \item \texttt{get\_config}: Retourneert de geladen configuratie of instantieert en retourneert de standaardconfiguratie indien deze nog niet is geladen.
+    \item \texttt{set\_config}: Stelt een waarde in de configuraties in. Indien de parameter \texttt{default} waar is, wordt de waarde alleen ingesteld als deze nog niet bestaat. Deze functie valideert en reinigt ook de configuratie.
+    \item \texttt{load\_config\_file}: Leest een YAML-configuratiebestand en gebruikt deze als de huidige configuratie. Elk configuratie-item wordt ingesteld met behulp van de \texttt{set\_config} functie.
+    \item \texttt{\_load\_default\_config}: Laadt de standaardconfiguratie vanuit het standaard configuratiebestand (\texttt{bibl.yml}). Deze functie wordt aangeroepen bij de eerste toegang tot de configuratie.
+    \item \texttt{\_validate\_and\_clean\_config}: Valideert de configuratie door te controleren of niet zowel de \texttt{select} als de \texttt{ignore} opties tegelijk zijn gespecificeerd. Indien beide zijn gespecificeerd, wordt een \texttt{ValueError} opgeworpen.
+\end{itemize}
+
+\subsubsection{Toepassing en Validatie}
+
+De configuratielogica zorgt ervoor dat de linter correct wordt ingesteld volgens de specificaties van de gebruiker, zoals gedefinieerd in een YAML-configuratiebestand. De standaardconfiguratie wordt geladen bij de eerste toegang tot de configuratie om ervoor te zorgen dat de linter altijd met geldige instellingen werkt. Daarnaast wordt de configuratie gevalideerd om conflicterende instellingen te voorkomen, zoals het gelijktijdig gebruik van \texttt{select} en \texttt{ignore}.
+
+Deze gestructureerde benadering voor het laden en beheren van configuraties helpt bij het waarborgen van de consistentie en flexibiliteit van de linter, waardoor gebruikers specifieke instellingen kunnen aanpassen aan hun behoeften zonder de integriteit van het systeem in gevaar te brengen.
+% --
+\subsection{lint.py - Hoofdlogica}
+
+De hoofdlogica van bibl bevindt zich in liny.py. 
+Hier gebeuren de controles van de bibliografische referenties, zowel consistentie als correctheid worden gecontroleerd op basis van de opgestelde regels.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+"""Main linter logic."""
+import logging
+import sys
+from dataclasses import dataclass
+from typing import List, Iterable
+
+import pybtex
+from pybtex.database import parse_file
+from bibl.rule import load_rules, Rule, EntryRule, TextRule
+from bibl.text_utils import find_entry_line_number, MONTH_NAMES
+
+logger = logging.getLogger()
+logger.setLevel(logging.WARNING)
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.WARNING)
+logger.addHandler(handler)
+
+
+@dataclass
+class LintWarning:
+    """Dataclass to represent and report a linter rule violation."""
+
+    # file path of the detected violation
+    file: str
+    # line number of the detected violation
+    line: int
+    # the violated rule
+    rule: Rule
+
+    def log(self):
+        """Print the warning with details to stdout."""
+        msg = "{}:{} {}".format(self.file, self.line, str(self.rule))
+        logger.warning(msg)
+
+
+def lint(bibliography: str, verbose: bool = True) -> List[LintWarning]:
+    """Execute the main linter program.
+
+    The linter will first scan the bibliography text file and check all text
+    rules for each line in the text file. Next, the file will be parsed by the
+    pybtex parser and all entry rules will be checked.
+
+    :param bibliography: a .bib bibliography file path
+    :param verbose: log linter warnings to stdout
+    :return: a list of LintWarning objects representing the linter violations
+    found while running
+    """
+    bib_data = parse_file(bibliography, macros=MONTH_NAMES)
+    bib_data.file = bibliography
+    with open(bibliography, 'r') as bib_file:
+        bib_text = bib_file.read()
+
+    rules = load_rules()
+
+    text_warnings = _apply_text_rules(bibliography, bib_text,
+                                      rules.enabled_text_rules)
+    entry_warnings = _apply_entry_rules(bibliography, bib_data, bib_text,
+                                        rules.enabled_entry_rules)
+
+    warnings = text_warnings + entry_warnings
+
+    warnings.sort(key=lambda w: w.rule.rule_id)
+    warnings.sort(key=lambda w: w.line)
+    if verbose:
+        for warning in warnings:
+            warning.log()
+    return warnings
+
+
+def _apply_text_rules(bibliography: str, bib_text: str,
+                      text_rules: Iterable[TextRule]) -> List[LintWarning]:
+    """Check all text rules in the bibliography text file.
+
+    :param bibliography: bibliography file path
+    :param bib_text: bibliography file contents
+    :param text_rules: list of text rules to be evaluated on each line of
+    the file
+    :return: a list of LinterWarnings representing found rule violations
+    """
+    warnings = []
+    for i, line in enumerate(bib_text.split('\n')):
+        line_number = i + 1
+        for rule in text_rules:
+            result = rule(line_number, line, bib_text)
+            if not result:
+                warnings.append(LintWarning(bibliography, line_number, rule))
+    return warnings
+
+
+def _apply_entry_rules(bibliography: str,
+                       bib_data: pybtex.database.BibliographyData,
+                       bib_text: str, entry_rules: Iterable[EntryRule]) \
+        -> List[LintWarning]:
+    """Check all entry rules in the bibliography text file.
+
+    :param bibliography: bibliography file path
+    :param bib_data: parsed bibliography data containing entries
+    :param bib_text: bibliography file contents
+    :param entry_rules: list of entry rules to be evaluated on each entry
+    :return: a list of LintWarning representing found rule violations
+    """
+    warnings = []
+    for key, entry in bib_data.entries.items():
+        for rule in entry_rules:
+            line_number, offset = find_entry_line_number(bib_text, key)
+            result = rule(key, entry, bib_data)
+            if not result:
+                warnings.append(LintWarning(bibliography, line_number, rule))
+    return warnings
+\end{minted}
+
+\subsubsection{Beschrijving van de Functies}
+
+\begin{itemize}
+    \item \texttt{LintWarning}:
+    Een dataclass die een lintingwaarschuwing vertegenwoordigt. Deze bevat de volgende attributen:
+    \begin{itemize}
+        \item \texttt{file}: Het pad naar het bestand waarin de overtreding is gedetecteerd.
+        \item \texttt{line}: Het regelnummer van de gedetecteerde overtreding.
+        \item \texttt{rule}: De overtreden regel.
+    \end{itemize}
+    De \texttt{log} methode wordt gebruikt om de waarschuwing met details naar stdout te loggen.
+
+    \item \texttt{lint}:
+    Voert het hoofdprogramma van de linter uit. De functie controleert eerst de bibliografietekst op alle tekstregels voor elke regel in de tekst. Vervolgens wordt het bestand geparseerd met de pybtex parser en worden alle invoerregels gecontroleerd.
+    \begin{itemize}
+        \item \texttt{bibliography}: Het pad naar een .bib bibliografisch bestand.
+        \item \texttt{verbose}: Logt linterwaarschuwingen naar stdout indien ingesteld op \texttt{True}.
+        \item Retourneert een lijst van \texttt{LintWarning} objecten die de tijdens het uitvoeren gevonden overtredingen vertegenwoordigen.
+    \end{itemize}
+
+    \item \texttt{\_apply\_text\_rules}:
+    Controleert alle tekstregels in het bibliografietekstbestand.
+    \begin{itemize}
+        \item \texttt{bibliography}: Het pad naar het bibliografisch bestand.
+        \item \texttt{bib\_text}: De inhoud van het bibliografiebestand.
+        \item \texttt{text\_rules}: Een lijst van tekstregels die op elke regel van het bestand worden geëvalueerd.
+        \item Retourneert een lijst van \texttt{LintWarning} objecten die gevonden overtredingen van de tekstregels vertegenwoordigen.
+    \end{itemize}
+
+    \item \texttt{\_apply\_entry\_rules}:
+    Controleert alle invoerregels in het bibliografietekstbestand.
+    \begin{itemize}
+        \item \texttt{bibliography}: Het pad naar het bibliografisch bestand.
+        \item \texttt{bib\_data}: Geparste bibliografische gegevens die entries bevatten.
+        \item \texttt{bib\_text}: De inhoud van het bibliografiebestand.
+        \item \texttt{entry\_rules}: Een lijst van invoerregels die op elke entry worden geëvalueerd.
+        \item Retourneert een lijst van \texttt{LintWarning} objecten die gevonden overtredingen van de invoerregels vertegenwoordigen.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Logica en Validatie}
+
+De hoofdlogica van de linter begint met het instellen van de loggingconfiguratie om waarschuwingen naar stdout te sturen. Vervolgens worden de regels voor de linter geladen en toegepast op de bibliografische gegevens. Er wordt eerst gekeken naar overtredingen in de tekstregels, gevolgd door overtredingen in de invoerregels. De gevonden overtredingen worden gesorteerd op regel-ID en regelnummers, en indien de \texttt{verbose} parameter is ingesteld, worden deze overtredingen gelogd naar stdout. Deze aanpak zorgt voor een gestructureerde controle van bibliografische bestanden, waarbij consistentie en correctheid worden gewaarborgd.
+
+% ---
+\subsection{rule.py - Structuur voor het Beheren van Regels}
+
+De volgende code implementeert een structuur voor het beheren van lintingregels op een uniforme manier. Deze structuur maakt het mogelijk om regels te definiëren, registreren en evalueren binnen bibl.
+
+\subsubsection{De \texttt{Rule} Klasse}
+
+De \texttt{Rule} klasse is een generieke klasse voor een lintingregel. Deze klasse bevat attributen voor het identificeren en beschrijven van de regel, evenals een \emph{callable} om de regel te controleren. Een \emph{callable} is een object dat kan worden aangeroepen als een functie.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+import fnmatch
+import os
+from typing import Callable, Dict, List
+from pybtex.database import Entry
+from bibl.config import get_config
+
+class Rule:
+    """Generic rule class.
+
+    :param rule_id: identifying code for this rule, starting with a letter
+    indicating the rule type, followed by a number or a string specification.
+    :param description: a full sentence description of the rule
+    """
+
+    def __init__(self, rule_id: str, description: str, rule: Callable):
+        """Create Rule object.
+
+        :param rule_id: identifying code for this rule, starting with a letter
+        indicating the rule type, followed by a number or a string
+        specification.
+        :param description: a full sentence description of the rule
+        :param rule: a callable returning a boolean to execute when checking
+        this rule
+        """
+        self.rule_id = rule_id
+        self.description = description
+        self._rule = rule
+
+    def __str__(self):
+        """Return rule as string representation."""
+        return "{}: {}".format(self.rule_id, self.description)
+
+    def __call__(self, *args, **kwargs):
+        """Handle Rule objects as callables.
+
+        When calling a rule, it is evaluated over (a part of) the bibliography.
+        :param args, kwargs: Rule arguments
+        :return: True if the bibliography is consistent with the rule, False if
+        the rule is violated.
+        """
+        return self._rule(*args, **kwargs)
+
+    @property
+    def enabled(self):
+        """Evaluate wheter a rule should be checked this run.
+
+        :return: True if the rule should be checked based on the configuration
+        used for running the linter, False otherwise
+        """
+        if get_config()['select']:
+            for pattern in get_config()['select']:
+                if fnmatch.fnmatch(self.rule_id, pattern):
+                    return True
+            return False
+        if get_config()['ignore']:
+            for pattern in get_config()['ignore']:
+                if fnmatch.fnmatch(self.rule_id, pattern):
+                    return False
+            return True
+        return True
+\end{minted}
+
+\subsubsection{De \texttt{EntryRule} en \texttt{TextRule} Klassen}
+
+De \texttt{EntryRule} en \texttt{TextRule} zijn subklassen van \texttt{Rule}. \texttt{EntryRule} wordt gebruikt om regels te evalueren op geparseerde bibliografie-entries, terwijl \texttt{TextRule} wordt gebruikt om regels te evalueren op tekstregels in bibliografie-entries.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+class EntryRule(Rule):
+    """Rule type evaluating a parsed bibliography entry."""
+
+    def __init__(self, rule_id, description,
+                 rule: Callable[[str, Entry, Dict[str, Entry]], bool]):
+        """Create EntryRule object.
+
+        :param key: The key of the current bibliography entry
+        :param entry: The current bibliography entry
+        :param database: All bibliography entries
+        """
+        super().__init__(rule_id, description, rule)
+
+
+class TextRule(Rule):
+    """Rule type evaluating a text line in the bibliography entry."""
+
+    def __init__(self, rule_id, description,
+                 rule: Callable[[int, str, str], bool]):
+        """Create TextRule object.
+
+        :param line_number: The number of the current line in the bibliography
+        :param line: The content of the current line in the bibliography
+        :param text: The entire bibliography
+        """
+        super().__init__(rule_id, description, rule)
+\end{minted}
+
+\subsubsection{De \texttt{RuleStore} Klasse}
+
+De \texttt{RuleStore} klasse dient als container voor alle geladen regels. Deze klasse bevat methoden om regels te registreren en op te halen.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+class RuleStore:
+    """Container for all loaded rules."""
+
+    def __init__(self):
+        """Create RuleStore object."""
+        self._rules = []
+
+    def register(self, rule: Rule):
+        """Register a new rule.
+
+        :param: a Rule object to register
+        """
+        position = 0
+        while position < len(self._rules) \
+                and self._rules[position].rule_id < rule.rule_id:
+            position += 1
+        self._rules.insert(position, rule)
+
+    @property
+    def all(self) -> List[Rule]:
+        """Return all loaded rules."""
+        return self._rules
+
+    @property
+    def enabled(self) -> List[Rule]:
+        """Return all loaded rules enabled by the configuration."""
+        return [rule for rule in self._rules if rule.enabled]
+
+    @property
+    def enabled_entry_rules(self) -> List[EntryRule]:
+        """Return all loaded entry rules."""
+        return [rule for rule in self.enabled if isinstance(rule, EntryRule)]
+
+    @property
+    def enabled_text_rules(self) -> List[TextRule]:
+        """Return all loaded text rules."""
+        return [rule for rule in self.enabled if isinstance(rule, TextRule)]
+\end{minted}
+
+\subsubsection{Registratie en Laden van Regels}
+
+Door gebruik te maken van het decorator design patroon, zie \texttt{register\_entry\_rule} en \texttt{register\_text\_rule}, kunnen nieuwe regels eenvoudig worden toegevoegd aan de linter. De \texttt{load\_rules} functie importeert automatisch alle modules in het \texttt{bibl/rules} pakket, waardoor alle daarin gedefinieerde regels automatisch worden geladen en geregistreerd.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+_ALL_RULES: RuleStore = RuleStore()
+
+def register_entry_rule(rule_id, description: str) -> Callable:
+    """Register a function as an entry rule."""
+    def decorator(f: Callable[[str, Entry, Dict[str, Entry]], bool]):
+        rule = EntryRule(rule_id, description, f)
+        _ALL_RULES.register(rule)
+    return decorator
+
+def register_text_rule(rule_id: str, description: str) -> Callable:
+    """Register a function as a text rule."""
+    def decorator(f: Callable[[int, str, str], bool]):
+        rule = TextRule(rule_id, description, f)
+        _ALL_RULES.register(rule)
+    return decorator
+
+def load_rules() -> RuleStore:
+    """Import all modules in the `bibl/rules` package."""
+    for module in os.listdir(os.path.join(os.path.dirname(__file__), 'rules')):
+        if module == '__init__.py' or module[-3:] != '.py':
+            continue
+        __import__('bibl.rules.' + module[:-3], locals(), globals())
+    del module
+    return _ALL_RULES
+\end{minted}
+
+\subsubsection{Logica en Validatie}
+
+De structuur begint met het importeren van de benodigde modules en het definiëren van de \texttt{Rule} klasse, die de basis vormt voor alle regels. Vervolgens worden de \texttt{EntryRule} en \texttt{TextRule} subklassen gedefinieerd voor respectievelijk invoer- en tekstregels. De \texttt{RuleStore} klasse dient als container voor alle geregistreerde regels en biedt methoden om deze op te halen en te filteren op basis van de huidige configuratie.
+
+Door gebruik te maken van decorators zoals \texttt{register\_entry\_rule} en \texttt{register\-\_text\-\_rule}, kunnen nieuwe regels eenvoudig worden toegevoegd aan de linter. De \texttt{load\_rules} functie importeert automatisch alle modules in het \texttt{bibl/rules} pakket, waardoor alle daarin gedefinieerde regels automatisch worden geladen en geregistreerd.
+
+Deze aanpak zorgt voor een flexibele en uitbreidbare structuur voor het beheren van lintingregels, waardoor de consistentie en correctheid van bibliografische gegevens gewaarborgd blijven. Dit is van groot belang om bibl als basis te kunnen zien voor de eigen linter die uitgewerkt zal worden.
 
 % ----
-\section{Programmeertaal}
-Wat de programmeertaal voor de proof of concept betreft, werd er zich beperkt tot Rust, Python en JavaScript. Er werd een beperkt prototype uitgewerkt in elk van deze talen en deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt was. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
+\subsection{text\_utils.py - Helper Functies voor Tekstverwerking}
 
-\subsection{Rust}
-Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen. 
- 
-Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is dus een goede eigenschap om te hebben.
+In dit bestand staan helperfuncties voor tekstverwerking gedefinieerd die worden gebruikt door de lintingregels en andere commando's. Deze functies helpen bij het vinden van regelnummers, het formatteren van regels als Markdown-tabellen en andere tekstverwerkingsactiviteiten.
 
-\subsection{Python}
-Python was wellicht stukken trager in vergelijking met Rust in de test die gevonden werd, maar het blijft wel een taal waar iedereen gemakkelijk mee kan beginnen te werken. Voor het gemak van uitbreidbaarheid is dit dan weer een interessante optie om deze taal in optie te nemen. Zoals eerder vermeld door \textcite{TurnerTrauring2023} zou de performantie vooral bij de pipeline te merken zijn.
-De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zijn een grote zorg zal worden voor deze proof of concept.
+\subsubsection{Importeren van Noodzakelijke Modules}
 
-\subsection{JavaScript}
-Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of GUI gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
+Net gelijk bij de andere componenten, worden er ook hier eerst de benodigde modules en bibliotheken geïmporteerd. In dit geval zijn dit: reguliere expressies, typing voor typeannotaties, en een externe bibliotheek voor het genereren van Markdown-tabellen.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+import re
+from typing import List
+
+import markdown_table
+
+# Month name dictionary for pybtex
+from bibl.rule import Rule
+
+MONTH_NAMES = {
+    'jan': 'jan',
+    'feb': 'feb',
+    'mar': 'mar',
+    'apr': 'apr',
+    'may': 'may',
+    'jun': 'jun',
+    'jul': 'jul',
+    'aug': 'aug',
+    'sep': 'sep',
+    'oct': 'oct',
+    'nov': 'nov',
+    'dec': 'dec'
+}
+\end{minted}
+
+De declaratie van \texttt{MONTH\_NAMES} (regel 9 en volgende) zorgt voor een gestandaardiseerde verwerking van maandnamen in bibliografische gegevens. Dit biedt consistentie, eenvoudige toegang, compatibiliteit met externe bibliotheken zoals in dit geval \texttt{pybtex}, en verbetert de leesbaarheid en onderhoudbaarheid van de code.
+
+\subsubsection{Functie \texttt{find\_match\_line\_number}}
+
+De functie \texttt{find\_match\_line\_number} wordt gebruikt om het regelnummer en de \emph{offset}, het aantal karakters vanaf het begin van de tekst, van een regex-match in een gegeven tekst te vinden.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+def find_match_line_number(text: str, pattern: str, group: int) -> (int, int):
+    r"""Find the line number and offset of a regex match.
+
+    :param text: text to match
+    :param pattern: regex pattern
+    :param group: regex group number of the intended match
+    :return: Line number (based on \n characters) of first occurrence of the
+    specified match, offset of the first occurrence of the match in the line
+    """
+    regex = re.compile(pattern)
+    match = next(regex.finditer(text))
+    start = match.start(group)
+    lineno = text.count('\n', 0, start)
+    if lineno:
+        offset = start - text.rfind('\n', 0, start)
+    else:
+        offset = start
+    return lineno + 1, offset + 1
+\end{minted}
+
+\subsubsection{Functie \texttt{find\_entry\_line\_number}}
+
+De functie \texttt{find\_entry\_line\_number} wordt gebruikt om het regelnummer van een BibTeX-entry in een gegeven tekst te vinden op basis van de entry-sleutel.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+def find_entry_line_number(text: str, key: str) -> (int, int):
+    r"""Find the file line number of a pybtex entry.
+
+    :param text: BibTeX file string
+    :param key: Entry key
+    :return: Line number (based on \n characters) of first occurrence of the
+    entry key, offset of the first occurrence of the key in the line
+    """
+    pattern = r'\s*@[a-zA-Z]+\s*{\s*(' + key + r')\s*,'
+    return find_match_line_number(text, pattern, 1)
+\end{minted}
+
+\subsubsection{Functie \texttt{format\_rules\_markdown\_tables}}
+
+De functie \texttt{format\_rules\_markdown\_tables} wordt gebruikt om een lijst van lintingregels als een Markdown-tabel te formatteren.
+
+\begin{minted}[autogobble, breaklines, linenos]{python}
+def format_rules_markdown_tables(rules: List[Rule]) -> str:
+    """Format a list of bibl rules as a Markdown table.
+
+    :param: rules: a list of Rule instances
+    :return: A string containing a markdown table of human readable rules
+    """
+    result = "# bibl rules\n"
+    headers = ["Rule ID", "Rule description"]
+    matrix = []
+    for i, rule in enumerate(rules):
+        if i != 0 and rule.rule_id[0] != rules[i - 1].rule_id[0]:
+            result += "## " + rules[i - 1].rule_id[0]
+            result += "\n"
+            result += markdown_table.render(headers, matrix)
+            result += "\n\n"
+            matrix = []
+        matrix.append([f'`{rule.rule_id}`', rule.description])
+    result += "## " + rule.rule_id[0]
+    result += "\n"
+    result += markdown_table.render(headers, matrix)
+    return result
+\end{minted}
+
+\subsubsection{Beschrijving van de Functies}
+
+\begin{itemize}
+    \item \texttt{find\_match\_line\_number}: Deze functie zoekt naar een regex-match in de tekst en retourneert het regelnummer en de offset van de eerste match. Dit is nuttig voor het lokaliseren van specifieke patronen binnen een tekst.
+    \item \texttt{find\_entry\_line\_number}: Deze functie zoekt naar het regelnummer van een BibTeX-entry op basis van de gegeven entry-sleutel. Dit helpt bij het vinden van specifieke bibliografische items binnen een BibTeX-bestand.
+    \item \texttt{format\_rules\_markdown\_tables}: Deze functie neemt een lijst van \texttt{Rule} objecten en formatteert deze als een Markdown-tabel. Dit maakt het mogelijk om regels op een leesbare en georganiseerde manier weer te geven\footnote{\url{https://arnevdk.gitlab.io/-/bibl/-/jobs/952978205/artifacts/all_rules.html}}.
+\end{itemize}
+
+\subsubsection{Gebruik van Externe Bibliotheken}
+
+De functies maken gebruik van verschillende externe bibliotheken:
+\begin{itemize}
+    \item \texttt{re}: Voor het werken met reguliere expressies.
+    \item \texttt{markdown\_table}: Voor het genereren van Markdown-tabellen.
+    \item \texttt{pybtex}: Voor het werken met bibliografische gegevens.
+\end{itemize}
+
+Deze functies zijn cruciale hulpmiddelen voor het verwerken en manipuleren van de inhoud uit een bibTeX-bestand. Ze zorgen ervoor dat de regels en de bijbehorende bibliografische gegevens consistent en leesbaar blijven.
 
 % ----
-\section{Opbouw linter}
-Aan het begin van dit project werd de beslissing genomen om direct met de ontwikkeling van een prototype aan de slag te gaan, wat leidde tot de zoektocht naar geschikte bronnen. Deze beslissing werd genomen gezien de beperkte tijd en de hoeveelheid aan onderzoek die diende te gebeuren. Indien Rust de taal zou moeten worden, moest deze nog volledig aangeleerd worden en zou er immers geen kostbare tijd verloren mogen gaan.
-In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter, als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
+
 
 \section{Open-source}
-Deze proof of concept heeft als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
-Open-source software voldoet aan specifieke criteria die het een waardevolle en veelzijdige keuze maken. Onder deze criteria verstaat men iets als open-source zijnde:
+Net als bibl, heeft deze proof of concept als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
+Open-source software voldoet aan specifieke criteria die het een waardevolle en veelzijdige keuze maken. Onder deze criteria wordt er iets als open-source erkend:
 \begin{itemize}
     \item \textbf{Vrij verspreid} kan worden, waardoor het voor iedereen toegankelijk is.
     \item De \textbf{broncode beschikbaar stelt}, zodat ontwikkelaars het kunnen begrijpen, aanpassen en verbeteren.
@@ -354,6 +896,48 @@ Open-source software voldoet aan specifieke criteria die het een waardevolle en 
 \end{itemize}
 
 Kortom, open-source is toegankelijk, krachtig en bevordert innovatie in de digitale wereld voor iedereen \autocite{OpenSource2006}.
+
+\section{Pipelines}
+\label{sec:pipelines}
+
+Pipelines spelen een cruciale rol in de automatisering van het bouwen, testen en implementeren van applicaties. Ze maken het mogelijk om verschillende processen te orkestreren, zodat code consistent en betrouwbaar van ontwikkeling naar productie kan worden verplaatst. Ook voor deze proof of concept kan een pipeline als een essentieel onderdeel beschouwd worden.
+
+\subsubsection{Functie van Pipelines}
+
+Pipelines automatiseren en stroomlijnen het proces van softwareontwikkeling door de workflow op te delen in afzonderlijke fasen. Elke fase voert een specifieke taak uit, zoals het bouwen van de code, het uitvoeren van tests, het voorbereiden en distribueren van de software, alsook het implementeren ervan in verschillende omgevingen. Deze automatisering vermindert de handmatige inspanning, zorgt voor consistentie en versnelt de feedbackloop voor ontwikkelaars. Hoewel CI (Continuous Integration) en CD (Continuous Deployment) pipelines vaak de eerste soorten zijn die opkomen, zijn pipelines ook voor vele andere zaken in te schakelen. Denk maar aan verschillende operationele taken, zoals het vernieuwen van certificaten, het detecteren van infrastructuurdrift en het uitvoeren van gezondheidscontroles op geïmplementeerde applicaties \autocite{Merode2023}.
+
+\subsubsection{Structuur van Pipelines}
+
+De structuur van een pipeline omvat doorgaans meerdere fasen en taken, die sequentieel of parallel kunnen worden uitgevoerd. \textcite{Merode2023} leert ons dat een goed gestructureerde pipeline de volgende fasen kan omvatten:
+
+\begin{itemize}
+    \item \textbf{Valideer ingangscriteria}: Zorgt ervoor dat aan alle vereisten is voldaan voordat het buildproces begint.
+    \item \textbf{Voer buildproces uit}: Compileert de broncode en bereidt de build-\-arte\-facten voor.
+    \item \textbf{Voer unittests uit}: Voert geautomatiseerde tests uit om de functionaliteit van individuele eenheden code te verifiëren.
+    \item \textbf{Analyseer code}: Controleert de codekwaliteit en veiligheid op kwetsbaarheden.
+    \item \textbf{Verpak artefact}: Bundelt de gecompileerde code in implementeerbare eenheden.
+    \item \textbf{Publiceer artefact}: Uploadt de build-\-arte\-facten naar een repository.
+    \item \textbf{Implementeer artefact naar testomgeving}: Implementeert de build in een testomgeving.
+    \item \textbf{Voer tests uit}: Voert integratie- en systeemtests uit in de testomgeving.
+    \item \textbf{Valideer uitgangscriteria}: Zorgt ervoor dat alle tests zijn geslaagd en de build gereed is voor productie.
+    \item \textbf{Implementeer naar productie}: Verplaatst de definitieve build naar de productieomgeving.
+\end{itemize}
+
+
+\subsubsection{Toepassingen van Pipeline Resultaten}
+
+De resultaten van pipeline-uitvoeringen zijn cruciaal voor verschillende belanghebbenden in de softwareontwikkelingscyclus:
+
+\begin{itemize}
+    \item \textbf{Developers}: Krijgen directe feedback over de wijzigingen die ze doorvoeren, wat helpt om snel problemen te identificeren en op te lossen.
+    \item \textbf{Operations Teams}: Gebruiken de pipeline-resultaten om de gezondheid en prestaties van applicaties in productie te monitoren, waardoor betrouwbaarheid en stabiliteit worden gegarandeerd.
+    \item \textbf{Management}: Verkrijgt inzicht in het ontwikkelingsproces via statistieken en KPI's, waardoor data-gedreven besluitvorming mogelijk wordt.
+\end{itemize}
+
+Pipelines kunnen ook worden ontworpen om complexe workflows te ondersteunen, zoals multi-branch en multi-stage configuraties, die verschillende takken van code en verschillende fasen van ontwikkeling tegelijkertijd verwerken \autocite{Merode2023}.
+
+Samengevat zijn pipelines een essentieel onderdeel van moderne softwareontwikkeling. Ze bieden automatisering, consistentie en efficiëntie in de continue integratie- en leveringsprocessen. Ze helpen bij het handhaven van de codekwaliteit, verminderen handmatige interventie en versnellen de implementatiecycli, wat uiteindelijk leidt tot meer betrouwbare en onderhoudbare softwaresystemen. 
+Binnen deze proof of concept zouden een CI en een CD pipeline goed benut kunnen worden.
 
 \section{Kanban}
 Overzichtelijk te werk gaan is voor elk project van belang. Ook bij het ontwikkelen van deze proof of concept was er geen uitzondering. Om een simplistisch maar effectief overzicht te behouden, werd er een kanbanbord gebruikt.
