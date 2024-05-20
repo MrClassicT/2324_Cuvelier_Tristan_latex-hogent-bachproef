@@ -1,0 +1,28 @@
+\glsdefs@newdocentry{MVP}%
+{%
+name={\acronymfont {\glsentryshort {MVP}}},%
+sort={MVP},%
+type={main},%
+first={MVP},%
+firstplural={MVPs},%
+text={MVP},%
+plural={MVPs},%
+description={Minimum viable product},%
+descriptionplural={Minimum viable product},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Minimum viable product},%
+longplural={Minimum viable products},%
+short={MVP},%
+shortplural={MVPs},%
+counter={page},%
+parent={},%
+%
+}%
+

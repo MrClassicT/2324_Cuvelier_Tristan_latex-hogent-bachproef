@@ -5,48 +5,116 @@
 %Aan het einde van deze fase stond er dus een werkende proof of concept beschikbaar op een GitHub-repository van de auteur van dit onderzoek, Tristan Cuvelier. 
 %Er werd verwacht dat deze fase wel enige tijd in beslag zou nemen gezien het verwachte resultaat en met een marge die ruim genoeg was voor problemen die opdoken tijdens het ontwikkelen van de software.
 
-Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstromen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er dus gekozen voor bibla.
+Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstormen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er dus gekozen voor bibla.
 
-Nu deze lastige zaak afgehandeld is, werd er eerst een hele rebrand uitgevoerd op de fork van bibl; Bibla was geboren.
+Nu deze lastige zaak afgehandeld is, werd er eerst een hele rebrand uitgevoerd op de fork van bibl; bibla was geboren.
 
 In het begin was het zeer lastig om eigen regels toe te voegen, dit omdat het ondanks de grondige analyse die erop plaats vond, nog altijd een ongekend project was. Daarom werd er besloten om eerst bestaande regels te controleren en deze te vergelijken met de eigen lijst van functionele requirements.
 Zo konden er enerzijds taken worden geschrapt van zaken die reeds geïmplementeerd waren en kon er een overzicht gemaakt worden van de regels die aangepast diende te worden. 
 
-Op deze manier werd er toch al nuttige vooruitgang geboekt en schepte dit een vertrouwensband met de bestaande code. Eens enkele waren regels aangepast, werden er ook eigen regels opgesteld die nodig waren.
+Op deze manier werd er toch al nuttige vooruitgang geboekt en schepte dit een vertrouwensband met de bestaande codebase. Eens enkele waren regels aangepast, werden er ook eigen regels opgesteld die nodig waren.
 % ----
-\section{Wijzigingen bibl}
-
-Eens een geldig BibLaTeX-bestand werd gelind door bibl, kon er gezien worden welke regels voor BibLaTeX niet meer van toepassing waren. Volgende regels waren als overtreding gedetecteerd:
-\begin{itemize}
-    \item D00 - Entry not in alphabetical order by key
-    \item M01 - Missing required field
-    \item M02 - Missing optional field
-    \item T00 - Non-ascii character
-    \item T01 - Non-standard whitespace
-    \item T02 - Whitespace end of line
-    \item T03 - Line length exceeding limit
-    \item U00 - Unknown entry type
-    \item E05 - Missing file
-\end{itemize}
-
-D00 is een regel die direct uitgeschakeld mocht worden. De volgorde van de bronnen is bij deze use case van geen belang; daarom staat deze regel in de lijst van te negeren regels. 
-Van regels M01 en M02 is het vrij logisch dat deze als overtreden beschouwd werden initiëel. Gezien BibTeX-bestanden andere velden gebruikten, zijn het deze velden die nu niet langer nodig zijn die als ontbrekend gezien worden. De lijst van entry types en hun velden dienen dus zeker nagekeken te worden. Idem voor regel U00, BibLaTeX kent meer entry types dan BibTeX.
-T00 is een regel die uit het programma mag gehaald worden. Bij BibLaTeX worden er namelijk wel non-ascii characters ondersteund. T01 is een regel die wat meer diepgang vereiste. Het is namelijk zo dat het aantal characters dat als tab gebruikt worden, niet overal gelijk zijn. Voor deze proef werd de gewenste afstand voor een tab gelijk gesteld aan twee spaties. Gezien dit niet altijd het geval is, heeft bibl gelukkig al een optie voorzien om dit eenvoudig in te stellen in de configuratie.
-T02 verwijst naar spaties die op het einde van de regel te vinden waren. Eens die spaties weggehaald werden, was dat in orde. Deze regel mag in principe blijven, het is slechts een kwestie van persoonlijke voorkeur of deze regel al dan niet gewenst is.
-T03 is een regel die kijkt naar het aantal characters die op een regel te vinden zijn. Voor het gemak werd hier niet al te veel aandacht aan gegeven, gezien het niet van groot belang is bij deze use case. 
-E05 is een handige regel voor persoonlijk gemak. Het verwijst naar een ontbrekend bestand dat gelinkt is bij de bron. Gezien deze lijst met geldige referenties via de promotor geleverd werd, is het logisch dat de bestanden waarnaar verwezen worden, niet beschikbaar zijn.
-
-\subsection{Overbodige regels}
-Regel T00 is zoals zonet vermeld bijvoorbeeld een regel die overbodig is, gezien deze kijkt of er non-ascii characters zijn. In BibTeX mochten er enkel ascii-characters gebruikt worden, maar bij BibLaTeX zijn deze wel toegestaan. Deze regel mocht dus weggehaald worden.
-
-
+\section{bibla}
 \subsection{Aangepaste regels}
+\paragraph{E00 - Sleutelformaat}
+\label{rule:E00}
+Eén van de regels die aangepast diende te worden, was regel E00. Deze regel controleert het formaat van entry keys. Dit is vooral belangrijk om de consistentie te garanderen en om ervoor te zorgen dat er niet plots door inconsistenties een verwijzing niet gevonden kan worden. De regel ziet er als volgt uit:
+
+\begin{minted}[autogobble, breaklines, linenos]{python3}
+@register_entry_rule('E00', 'Keys of published works should have format `AuthorYEARa`')
+def key_format(key, entry, database):
+    """Raise a linter warning when entry key is not of format `AuthorYEARa`.
+
+    E.g. an entry with values
+    ```
+    author = {Arthur B Cummings and David Eftekhary and Frank G House},
+    date   = {2003-02-02}
+    ```
+    should have key `Cummings2003`.
+    If another entry with the same year and main author is present,
+    their keys should have formats `Cummings2003a` and `Cummings2003b`.
+    This rule only applies when `date` and at least one author are set.
+
+    :param key: The key of the current bibliography entry
+    :param entry: The current bibliography entry
+    :param database: All bibliography entries
+    :return: True if the current entry's key has the specified format or
+    year or author are not specified, False otherwise.
+    """
+    if 'date' not in entry.fields or len(entry.persons.get('author', [])) == 0:
+        return True
+    try:
+        author = entry.persons['author'][0]
+    except KeyError:
+        try:
+            author = entry.persons['editor'][0]
+        except KeyError:
+            return True
+    names = author.rich_prelast_names + [name for last_name in author.rich_last_names for name in last_name.split('-')]
+    date = entry.fields['date']
+    year = re.search(r'\d{4}', date).group()
+
+    # Check for 'EtAl' in the key when there are more than 3 authors
+    if len(entry.persons.get('author', [])) >= 3 and 'EtAl' in key.lower():
+        correct_key_unicode = names[0] + 'EtAl' + year
+    # Check for two names in the key when there are exactly 2 authors
+    elif len(entry.persons.get('author', [])) == 2:
+        correct_key_unicode = "".join([str(name) for name in names[:2]]) + year
+    else:
+        correct_key_unicode = "".join([str(name) for name in names]) + year
+
+    correct_key_ascii = unidecode(str(correct_key_unicode))
+    regex = re.compile(correct_key_ascii + r'[a-zA-Z]?')
+    return bool(regex.match(key))
+\end{minted}
+
+Gezien bij bibTeX de datum opgesplitst werd in \texttt{year}, \texttt{month} en \texttt{day} velden, diende deze regel aangepast te worden om rekening te houden met het \texttt{date} veld in de plaats (zie regel 21). Alsook diende er een \acrfull{REGEX} toegevoegd te worden om rekening te houden met het veranderde datum formaat. Het jaar moest immers uit het date field gehaald worden gezien het geen veld op zich meer was, zie regel 32. Daarnaast werd er ook een controle toegevoegd voor wanneer er geen author aanwezig was en bijvoorbeeld enkel een editor. \texttt{bibl} hield er namelijk geen rekening mee dat er enkel editors aanwezig zouden kunnen zijn in een bepaalde bron. Bij het uitwerken van deze proef is er een bron in de bibliografie geraakt waarbij dit het geval was. Dit had als gevolg dat de linter crashte bij het linten van dit bibliografisch bestand.
+Daarnaast moest het ook mogelijk zijn om achternamen van twee auteurs te gebruiken in een sleutel of zelf 'EtAl' indien het er drie of meer waren. Ook hiervoor werden er enkele controles op punt gezet om hier rekening mee te houden, zie code-regel 35 tot en met 41.
+
+\paragraph{E08 - \texttt{pages} veld formaat}
+Deze test leek niet te werken vanwege het veld waarop gecontroleerd werd. Er werd naar het \texttt{page} veld gezocht, maar het veld waar effectief naar gezocht diende te worden staat gekend als \texttt{pages} in BibLaTeX. 
+
+\paragraph{E09 - Correct \texttt{date} formaat}
+Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van data wat veranderd. Nu er geen apart veld meer gebruikt wordt voor \texttt{year}, \texttt{month} en \texttt{day}, dient er een extra controle te gebeuren om te zien of de datum van een bron wel goed geformatteerd is. Waar de originele regel van bibl enkel keek of de maand weldegelijk in 'MMM' formaat was, dient er nu gekeken te worden dat het formaat gelijk is aan 'YYYY-MM-DD'. 
+
+\begin{minted}[autogobble, breaklines, linenos]{python3}
+    if 'date' not in entry.fields:
+        return True
+    date = entry.fields['date']
+    regex = re.compile(r'^(\d{4})-(\d{2})-(\d{2})$')
+    match = regex.match(date)
+    if not match:
+        regex = re.compile(r'^(\d{4})-(\d{2})$')
+        match = regex.match(date)
+        if not match:
+            regex = re.compile(r'^(\d{4})$')
+            match = regex.match(date)
+            if not match:
+                return False
+            return True
+        year, month = map(int, match.groups())
+        if not (1 <= month <= 12):
+            return False
+        return True
+    year, month, day = map(int, match.groups())
+    if not (1 <= month <= 12):
+        return False
+    if not (1 <= day <= 31):
+        return False
+    return True
+\end{minted}
+Ook hier is er op meerdere plaatsen weer een \acrfull{REGEX} te zien. \acrshort{REGEX} zijn krachtig voor het controleren van bepaalde vaste tekstuele structuren. In deze use case zijn ze bijvoorbeeld zeer handig om het \texttt{date} veld op te splitsen. Bij de eerste check, zie regel 4, kan al direct gezien worden of het een '4-2-2' formaat is, of toch eerder een '2-2-4' formaat. Gezien zowel de maand als dag met twee getallen voorgesteld worden, is het belangrijk om hier een minimale vorm van controle op uit te voeren. Zo kan het maandnummer nooit groter zijn dan 12 en zijn er maar maximaal 31 dagen tijdens de langste dagen. Hoewel dit niet elke fout kan tegengaan, is het wel handig om deze minimale controles uit te voeren om zoveel mogelijk garantie te bieden dat er geen grove fouten optreden op vlak van consistentie in de \texttt{date} velden. Regels 6 tot en met 18 voeren de controle uit om te zien wanneer de dag en/of maand moest ontbreken, om te zien dat ook dan het formaat zo goed mogelijk gerespecteerd wordt.
+
 
 \subsection{Nieuwe regels}
-Gezien de veranderingen van BibLaTeX ten opzichte met BibTex, diende er ook rekening gehouden te worden met het gebruik van andere velden. Hierbij wordt er gedacht aan bijvoorbeeld het veld 'date' dat de voorkeur krijgt over de verouderde velden 'year', 'month' en 'day'.
+\paragraph{E1O - Gebruik van Velden}
+\label{rule:E10-field-preferences}
+Zoals bij de aanpassingen gemerkt kon worden, was het gebruik van andere velden toch wel een aanpassing. Echter is het niet te voorkomen dat er nooit nog de \emph{oudere} velden gebruikt worden om data in op te slaan. Om de gebruikers zo goed mogelijk te ondersteunen, werd er een regel opgesteld waardoor de voorkeursvelden en hun aliassen konden gecontroleerd worden. De regel gaat op zoek naar oudere varianten/naamgevingen en suggereerd dan het nieuwere veld aan in de plaats. 
+
+Er kan terug gedacht worden aan de \texttt{year}, \texttt{month} en \texttt{day} velden, waarvoor nu de voorkeur gaat om \texttt{date} te gebruiken.
 
 De regel die dit controleert zag er als volgt uit:
-\begin{minted}[samepage, breaklines]{python3}
+\begin{minted}[autogobble, breaklines, linenos]{python3}
     def register_variant_rule(entry_type, field, variant):
     rule_id = 'E10{}{}'.format(entry_type.capitalize(), field.capitalize())
     message = "Entry type {} - use {} instead of {}!".format(entry_type, variant, field)
@@ -71,8 +139,190 @@ De regel die dit controleert zag er als volgt uit:
         else:
             return True
 \end{minted}
-% TODO HERE=> verwijzen naar documentatie en code verder kort toelichten.
-Als er naar de code gekeken wordt, kan er gezien worden dat er meer documentatie staat dan effectieve regels code. Documentatie is namelijk van groot belang om een zo goed mogelijk overzicht te behouden van 
+Net zoals bij de originele regels van bibl, wordt er ook bij de nieuwe aandacht besteed aan een correcte documentatie van de code. Het is namelijk dankzij deze zorgvuldige documentatie dat gebruikers en bijdragers (Engels: Contributors) in staat zijn om te begrijpen wat er gaande is en hun bijdrage te leveren zonder onnodig tijd te moeten verspillen aan het ontcijferen van bestaande code.
+
+Bij deze regel kan ook duidelijk gezien worden dat er inspiratie gehaald werd bij een reeds bestaande regels die op een zeer gelijkaardige manier te werk gaan. De regels M01 en M02 zijn een grote inspiratie geweest. De regels zijn simpel maar zeer efficiënt. Er wordt een lijst \emph{dictionary} bijgehouden waarbij de 'oude' velden als \emph{key} dienen en de 'nieuwe' als \emph{value}.
+% ---
+\paragraph{M03 - Speciale karakters}
+
+Deze regel zal wellicht later van naam veranderen, gezien het niet direct onder de meest intuïtieve categorie staat (M). 'M' wordt doorgaans gebruikt voor 'Missing' of ontbrekende zaken aan te duiden. Al kan er gediscussiëerd worden of dit dan niet net toch de juiste categorie zou zijn, gezien het om een ontbrekend karakter gaat. Speciale karakters dienen namelijk vervangen te worden door het commando om ze te genereren. Het commando is doorgaans gewoon een \backslash voor het karakter plaatsen. Dit zorgt ervoor dat LaTeX het speciale karakter niet gaat zien als een commando dat het moet uitvoeren. 
+
+\begin{minted}[autogobble, breaklines, linenos]{python3}
+    @register_entry_rule('M03', 'Special characters should be replaced by the command to generate them: %, &, $, #, _, \\, ~, ^, |')
+    def check_special_characters(key, entry, database):
+        """Raise a linter warning when a field contains special characters that should be replaced.
+        :param key: The key of the current bibliography entry
+        :param entry: The current bibliography entry
+        :param database: All bibliography entries
+        :return: True if no field contains special characters, False otherwise.
+        """
+        special_chars = ['%', '&', '$', '#', '_', '\\', '~', '^', '|']
+    
+        for field in entry.fields.values():
+            if any(char in field for char in special_chars):
+                for char in special_chars:
+                    if char in field and field[field.index(char) - 1] != '\\':
+                        return False
+        return True
+\end{minted}
+
+Hoewel deze versie gebruikt wordt in versie 2.0.5 van bibla, zit hier nog een kleine \emph{bug} in. Het is namelijk zo dat deze regel elk veld zal controleren op speciale karakters. Hoewel dit over het algemeen goed is, gooit het hierdoor ook foutieve waarschuwingen op het \texttt{url} veld.
+
+
+%----
 
 \subsection{Diverse aanpassingen}
-Foutafhandelingen dienen niet direct als een regel gezien te worden, maar ze kunnen wel voorkomen door regels die overtreden worden. Zo was bijvoorbeeld het bevatten van duplicate entry keys een reden waardoor de applicatie het soms begaf. Dit werd opgelost door een 'exception handler', ook wel fout afhandelaar genoemd, toe te voegen. Hoewel dan niet het hele bestand gelind werd, vanwege de vroegtijde fout in het programma, wordt er nu tenminste wel getoond wat er mis is en gewijzigd dient te worden. Hetzelfde werd voorzien voor wanneer er gewoon lege entries waren. 
+Ondanks dat \texttt{bibl} een uitstekende start was voor deze \acrlong{POC}, waren er nog een paar zaken ter verbetering vatbaar. Foutafhandelingen waren hier een deel van. Ze dienen niet direct als een regel gezien te worden, maar ze kunnen wel voorkomen door regels die overtreden worden. Zo was bijvoorbeeld het bevatten van duplicate entry keys een reden waardoor de applicatie het soms begaf. Dit werd opgelost door een 'exception handler', ook wel foutafhandelaar genoemd, toe te voegen. Hoewel dan niet het hele bestand gelind werd, vanwege de vroegtijde fout in het programma, wordt er nu tenminste wel op een minder schokkerende wijze getoond wat er mis is en gewijzigd dient te worden. Hetzelfde werd voorzien voor wanneer er gewoon lege entries waren.  
+
+\begin{minted}[autogobble, breaklines, linenos]{python3}
+try:
+    bib_data = parse_file(bibliography, macros=MONTH_NAMES)
+except BibliographyDataError as e:
+    # Extract the key from the error message
+    match = re.search(r'repeated bibliograhpy entry: (.*)', str(e))
+    if match:
+        duplicate_key = match.group(1)
+        print(f"{bibliography} D03: Duplicate entry with key '{duplicate_key}'")
+    else:
+        print(f"Warning: {e}")
+    return []
+except pybtex.scanner.TokenRequired as e:
+    print(f"E00: {e}")
+    return []
+except Exception as e:
+    print(f"Error: {e}")
+    return []
+\end{minted}
+
+In dit codeblock, genomen uit \texttt{lint.py}, kan er gezien worden dat er aan extra foutafhandelingen gedaan wordt. De regels die hier overtreden worden, staan op dit ogenblik vast gecodeerd en zijn minder dynamisch dan doorheen de rest van de applicatie gewend is, maar ze zijn afgestemd geweest en als de testen als betrouwbaar gezien kunnen worden, zou dit kloppen met wat de oorzaak achterliggend effectief is. Dit was de meest eenvoudige en duidelijke manier om de gebruiker te laten weten wat er mis is zonder kostbare tijd te verliezen voor het verder ontwikkelen van andere delen van de applicatie.
+
+\subsection{Configuratie}
+De standaardconfiguratie van bibl was een zeer goede basis om van verder te gaan voor bibla. Maar zoals al vaker aangegeven, zijn er verschillen tussen bibTeX en bibLaTeX die ervoor zorgen dat er aanpassingen dienen te gebeuren. Op de configuratie van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl/-/blob/master/bibl/bibl.yml}} zijn er zaken veranderd, maar ook extra toegevoegd. Zoals voor bijvoorbeeld regel E10 (\ref{rule:E10-field-preferences}) waar er gekeken werd naar bepaalde velden waarbij er een voorkeur is om er een synoniem van te gebruiken. Waarvan hieronder het stukje configuratie in YAML-formaat.
+
+\begin{minted}[autogobble, breaklines, linenos]{yaml}
+alternate_fields:
+  # preferred: [other]
+  date: [year] # Month and day will not be used alone, so when we just check for the year, that'll be fine.
+  journaltitle: [journal]
+  institution: [school]
+\end{minted}
+
+De overige configuratie kan geraadpleegt worden op de \texttt{bibla} repository in \texttt{bibla.yml}\footnote{\url{https://github.com/MrClassicT/bibla/blob/master/bibla/bibla.yml}}, wat de algemene configuratie voor \texttt{bibla} bevat.
+
+\subsection{Pipelines}
+\texttt{bibl} werkte met GitLab, \texttt{bibla} werkt met GitHub. Het is dus niet onlogisch dat er nog enkele andere zaken aangepast dienen te worden om alles vlot te laten verlopen. Hierbij denken we vooral aan de pipelines die gebruikt worden. \texttt{bibl} bevat slechts één pipeline bestand\footnote{\url{https://gitlab.com/arnevdk/bibl/-/blob/master/.gitlab-ci.yml}}, een continuous integration. Al gebeurt er in deze pipeline ook een \emph{deploy} van een statische website die alle linterregels bevat.
+
+Op GitHub worden pipelines gekend onder \emph{workflows}, wat reflecteert naar wat een pipeline effectief inhoudt. Gezien de \emph{workflows} iets anders zijn dan de gewone pipelines op GitLab, diende er enkele wijzigingen te gebeuren. Zo diende de pipelines te komen in een folder \texttt{.github/workflows} om herkend te worden. Hierin werd er een omgevormde CI-pipeline geplaatst, gebaseerd op de originele van \texttt{bibl}.
+
+\paragraph{CI-pipeline}
+\begin{minted}[autogobble, breaklines, linenos]{yaml}
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install git+https://${{secrets.BIBLA_GITHUB_TOKEN}}@github.com/mrclassict/bibla.git
+        pip install --upgrade setuptools wheel
+        pip install -e .[dev]
+        pip install flake8
+
+    - name: Static Analysis with Flake8
+      run: |
+        mkdir out
+        flake8 --append-config .flake8 --ignore=E501 | tee out/lint_result.txt
+        num_warnings=$(wc -l < out/lint_result.txt)
+        echo "$num_warnings warnings!"
+        echo "Generating badge..."
+        anybadge -v=$num_warnings -f=out/flake8.svg -l=flake8 10=green 1000=orange 10000=red
+        cat out/lint_result.txt
+        if [ $num_warnings -gt 0 ]; then exit 1; fi
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: flake8-results
+        path: |
+          out/flake8.svg
+          out/lint_result.txt
+\end{minted}
+
+Bij het analyseren van deze pipeline, kan er gezien worden dat er vier zaken gebeuren:
+\begin{enumerate}
+    \item De juiste Python-versie installeren (in dit voorbeeld 3.12)
+    \item Dependencies installeren
+    \item De code linten met flake8
+    \item Artifacts uploaden
+\end{enumerate}
+
+Deze stappen gebeuren op een virtuele machine op de GitHub servers en ze gebeuren elke keer dat er een \emph{push} gebeurt naar de 'master' branch.
+Hoewel in deze pipeline net gelijk bij \texttt{bibl} Flake8 gebruikt wordt om de code te linten, werd er ondertussen geleerd dat Ruff wellicht een interessantere optie is. Naar de toekomst toe kan het interessant zijn om hier eens naar te kijken en eventueel over te schakelen van linting-tool.
+
+
+\paragraph{CD-pipeline}
+Om ervoor te zorgen dat bij elke \emph{release} (of uitgave in het Nederlands) \texttt{bibla} eenvoudig en consistent naar de pakketmanager gestuurd kon worden, werd er ook een CD-pipeline voorzien. Het opzetten van deze pipeline ging dankzij de templates die GitHub voorziet in minder dan vijf minuten! Het enige dat zelf diende te gebeuren, was een API-token (een vorm van zowel identificatie en authenticatie) voorzien en de CD-pipeline-template deed de rest.
+
+\begin{minted}[autogobble, breaklines, linenos]{yaml}
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+        pip install markdown
+
+    - name: Build package
+      run: python -m build
+
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
+
+\end{minted}

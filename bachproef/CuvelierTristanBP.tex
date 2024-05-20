@@ -5,12 +5,6 @@
 
 \documentclass[dutch,dit,thesis]{hogentreport}
 
-% TODO:
-% - If necessary, replace the option `dit`' with your own department!
-%   Valid entries are dbo, dbt, dgz, dit, dlo, dog, dsa, soa
-% - If you write your thesis in English (remark: only possible after getting
-%   explicit approval!), remove the option "dutch," or replace with "english".
-
 \usepackage{lipsum} % For blind text, can be removed after adding actual content
 
 %% Pictures to include in the text can be put in the graphics/ folder
@@ -51,9 +45,14 @@
 % Other packages not already included can be imported here
 \usepackage{multirow} % Nodig om de tabel mooi te tonen.
 \usepackage{pdflscape} % Nodig voor de functionele requirements.
+\usepackage[automake]{glossaries}% Nodig voor glossary (afkortingenlijst)
+\makeglossaries %% GLOSSARY_ENTRY
+\newacronym{MVP}{MVP}{Minimum Viable Product}
+\newacronym{POC}{PoC}{Proof of Concept}
+\newacronym{REGEX}{Regex}{Reguliere Expressie}
+\glstoctrue
 
 %%---------- Document metadata -------------------------------------------------
-% TODO: Replace this with your own information
 \author{Tristan Cuvelier}
 \supervisor{Dhr. B. Van Vreckem}
 \cosupervisor{Dhr. B. Van Vreckem}
@@ -116,8 +115,10 @@
 
 % If you included tables and/or source code listings, uncomment the appropriate
 % lines.
-%\listoftables
-%\listoflistings
+\listoftables
+% \listoflistings
+\printglossaries
+
 
 % Als je een lijst van afkortingen of termen wil toevoegen, dan hoort die
 % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
