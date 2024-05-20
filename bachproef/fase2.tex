@@ -12,7 +12,7 @@ Als eerste werd er onderzocht wat een linter nu eigenlijk was en hoe deze werkte
 
 Met deze lijst kon er dan gekeken worden naar de keuze van de programmeertaal die gebruikt kon en zou worden voor het maken en opzetten van de proof of concept. De keuze van de programmeertaal werd bereikt door het opstellen van kleine prototypes in elke kandidaat-programmeertaal. Deze kregen werden dan getimed en daarnaast werden ook andere voor- en nadelen van elk bekeken om zo tot de beste optie te komen.
 
-Uit de lijst van functionaliteiten werden er 2 gekozen die als eerste uitgewerkt zouden worden om zo een eerste versie van de linter te bekomen. Deze functionaliteiten waren: het detecteren van duplicaten en de detectie om te zien of alle required fields wel aanwezig waren.
+Uit de lijst van functionaliteiten werden er twee gekozen die als eerste uitgewerkt zouden worden om zo een eerste versie van de linter te bekomen. Deze functionaliteiten waren: het detecteren van duplicaten en de detectie om te zien of alle required fields wel aanwezig waren.
 
 % ---
 % \section{Linters onder de loep}
@@ -108,8 +108,8 @@ Wat de \textbf{niet-functionele} requirements betreft:
     \label{tab:functional_requirements}
     \end{table}
 
-
 \section{Keuze van de Programmeertaal}
+\label{sec:mini-pocs}
 Om de gepaste programmeertaal te vinden, werden diverse kandidaat\babelhyphen{hard}programmeertalen overwogen. De kandidaat\babelhyphen{hard}programmeertalen waren: Rust, JavaScript en Python.
 
 Door het analyseren van reeds bestaande linters en het afgaan van een hele lijst aan programmeertalen, werd er besloten om met deze drie programmeertalen te experimenteren. Om ervoor te zorgen dat de testprogramma's niet te uitgebreid werden en zowel gelijk als eerlijk konden worden vergeleken, zouden er slechts twee functionaliteiten worden uitgewerkt. Deze twee functionaliteiten waren: detecteren van duplicaten en detecteren of alle required fields aanwezig waren. Om dit onderzoek niet nodeloos lang te maken, werd er besloten om de broncode van deze programma's niet op te nemen in dit document. De broncode is echter wel te vinden op GitHub voor zowel de kleine poc's\footnote{\url{https://github.com/MrClassicT/bibLaTeX-linter-pocs}} als voor het uiteindelijk resultaat\footnote{\url{https://github.com/MrClassicT/bibla}}.
@@ -210,7 +210,7 @@ In deze controle valt op dat er een gebrek aan consistentie is in de manier waar
 
 \subsection{Python}
 \label{subsec:python}
-Gezien het grote aanbod aan linters die in Python geschreven zijn en de ruime gekendheid ervan, werd er besloten om ook Python een kans te geven. Omdat de Python-kennis wat afgezwakt was, werd er beroep gedaan op de krachten van AI. De linter poc geschreven in JavaScript werd aan ChatGPT versie 4 gegeven en stapsgewijs werd er gevraagd om deze code om te vormen naar een werkend Python alternatief. Op enkele uren tijd werd erin geslaagd om een eerste versie werkende te krijgen. Het was zeer knap om te zien hoe goed ChatGPT met de Python syntax effectief kon omgaan. Ook de reguliere expressies die gebruikt werden, hebben op een bepaald moment in de handen van ChatGPT of zelfs github-copilot gezeten. AI-tools zijn zeer handig om complexe zaken enerzijds te verduidelijken als anderzijds erbij te assisteren om suggesties te doen van hoe een bepaald probleem aangepakt kan worden. Het potentiëel van AI was dus hier zeker merkbaar en werd ten volste benut waar mogelijk.
+Gezien het grote aanbod aan linters die in Python geschreven zijn en de ruime gekendheid ervan, werd er besloten om ook Python een kans te geven. Omdat de Python-kennis wat afgezwakt was, werd er beroep gedaan op de krachten van AI. De linter poc geschreven in JavaScript werd aan ChatGPT-4 gegeven en stapsgewijs werd er gevraagd om deze code om te vormen naar een werkend Python alternatief. Op enkele uren tijd werd erin geslaagd om een eerste versie werkende te krijgen. Het was zeer knap om te zien hoe goed ChatGPT met de Python syntax effectief kon omgaan. Ook de reguliere expressies die gebruikt werden, hebben op een bepaald moment in de handen van ChatGPT of zelfs github-copilot gezeten. AI-tools zijn zeer handig om complexe zaken enerzijds te verduidelijken als anderzijds erbij te assisteren om suggesties te doen van hoe een bepaald probleem aangepakt kan worden. Het potentiëel van AI was dus hier zeker merkbaar en werd ten volste benut waar mogelijk.
 \pagebreak
 \begin{minted}[autogobble, breaklines, linenos, samepage]{python3}
     entries = [match.groups() for match in entry_pattern.finditer(file_content)]

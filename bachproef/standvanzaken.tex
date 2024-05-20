@@ -59,19 +59,98 @@ Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker202
 De blijvende populariteit is te dus te danken aan de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd. 
  
 %--- start: BibLaTeX vs BibTeX ---
-\section{BibLaTeX en BibTex} % TODO: Meer in detail gaan, technischer gaan. Uitgebreider bespreken.
-BibLaTeX is een uitbreiding van \LaTeX{} die bibliografische referenties ondersteunt. Het is oorspronkelijk ontwikkeld door Philipp Lehman \autocite{Kime2024} en is een van de meest populaire bibliografische pakketten voor \LaTeX{}. BibLaTeX is een vervanging voor BibTeX, dat in 1985 werd ontwikkeld door \textcite{Patashnik1988}. BibTeX is een programma en bestandsformaat dat wordt gebruikt om bibliografische referenties te formatteren en te ordenen. BibLaTeX is een \LaTeX-pakket dat de functionaliteit van BibTeX uitbreidt en verbetert. Het biedt meer flexibiliteit en aanpassingsmogelijkheden dan BibTeX en is daarom de voorkeurskeuze voor veel \LaTeX-gebruikers.
 
-\subsection{Compatibiliteit}
-Van \textcite{Oetiker2023} kan geleerd worden dat BibLaTeX niet compatibel is met BibTeX, maar wel BibTeX-bestanden kan importeren. BibLaTeX ondersteunt UTF-8-codering, terwijl BibTeX alleen ASCII-codering ondersteunt. Gezien BibLaTeX een uitbreidig is op BibTeX, biedt het ook meer aanpassingsmogelijkheden en stijlen aan. BibLaTeX is een krachtig hulpmiddel voor het beheren van bibliografische referenties in \LaTeX-documenten en wordt veel gebruikt in academische en wetenschappelijke publicaties. 
+\section{BibTeX en BibLaTeX}
+
+\subsection{Inleiding}
+BibTeX en BibLaTeX zijn hulpmiddelen die worden gebruikt voor het beheren van referenties in \LaTeX{}-documenten. Beide hulpmiddelen hebben verschillende kenmerken en mogelijkheden die inspelen op verschillende behoeften van gebruikers bij het beheren van bibliografieën. Deze vergelijking belicht de technische aspecten van beide en biedt een diepgaande analyse om de verschillen tussen beide beter te begrijpen.
+
+\subsection{Overzicht van BibTeX}
+BibTeX werd in 1985 gecreëerd door \textcite{Patashnik1988} en is ontworpen om samen te werken met \LaTeX{}. Het vergemakkelijkt het genereren van bibliografieën door gebruikers in staat te stellen citatievermeldingen te definiëren in een \texttt{.bib}-bestand en deze te formatteren volgens vooraf gedefinieerde stijlen.
+
+\subsubsection{Belangrijkste Kenmerken van BibTeX}
+\begin{enumerate}
+    \item \textbf{Compatibiliteit}: BibTeX is compatibel met \LaTeX{} versie 2.09 en latere versies. Het integreert goed met \LaTeX{}-documenten en maakt gebruik van \texttt{.bst}-bestanden voor stijldefinities \autocite{Patashnik1988}.
+    \item \textbf{Kruisverwijzingen}: BibTeX ondersteunt kruisverwijzingen (Engels: cross-referencing) tussen vermeldingen, waardoor een vermelding velden van een andere kan erven. Dit is nuttig voor het citeren van proceedings en verzamelwerken \autocite{Patashnik1988}.
+    \item \textbf{Geaccentueerde Karakters}: BibTeX kan geaccentueerde karakters verwerken, wat cruciaal is voor internationalisatie. Het vereist dat geaccentueerde karakters tussen accolades worden geplaatst om correcte verwerking te garanderen \autocite{Patashnik1988}.
+    \item \textbf{Sorteren en Labels}: BibTeX sorteert vermeldingen standaard op auteur, jaar en titel. Aangepaste sorteer- en labelgeneratie kan worden gespecificeerd in \texttt{.bst}-bestanden \autocite{Patashnik1988}.
+    \item \textbf{String-concatenatie}: BibTeX ondersteunt string-concatenatie in veldwaarden, wat de flexibiliteit van vermeldingsdefinities vergroot \autocite{Patashnik1988}.
+    \item \textbf{Preambule-commando}: Het \texttt{@PREAMBLE}-commando stelt gebruikers in staat om \LaTeX{}-commando's in de bibliografie op te nemen, wat extra aanpassingsopties biedt \autocite{Patashnik1988}.
+\end{enumerate}
+
+\subsubsection{Beperkingen van BibTeX}
+\begin{enumerate}
+    \item \textbf{Aanpassingsbeperkingen}: Het aanpassen van bibliografische stijlen in BibTeX vereist het maken of wijzigen van \texttt{.bst}-bestanden, die een gespecialiseerde taal bevatten die complex kan zijn voor nieuwe gebruikers \autocite{Patashnik1988}.
+    \item \textbf{Unicode Ondersteuning}: BibTeX heeft beperkte ondersteuning voor Unicode, wat een beperking kan zijn voor documenten die uitgebreid gebruik maken van niet-ASCII-karakters \autocite{Patashnik1988}.
+    \item \textbf{Statisch Sorteren en Formatteren}: Wijzigingen in sorteren en formatteren vereisen aanpassingen aan de \texttt{.bst}-bestanden, wat niet eenvoudig is voor dynamische of complexe sorteerbehoeften \autocite{Patashnik1988}.
+\end{enumerate}
+
+\subsection{Overzicht van BibLaTeX}
+BibLaTeX, oorspronkelijk ontwikkeld door Philipp Lehman en later verder door \textcite{Kime2024}, is een moderner en flexibeler alternatief voor BibTeX. Het is ontworpen om samen te werken met de \texttt{biber}-backend en biedt uitgebreide aanpassingsmogelijkheden en geavanceerde functies voor bibliografiebeheer.
+
+\subsubsection{Belangrijkste Kenmerken van BibLaTeX}
+\begin{enumerate}
+    \item \textbf{Verbeterde Aanpassing}: BibLaTeX maakt uitgebreide aanpassing van bibliografieën mogelijk via \LaTeX{}-macro's. Gebruikers kunnen aangepaste stijlen en citatiecommando's definiëren zonder een aparte programmeertaal te moeten leren \autocite{Kime2024}.
+    \item \textbf{Unicode Ondersteuning}: BibLaTeX ondersteunt volledig Unicode, waardoor het geschikt is voor documenten die een breed scala aan karakters en scripts bevatten \autocite{Kime2024}.
+    \item \textbf{Dynamisch Sorteren en Filteren}: BibLaTeX biedt krachtige sorteer- en filteropties, waardoor gebruikers vermeldingen dynamisch kunnen sorteren en groeperen op basis van verschillende criteria zoals auteur, jaar en type \autocite{Kime2024}.
+    \item \textbf{Meertalige Ondersteuning}: BibLaTeX kan samenwerken met \texttt{babel}- en \texttt{polyglossia}-pakketten om meertalige documenten te ondersteunen. Het past automatisch bibliografie- en citatiestijlen aan op basis van de taalinstellingen van het document \autocite{Kime2024}.
+    \item \textbf{Gesegmenteerde Bibliografieën}: Gebruikers kunnen gesegmenteerde bibliografieën en meerdere bibliografieën binnen een enkel document maken, gecategoriseerd op onderwerpen of secties \autocite{Kime2024}.
+    \item \textbf{Aanpassing van het Datamodel}: Het datamodel in BibLaTeX kan worden uitgebreid en aangepast, waardoor gebruikers nieuwe vermeldingssoorten en velden kunnen definiëren indien nodig \autocite{Kime2024}.
+    \item \textbf{Annotatie en Annotatiecommando's}: BibLaTeX ondersteunt data-annotatie en querycommando's, waardoor meer geavanceerd beheer van bibliografische gegevens mogelijk is \autocite{Kime2024}.
+\end{enumerate}
+
+\subsubsection{Beperkingen van BibLaTeX}
+\begin{enumerate}
+    \item \textbf{Leercurve}: De uitgebreide aanpassingsmogelijkheden en flexibiliteit van BibLaTeX brengen een steilere leercurve met zich mee in vergelijking met BibTeX \autocite{Kime2024}.
+    \item \textbf{Compatibiliteitsproblemen}: BibLaTeX is niet volledig compatibel met sommige oudere \LaTeX{}-pakketten die specifiek voor BibTeX zijn ontworpen. Gebruikers moeten ervoor zorgen dat hun documentopstelling compatibel is met BibLaTeX \autocite{Kime2024}.
+    \item \textbf{Afhankelijkheid van Biber}: BibLaTeX is afhankelijk van de \texttt{biber}-backend voor het verwerken van bibliografiebestanden, wat een extra afhankelijkheid met zich meebrengt en installatie- en configuratie-inspanningen kan vereisen \autocite{Kime2024}.
+\end{enumerate}
+
+\subsection{Gedetailleerde Vergelijking}
+
+\subsubsection{Database-vermeldingssoorten}
+BibTeX en BibLaTeX ondersteunen verschillende soorten vermeldingen voor verschillende soorten referenties. BibLaTeX biedt echter meer flexibiliteit en extra vermeldingssoorten die niet beschikbaar zijn in BibTeX.
+
+\begin{itemize}
+    \item \textbf{BibTeX}: Standaard vermeldingssoorten zijn onder andere \texttt{article}, \texttt{book}, \texttt{inbook}, \texttt{incollection}, \texttt{inproceedings}, \texttt{manual}, \texttt{mastersthesis}, \texttt{misc}, \texttt{phdthesis}, \texttt{proceedings}, \texttt{techreport}, en \texttt{unpublished} \autocite{Patashnik1988}.
+    \item \textbf{BibLaTeX}: Ondersteunt alle BibTeX-vermeldingssoorten en extra zoals \texttt{mvbook} (meerdelige boeken), \texttt{mvcollection} (meerdelige verzamelingen), \texttt{dataset}, \texttt{online}, \texttt{patent}, en meer. Elke vermeldingssoort kan een rijk stel velden hebben die zijn afgestemd op specifieke referentiebehoeften \autocite{Kime2024}.
+\end{itemize}
+
+\subsubsection{Citatie- en Bibliografiecommando's}
+BibLaTeX biedt een breed scala aan citatiecommando's en bibliografiebeheeropties die de mogelijkheden van BibTeX overtreffen.
+
+\begin{itemize}
+    \item \textbf{BibTeX}: Basis citatiecommando's zijn \texttt{\textbackslash cite}, \texttt{\textbackslash nocite}, \texttt{\textbackslash bibliography}, en \texttt{\textbackslash bibliographystyle} \autocite{Patashnik1988}.
+    \item \textbf{BibLaTeX}: Biedt uitgebreide citatiecommando's zoals \texttt{\textbackslash cite}, \texttt{\textbackslash parencite}, \texttt{\textbackslash footcite}, \texttt{\textbackslash textcite}, en meer. Bibliografiecommando's bieden fijnere controle over het sorteren, filteren en formatteren van vermeldingen \autocite{Kime2024}.
+\end{itemize}
+
+\subsubsection{Aanpassing en Stijldefinitie}
+BibTeX en BibLaTeX verschillen aanzienlijk in hun benadering van aanpassing en stijldefinitie.
+
+\begin{itemize}
+    \item \textbf{BibTeX}: Aanpassing vereist het wijzigen van \texttt{.bst}-bestanden, wat een gespecialiseerde en minder intuïtieve taal inhoudt \autocite{Patashnik1988}.
+    \item \textbf{BibLaTeX}: Aanpassing gebeurt met behulp van \LaTeX{}-macro's, waardoor het toegankelijker is voor gebruikers die bekend zijn met \LaTeX{}. Gebruikers kunnen eenvoudig citatie- en bibliografiestijlen definiëren en aanpassen binnen hun \LaTeX{}-documenten \autocite{Kime2024}.
+\end{itemize}
+
+\subsubsection{Compatibiliteit en Integratie}
+BibTeX is meer gevestigd en heeft daarom een bredere compatibiliteit met oudere \LaTeX{}-pakketten, terwijl BibLaTeX moderne functies biedt maar compatibiliteitsproblemen kan ondervinden met sommige oudere pakketten.
+
+\begin{itemize}
+    \item \textbf{BibTeX}: Compatibel met de meeste oudere \LaTeX{}-pakketten en stijlen \autocite{Patashnik1988}.
+    \item \textbf{BibLaTeX}: Vereist specifieke versies van \LaTeX{} en \texttt{biber}, en is mogelijk niet compatibel met alle pakketten die voor BibTeX zijn ontworpen \autocite{Kime2024}.
+\end{itemize}
+
+\subsection{Conclusie}
+Zowel BibTeX als BibLaTeX spelen een belangrijke rol in het beheer van bibliografieën binnen \LaTeX{}-documenten. BibTeX is geschikt voor gebruikers die een eenvoudige, gevestigde oplossing nodig hebben met brede compatibiliteit. BibLaTeX daarentegen is ideaal voor degenen die geavanceerde functies, uitgebreide aanpassing en moderne mogelijkheden zoals Unicode-ondersteuning en dynamisch bibliografiebeheer nodig hebben. Gebruikers moeten het hulpmiddel kiezen dat het beste aansluit bij hun technische vereisten en document specificaties. Bij HOGENT is het gebruik van BibLaTeX verplicht. Deze proof of concept is daarom bijzonder relevant, aangezien het kan bijdragen aan het voldoen aan de behoeften van zowel studenten als docenten door te zorgen dat de gebruikte BibLaTeX-bestanden optimaal georganiseerd en correct zijn.
+
 %--- end: BibLaTeX vs BibTeX ---
 \section{Huidige stand van zaken}
-Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er snel gemerkt dat er fouten optraden die niet snel op te lossen waren, zie \ref{fig:biblatex-linter-error}. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
+Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow\footnote{\label{foot:pezgithub}\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er gemerkt dat er fouten optraden die niet dircet op te lossen waren, zie \ref{fig:biblatex-linter-error}. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
-    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand, gebruikmakende van de linter geschreven door Pez Cuckow.}
+    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand, gebruikmakende van de linter geschreven door Pez Cuckow\footnote[1]{\ref{foot:pezgithub}}.}
     \label{fig:biblatex-linter-error}
 \end{figure}
 
@@ -122,10 +201,13 @@ bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een p
     \label{fig:bibl_repo}
 \end{figure}
 
-De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline (zie \ref{sec:pipelines}), een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python wordt gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip). In \Ref{sec:bibl-in-depth} wordt er dieper ingegaan op de volledige werking van de linter.
-
+De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline (zie \ref{sec:pipelines}), een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python wordt gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip). In een latere sectie (\Ref{sec:bibl-in-depth}) wordt er dieper ingegaan op de volledige werking van de linter.
+% ---
 \section{Programmeertaal}
-Wat de programmeertaal voor de proof of concept betreft, werd er zich beperkt tot Rust, Python en JavaScript. Er werd een beperkt prototype uitgewerkt in elk van deze talen en deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt was. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
+
+Om de gepaste programmeertaal te vinden, werden diverse kandidaat\babelhyphen{hard}programmeertalen overwogen. De kandidaat\babelhyphen{hard}programmeertalen waren: Rust, JavaScript en Python. Door het analyseren van reeds bestaande linters en het afgaan van een hele lijst aan programmeertalen, werd er besloten om met deze drie programmeertalen te experimenteren.
+
+In een latere fase (sectie \ref{sec:mini-pocs}) werden er beperkte prototypes uitgewerkt in elk van deze talen; deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt zou zijn. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
 
 \subsection{Rust}
 Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen. 
