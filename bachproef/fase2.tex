@@ -15,36 +15,6 @@ Met deze lijst kon er dan gekeken worden naar de keuze van de programmeertaal di
 Uit de lijst van functionaliteiten werden er twee gekozen die als eerste uitgewerkt zouden worden om zo een eerste versie van de linter te bekomen. Deze functionaliteiten waren: het detecteren van duplicaten en de detectie om te zien of alle required fields wel aanwezig waren.
 
 % ---
-% \section{Linters onder de loep}
-% \label{sec:linters-onder-de-loep}
-
-% Gezien er tot op heden slechts één linter beschikbaar was voor BibLaTeX en deze niet optimaal leek te zijn, werd er besloten om ook eens te kijken naar andere linters die er bestonden. Zo kon er inspiratie opgedaan worden voor de proof of concept die gemaakt zou worden. Linters die werden bekeken zijn: Ruff, Pytype, Flake8, DirtyRat, bibl en nog enkele andere. De linters diende net zoals het proof of concept open-source en gratis te gebruiken zijn.
-
-%  \subsection{BibLaTeX linter}
-% \label{sec:biblatex-linter}
-% Zoals reeds vermeld, was er tot op heden nog geen \emph{optimale} BibLaTeX linter beschikbaar. 
-
-% Onderzoek wees uit dat de linter van Pez Cuckow\footnote{\url{https://github.com/Pezmc/BibLatex-Linter}} de enige linter was die specifiek voor BibLaTeX gemaakt was. Hoewel de linter een web-ui heeft, werd er tijdens dit onderzoek niet in geslaagd om een bestand succesvol te laten valideren. Een poging om een bestand te valideren, leidde tot volgende de foutmelding die te zien is op afbeelding \ref{fig:biblatex-linter-error}.
-
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
-%     \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand.}
-%     \label{fig:biblatex-linter-error}
-% \end{figure}
-
-% Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
-
-
-% \subsection{Ruff versus de concurrentie}
-% \label{subsec:ruff}
-% Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter geschreven in Rust. Dat is ook direct waar Ruff zich onderscheid van de concurrent Python linters die gewoon in Python geschreven zijn. Rust is een programmeertaal die bekend staat om zeer snel en veilig te zijn. Dit zou dus duidelijk een goede keuze kunnen zijn voor een linter. Daarnaast is Rust ook veel lichter om te draaien op hardware dan Python, gezien Python een interpretatieve taal is en Rust een gecompileerde taal. 
-% Dit zou dus ook een goede keuze kunnen zijn voor een linter die in een CI-pipeline gebruikt zou worden. Ook is er slechts één versie van Rust waar steeds op verdergewerkt wordt, hierdoor wensen de developers van de Rust taal ook dat de code die in Rust geschreven wordt, steeds blijft werken. Of het nu over vijf jaar is, of over tien jaar, wat vandaag gecompileerd kan worden, zal ook binnen tien jaar nog steeds gecompileerd kunnen worden. 
-
-% Ruff zou op bepaalde taken tien tot wel honderd keer sneller kunnen zijn! Dit wekte direct al interesse op om de Rust taal eens op de proef te stellen om te zien of dit ook effectief zo was. 
-
-
-% ---
 \section{Functionele en Niet-Functionele Requirements}
 Nadat de volledige reeks linters was geanalyseerd, kon een lijst van zowel functionele als niet-functionele vereisten worden opgesteld. Dankzij de promotor van deze thesis werd dat proces versneld. Een informatieve lijst werd verstrekt, waarin onder andere een opsomming van de gewenste regels stond. Aangezien de promotor uitgebreide technische kennis van het onderwerp heeft en beschouwd kan worden als de \emph{klant} bij de ontwikkeling van deze tool, werd gefocust op de uitwerking van de specifieke regels volgens zijn wensen.\newline
 
@@ -262,10 +232,9 @@ Hoewel Rust een grote kans leek te maken om de programmeertaal te worden waarin 
 
 Zoals eerder al enkele keren vermeld werd, was de keuze van de programmeertaal van groot belang zodat er ook na deze proef verder kon gewerkt worden aan de linter. Rust heeft daarbij de minst gunstige positie. Het was dus van groot belang om te kijken of het potentiëel in snelheid merkbaar genoeg was om de keuze te maken.
 
-Ondanks dat er wat kennis opgedaan werd over de programmeertaal zelf, was het niet mogelijk om beide functionaliteiten werkende te krijgen binnen de Rust-\acrshort{POC}. De kennis was simpelweg nog altijd te beperkt.
-Daarom werd er besloten om de enige werkende functionaliteit te testen ten opzichte van de snelste andere \acrshort{POC}, waarbij ook daar slechts enkel die éne controle gebruikt zou worden.
+Ondanks dat er kennis opgedaan werd over de programmeertaal zelf en dat de capaciteiten van \acrshort{AI} ingeschakeld werden, was het niet mogelijk om beide functionaliteiten werkende te krijgen binnen de Rust-\acrshort{POC}. De kennis was simpelweg nog altijd te beperkt; ook voor \acrshort{AI} was dit het geval. Met dat de programmeertaal recenter is en minder populair is dan Python, hebben de \acrshort{AI}-modellen (ChatGPT-4 en Microsoft's Copilot) veel minder \emph{referenties} om zich op te baseren voor het oplossen van de problemen die optreden. Dit legt direct een nadruk op het belang van een goede programmeerkennis en dat \acrfull{AI} niet zomaar elke programmeur zijn beroep zal kunnen innemen.
 
-De enige functionaleit die werkend gekregen was in Rust, was de controle op duplicaten. Dit voelde toch wel als een kleine teleurstelling aan, maar vestigde nog maar eens een belang van een programmeertaal te beheersen en dat enkel AI en wat ideeën niet altijd voldoende zal zijn. Dat gaf dan ook maar direct het gevoel van jobzekerheid als programmeur.
+Gezien de tijd beperkt was, werd er besloten om de enige werkende functionaliteit te testen en vergelijken met de snelste andere \acrshort{POC}, waarbij ook daar slechts enkel die éne controle gebruikt zou worden. De enige functionaleit die werkend gekregen was in Rust, was de controle op duplicaten. 
 
 Net zoals bij de andere twee \acrshort{POC}'s, werd er een soortgelijke werkwijze gehanteerd. Eerst worden de veschillende entries van elkaar gescheiden en vervolgens worden er de controles, of in dit geval de controle, op uitgevoerd.
 \begin{minted}[autogobble, breaklines, linenos, samepage]{rust}
@@ -291,7 +260,7 @@ Net zoals bij de andere twee \acrshort{POC}'s, werd er een soortgelijke werkwijz
     );
 \end{minted}
 
-Iedereen die wat programmeerkennis heeft, kan zelf ook inzien dat deze code ver van optimaal is. Maar opnieuw, de kennisbarrière was eenmaal aanwezig en met een beperkte tijd, diende er compromis gemaakt te worden. Merk op dat er veel lussen gebeuren, lussen die hoogstwaarschijnlijk overbodig of toch zeker weg te werken zijn. Er werden veel transformaties gemaakt met de data waarbij het leek dat er van het éne type naar het andere gegaan werd om dan vervolgens terug naar het éne type te gaan. Duidelijk veel overbodigheden. Voorgaande code bevatte niet eens de volledige check op duplicaten, dat was slechts het begin-bestand waaruit de applicatie start. Hieronder volgt de effectieve controle. Merk ook daar op dat er twee lussen in de methode zitten. Hoewel het grotendeels is voor zaken op een mooie manier te tonen is, blijft het merkwaardig dat er geen efficiëntere manier gevonden kon worden. ChatGPT of Github Copilot konden hier beide niet beter mee helpen dan ze tot dit punt al gedaan hebben.
+Elke programmeur kan zelf ook inzien dat deze code ver van optimaal is. Maar opnieuw, de kennisbarrière was eenmaal aanwezig en met een beperkte tijd, diende er compromis gemaakt te worden. Merk op dat er veel lussen gebeuren, lussen die hoogstwaarschijnlijk overbodig of toch zeker weg te werken zijn. Er werden veel transformaties gemaakt met de data waarbij het leek dat er van het éne type naar het andere gegaan werd om dan vervolgens terug naar het éne type te gaan. Duidelijk veel overbodigheden. Voorgaande code bevatte niet eens de volledige check op duplicaten, dat was slechts het begin-bestand waaruit de applicatie start. Hieronder volgt de effectieve controle. Merk ook daar op dat er twee lussen in de methode zitten. Hoewel het grotendeels is voor zaken op een mooie manier te tonen is, blijft het merkwaardig dat er geen efficiëntere manier gevonden kon worden. ChatGPT of Copilot konden hier beide niet beter mee helpen dan ze tot dit punt al gedaan hebben.
 
 \begin{minted}[autogobble, breaklines, linenos, samepage]{rust}
     pub fn check_for_duplicates<'a>(
@@ -371,7 +340,7 @@ Het is in principe wel nog perfect mogelijk dat Rust zich beter schaalt naar gro
 Python is dus de winnaar uit dit onderzoek en zal gebruikt worden om de rest van deze proof of concept mee uit te werken.
 
 \section{Gebruik van bibl als Basis}
-Met Python als programmeertaal was het mogelijk om terug te denken aan bibl, dat uitgebreid was bestudeerd (\ref{sec:bibl-in-depth}). Zou het mogelijk zijn om bibl om te vormen tot een BibLaTeX-compatibele linter? Gezien de eerdere positieve ervaringen met bibl, werd besloten dit te onderzoeken. Een geldig BibLaTeX-bestand werd door bibl gehaald om de resultaten te analyseren. bibl crashte niet; het genereerde enkele linterwaarschuwingen op het bestand. Dit was een positieve uitkomst. Aangezien bibl open-source is en een goed gestructureerde codebasis heeft, was het eenvoudig om regels aan te passen, te verwijderen of nieuwe toe te voegen.
+Met Python als programmeertaal was het mogelijk om terug te denken aan bibl, dat uitgebreid werd bestudeerd (\ref{sec:bibl-in-depth}). Zou het mogelijk zijn om bibl om te vormen tot een BibLaTeX-compatibele linter? Gezien de eerdere positieve ervaringen met bibl, werd besloten dit te onderzoeken. Een geldig BibLaTeX-bestand werd door bibl gehaald om de resultaten te analyseren. bibl crashte niet; het genereerde enkele linterwaarschuwingen op het bestand. Dit was een positieve uitkomst. Aangezien bibl open-source is en een goed gestructureerde codebasis heeft, was het eenvoudig om regels aan te passen, te verwijderen of nieuwe toe te voegen.
 
 Nadat een geldig BibLaTeX-bestand door bibl was gelind, werd het duidelijk welke regels voor BibLaTeX niet langer van toepassing waren. De volgende regels werden als overtreding gedetecteerd:
 \begin{itemize}
@@ -388,8 +357,8 @@ Nadat een geldig BibLaTeX-bestand door bibl was gelind, werd het duidelijk welke
 \end{itemize}
 
 Regel D00 kon direct worden uitgeschakeld. De volgorde van de bronnen is in deze use case niet relevant; daarom staat deze regel op de lijst van te negeren regels. 
-Het was logisch dat de regels M01 en M02 in eerste instantie als overtreding werden beschouwd. BibTeX-bestanden gebruiken namelijk andere velden die niet langer nodig zijn in BibLaTeX, waardoor deze velden als ontbrekend werden gemarkeerd. De lijst van entry types en hun velden moet dus zorgvuldig worden nagekeken. Dit geldt ook voor regel U00, aangezien BibLaTeX meer entry types kent dan BibTeX.
-Regel T00 kan worden verwijderd, aangezien BibLaTeX non-ascii characters ondersteunt. Regel T01 vereist meer aandacht. Het aantal karakters dat als tab wordt gebruikt, verschilt namelijk per omgeving. Voor deze proef werd de tab ingesteld op twee spaties. Omdat dit niet altijd het geval is, biedt bibl gelukkig een optie om dit eenvoudig in te stellen in de configuratie.
+Het was logisch dat de regels M01 en M02 in eerste instantie als overtreding werden beschouwd. BibTeX-bestanden gebruiken namelijk andere velden die niet langer nodig zijn in BibLaTeX, waardoor deze velden als ontbrekend werden gemarkeerd. De lijst van entry types en hun velden moet dus zorgvuldig worden nagekeken. Dit geldt ook voor regel U00, aangezien BibLaTeX meer entry types kent dan BibTeX. 
+Regel T00 kan worden verwijderd, aangezien BibLaTeX non-ascii characters ondersteunt. Regel T01 vereist meer aandacht; het aantal karakters dat als tab worden gebruikt, verschilt namelijk per omgeving. Voor deze proef werd de tab ingesteld op twee spaties. Omdat dit niet altijd het geval is, biedt bibl gelukkig een optie om dit eenvoudig in te stellen in de configuratie.
 Regel T02 verwijst naar spaties aan het einde van de regel. Nadat deze spaties waren verwijderd, was dit probleem opgelost. Deze regel kan blijven bestaan, afhankelijk van persoonlijke voorkeur.
 Regel T03 controleert het aantal karakters per regel. In deze use case werd hier minder aandacht aan besteed, aangezien het niet van groot belang was.
 Regel E05 is handig voor persoonlijke organisatie. Het verwijst naar een ontbrekend bestand dat aan een bron is gekoppeld. Aangezien de lijst met geldige referenties door de promotor werd geleverd, is het logisch dat sommige bestanden niet beschikbaar waren.

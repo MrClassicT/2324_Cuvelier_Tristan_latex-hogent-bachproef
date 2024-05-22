@@ -17,9 +17,15 @@ Op deze manier werd er toch al nuttige vooruitgang geboekt en schepte dit een ve
 % ----
 \section{bibla}
 \subsection{Behouden regels}
-Deze sectie bevat de regels die niet volledig doorgekomen zijn vanuit \texttt{bibl}.
+Deze sectie bevat de regels die volledig doorgekomen zijn vanuit \texttt{bibl} en dus geen veranderingen ondergaan zijn. Wèl is het mogelijk dat hier regels bij vermeld staan waarvan er veranderingen zijn doordat het configuratiebestand veranderingen ondergaan heeft.
 
-Zo zijn regels voor entiteiten (E): E01 (voornaam auteur mag niet worden afgekort), E02 (middennamen die al dan niet mogen worden afgekort), E03 (vermijd het gebruik van 'Et Al' in auteursveld), E04 (bestanden moeten relatief pad gebruiken), E05 (gelinkte bestanden die afwezig zijn), E06 (onjuist DOI-formaat) en E07 (onjuist ISBN-formaat) gelijk gebleven. 
+Zo zijn regels voor wat de \texttt{Entries} (E) betreffen: E01 (voornaam auteur mag niet worden afgekort), E02 (middennamen die al dan niet mogen worden afgekort), E03 (vermijd het gebruik van 'Et Al' in auteursveld), E04 (bestanden moeten relatief pad gebruiken), E05 (gelinkte bestanden die afwezig zijn), E06 (onjuist DOI-formaat) en E07 (onjuist ISBN-formaat) gelijk gebleven. 
+
+De \texttt{Database} (D) regels: D00 (Alfabetische volgorde van de bronnen), D01 (Preambule is de start van het document), D02 (Mogelijke duplicaten op basis van titel) zijn ook ongewijzigd gebleven.
+
+De \texttt{Missing} (M) regels: M00 (Geen auteurs of redacteurs), M01 (Missend verplicht veld), M02 (Missend optioneel veld) zijn ook ongewijzigd gebleven wat de code betreft. Echter is hier wel de configuratie grondig aangepakt geweest voor M01 en M02, gezien HOGENT\footnote{\url{www.hogent.be}} zelf eigen voorkeuren heeft over welke bibliografische gegevens van een bron bijgehouden dienen te worden. Ook voor de \texttt{Unrecognized} (U) regels, zijn er enkel wijzigingen gebeurt in de configuratie. 
+
+De \texttt{Unrecognized} (U) regels zijn ook totaal onaangepast gebleven. Hetzelfde kan gezegd worden voor de \texttt{Textual} (T) regels; opnieuw met uitzondering voor T01 (aantal spaties die als indentatie gebruikt dienen te worden), waar de configuratie van werd aangepast; uiteraard met uitzondering voor regel T00 (enkel ASCII karakters) die weggehaald werd gezien deze niet meer relevant is.
 
 \subsection{Aangepaste regels}
 \paragraph{E00 - Sleutelformaat}
@@ -80,10 +86,10 @@ Gezien bij bibTeX de datum opgesplitst werd in \texttt{year}, \texttt{month} en 
 Daarnaast moest het ook mogelijk zijn om achternamen van twee auteurs te gebruiken in een sleutel of zelf 'EtAl' indien het er drie of meer waren. Ook hiervoor werden er enkele controles op punt gezet om hier rekening mee te houden, zie code-regel 35 tot en met 41.
 
 \paragraph{E08 - \texttt{pages} veld formaat}
-Deze test leek niet te werken vanwege het veld waarop gecontroleerd werd. Er werd naar het \texttt{page} veld gezocht, maar het veld waar effectief naar gezocht diende te worden staat gekend als \texttt{pages} in BibLaTeX. 
+Deze test leek niet te werken vanwege het veld waarop gecontroleerd werd. Er werd naar het \texttt{page} veld gezocht, maar het veld waar effectief naar gezocht diende te worden staat gekend als \texttt{pages} in BibLaTeX. Uiteindelijk werd deze regel een samenvoeging van de voormalige regel E08 (pagina formaat moet xx--yy zijn) en E09 (eindpagina dient groter te zijn dan de startpagina) uit \texttt{bibl}.
 
 \paragraph{E09 - Correct \texttt{date} formaat}
-Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van data wat veranderd. Nu er geen apart veld meer gebruikt wordt voor \texttt{year}, \texttt{month} en \texttt{day}, dient er een extra controle te gebeuren om te zien of de datum van een bron wel goed geformatteerd is. Waar de originele regel van bibl enkel keek of de maand weldegelijk in 'MMM' formaat was, dient er nu gekeken te worden dat het formaat gelijk is aan 'YYYY-MM-DD'. 
+Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van data wat veranderd. Nu er geen apart veld meer gebruikt wordt voor \texttt{year}, \texttt{month} en \texttt{day}, dient er een extra controle te gebeuren om te zien of de datum van een bron wel goed geformatteerd is. Waar de originele regel van bibl enkel keek of de maand weldegelijk in 'MMM' formaat was, dient er nu gekeken te worden dat het formaat gelijk is aan 'YYYY-MM-DD'. Deze regel vervangt de in \texttt{bibl} gekende regel E10 waarbij de maand in \texttt{mmm}-formaat diende te zijn.
 
 \begin{minted}[autogobble, breaklines, linenos]{python3}
     if 'date' not in entry.fields:
@@ -111,7 +117,7 @@ Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van dat
         return False
     return True
 \end{minted}
-\captionof{listing}[bibla: E09 - Correct \texttt{date} formaat]{bibla: E09 - Correct \texttt{date} formaat. Deze regel werd gewijzigd gezien het vermelden van data gewijzigd is. Gebruikt nu \texttt{date} veld in plaats van de \texttt{year}, \texttt{month} en \texttt{day} velden \label{lst:bibla_AR_E09}}
+\captionof{listing}[bibla: E09 - Correct \texttt{date} formaat]{bibla: E09 - Correct \texttt{date} formaat. Deze regel werd gewijzigd gezien het vermelden van data gewijzigd is. Gebruikt nu \texttt{date} veld in plaats van de \texttt{year}, \texttt{month} en \texttt{day} velden. Dit is de logica. \label{lst:bibla_AR_E09}}
 
 Ook hier is er op meerdere plaatsen weer een \acrfull{REGEX} te zien. \acrshort{REGEX} zijn krachtig voor het controleren van bepaalde vaste tekstuele structuren. In deze use case zijn ze bijvoorbeeld zeer handig om het \texttt{date} veld op te splitsen. Bij de eerste check, zie regel 4, kan al direct gezien worden of het een '4-2-2' formaat is, of toch eerder een '2-2-4' formaat. Gezien zowel de maand als dag met twee getallen voorgesteld worden, is het belangrijk om hier een minimale vorm van controle op uit te voeren. Zo kan het maandnummer nooit groter zijn dan 12 en zijn er maar maximaal 31 dagen tijdens de langste dagen. Hoewel dit niet elke fout kan tegengaan, is het wel handig om deze minimale controles uit te voeren om zoveel mogelijk garantie te bieden dat er geen grove fouten optreden op vlak van consistentie in de \texttt{date} velden. Regels 6 tot en met 18 voeren de controle uit om te zien wanneer de dag en/of maand moest ontbreken, om te zien dat ook dan het formaat zo goed mogelijk gerespecteerd wordt.
 
@@ -146,9 +152,9 @@ De regel die dit controleert zag er als volgt uit:
         :return: False if the specific field is used instead of its variant, True otherwise
         """
         if entry.type == entry_type and field in entry.fields:
-        return False
+            return False
         else:
-        return True
+            return True
 \end{minted}
 \captionof{listing}[bibla: E10 - Gebruik aanbevolen velden]{bibla: Nieuwe Regel | E10 - Gebruik aanbevolen velden in plaats van gelijkaardigen. \label{lst:bibla_NR_E10}}
 
@@ -156,6 +162,34 @@ Net zoals bij de originele regels van bibl, wordt er ook bij de nieuwe aandacht 
     
 Bij deze regel kan ook duidelijk gezien worden dat er inspiratie gehaald werd bij een reeds bestaande regels die op een zeer gelijkaardige manier te werk gaan. De regels M01 en M02 zijn een grote inspiratie geweest. De regels zijn simpel maar zeer efficiënt. Er wordt een lijst \emph{dictionary} bijgehouden waarbij de 'oude' velden als \emph{key} dienen en de 'nieuwe' als \emph{value}.
 % ---
+
+\paragraph{E11 - Gebruik van Aliassen}
+\label{rule:E11-alias-preferences}
+Binnen BibLaTeX zijn er vaak vele varianten beschikbaar voor bepaalde types bronnen, deze varianten vereisen dan dezelfde fields als het \emph{originele} type. Om consistentie te garanderen, gaat de voorkeur uit om altijd het \emph{originele} type te gebruiken in plaats van één van de aliassen. Deze methode werd op een gelijkaardige manier uitgewerkt als E10, M01 en M02 waar er gekeken wordt naar de bepaalde velden die al dan niet gebruikt worden. Het enige verschil is dat er hier niet naar de velden gekeken worden van een \emph{entry} maar wel naar het type van de \emph{entry}.
+%---
+\paragraph{E12 - Geen startpagina's in \texttt{URL} veld}
+Startpagina's zijn te algemeen en verwijzen meestal niet naar een geldige bron, daarom is het van groot belang dat de correcte URL opgeslagen wordt, zodat ook na het raadplegen van een bron voor de eerste keer, dezelfde bron eenvoudig achterhaald kan worden. Ook voor in de bibliografie is het van groot belang dat dit correct opgeslagen wordt. Deze regel wordt nagekeken door opnieuw gebruik te maken van \acrshort{REGEX}. De code binnen deze regel ziet er als volgt uit:
+\begin{minted}[autogobble, breaklines, linenos]{python3}
+    if 'url' not in entry.fields:
+        return True
+    url = entry.fields['url']
+    regex = re.compile(r'^(https?://)?[^/]+/?$')
+    if regex.match(url):
+        return False
+    return True
+\end{minted}
+\captionof{listing}[bibla: E12 - Geen startpagina's gebruiken]{bibla: Nieuwe Regel | E12 - Gebruik geen startpagina's in het \texttt{URL} veld, logica. \label{lst:bibla_NR_E12}}
+
+Op regel 4, in de \acrshort{REGEX} kan er gezien worden dat er gekeken wordt naar hoe een typische URL eruit kan zien, rekeninghoudende met al dan niet optionele componenten uit een URL.
+% ---
+
+\paragraph{E13 - Enkel kritische pad in \texttt{URL} veld}
+% TODO - Hier verder uitschrijven.
+\begin{minted}[autogobble, linenos, breaklines]{python3}
+if ('#' or '?' or '%') in url:
+\end{minted}
+
+%---
 \paragraph{M03 - Speciale karakters}
 
 Deze regel zal wellicht later van naam veranderen, gezien het niet direct onder de meest intuïtieve categorie staat (M). 'M' wordt doorgaans gebruikt voor 'Missing' of ontbrekende zaken aan te duiden. Al kan er gediscussiëerd worden of dit dan niet net toch de juiste categorie zou zijn, gezien het om een ontbrekend karakter gaat. Speciale karakters dienen namelijk vervangen te worden door het commando om ze te genereren. Het commando is doorgaans gewoon een \backslash voor het karakter plaatsen. Dit zorgt ervoor dat LaTeX het speciale karakter niet gaat zien als een commando dat het moet uitvoeren. 
@@ -223,7 +257,7 @@ alternate_fields:
   journaltitle: [journal]
   institution: [school]
 \end{minted}
-\captionof{listing}[bibla: Configuratie | E10 - Gebruik aanbevolen velden]{bibla: Configuratie | E10 - Gebruik aanbevolen velden in plaats van gelijkaardigen. \label{lst:bibla_AR_E00}}
+\captionof{listing}[bibla: Configuratie | E10 - Gebruik aanbevolen velden]{bibla: Configuratie | E10 - Gebruik aanbevolen velden in plaats van gelijkaardigen. \label{lst:bibla_AC_E10}}
    
 De overige configuratie kan geraadpleegt worden op de \texttt{bibla} repository in \texttt{bibla.yml}\footnote{\url{https://github.com/MrClassicT/bibla/blob/master/bibla/bibla.yml}}, wat de algemene configuratie voor \texttt{bibla} bevat.
 

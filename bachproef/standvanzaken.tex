@@ -154,6 +154,7 @@ Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Lin
     \label{fig:biblatex-linter-error}
 \end{figure}
 
+
 Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
 
 \section{Andere linters}
@@ -238,7 +239,7 @@ In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsge
 
 De structuur van bibl \ref{fig:bibl_src} volgt een gebruikelijke pakket-gebaseerde aanpak voor het organiseren van code. Deze aanpak wordt vaak toegepast wanneer een project is opgezet als een herbruikbaar pakket, in plaats van een los script. De aanwezigheid van `\_\_init\_\_.py` zorgt er namelijk voor dat het pakket importeerbaar is \autocite{Loubser2021}. Dit is direct ook een indicator dat het om een pakket gaat.
 
-Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd.
+Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \texttt{bibl} uiteindelijk de basis kon worden van deze proof of concept, was het van groot belang om een zorgvuldige analyse uit te voeren en de codebase zo goed mogelijk te begrijpen.
 
 \subsection{\_\_init\_\_.py}
 Zoals eerder vermeld, is dit bestand kenmerkend bij pakketten. Het bestand is namelijk vereist voor Python om de directory als een pakket te behandelen. Het kan leeg zijn, maar het kan ook initialisatiecode of pakket-niveau-definities bevatten; in dit geval bevat het de huidige softwareversie.
