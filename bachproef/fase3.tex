@@ -8,13 +8,19 @@
 Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstormen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er dus gekozen voor bibla.
 
 Nu deze lastige zaak afgehandeld is, werd er eerst een hele rebrand uitgevoerd op de fork van bibl; bibla was geboren.
-
-In het begin was het zeer lastig om eigen regels toe te voegen, dit omdat het ondanks de grondige analyse die erop plaats vond, nog altijd een ongekend project was. Daarom werd er besloten om eerst bestaande regels te controleren en deze te vergelijken met de eigen lijst van functionele requirements.
+\\
+\\
+In het begin was het zeer lastig om eigen regels toe te voegen, dit omdat het ondanks de grondige analyse die erop plaats vond, nog altijd een \emph{vreemd} project was. Daarom werd er besloten om eerst bestaande regels te controleren en deze te vergelijken met de eigen lijst van functionele requirements.
 Zo konden er enerzijds taken worden geschrapt van zaken die reeds geïmplementeerd waren en kon er een overzicht gemaakt worden van de regels die aangepast diende te worden. 
 
 Op deze manier werd er toch al nuttige vooruitgang geboekt en schepte dit een vertrouwensband met de bestaande codebase. Eens enkele waren regels aangepast, werden er ook eigen regels opgesteld die nodig waren.
 % ----
 \section{bibla}
+\subsection{Behouden regels}
+Deze sectie bevat de regels die niet volledig doorgekomen zijn vanuit \texttt{bibl}.
+
+Zo zijn regels voor entiteiten (E): E01 (voornaam auteur mag niet worden afgekort), E02 (middennamen die al dan niet mogen worden afgekort), E03 (vermijd het gebruik van 'Et Al' in auteursveld), E04 (bestanden moeten relatief pad gebruiken), E05 (gelinkte bestanden die afwezig zijn), E06 (onjuist DOI-formaat) en E07 (onjuist ISBN-formaat) gelijk gebleven. 
+
 \subsection{Aangepaste regels}
 \paragraph{E00 - Sleutelformaat}
 \label{rule:E00}
@@ -67,6 +73,8 @@ def key_format(key, entry, database):
     regex = re.compile(correct_key_ascii + r'[a-zA-Z]?')
     return bool(regex.match(key))
 \end{minted}
+\captionof{listing}[bibla: E00 - Correct \texttt{key} formaat]{bibla: E00 - Sleutels moeten het juiste formaat hebben. De aangepaste versie. Aanpassingen waren nodig vanwege het gebruik van het 'date' field in plaats van het voormalige 'year' field. \label{lst:bibla_AR_E00}}
+
 
 Gezien bij bibTeX de datum opgesplitst werd in \texttt{year}, \texttt{month} en \texttt{day} velden, diende deze regel aangepast te worden om rekening te houden met het \texttt{date} veld in de plaats (zie regel 21). Alsook diende er een \acrfull{REGEX} toegevoegd te worden om rekening te houden met het veranderde datum formaat. Het jaar moest immers uit het date field gehaald worden gezien het geen veld op zich meer was, zie regel 32. Daarnaast werd er ook een controle toegevoegd voor wanneer er geen author aanwezig was en bijvoorbeeld enkel een editor. \texttt{bibl} hield er namelijk geen rekening mee dat er enkel editors aanwezig zouden kunnen zijn in een bepaalde bron. Bij het uitwerken van deze proef is er een bron in de bibliografie geraakt waarbij dit het geval was. Dit had als gevolg dat de linter crashte bij het linten van dit bibliografisch bestand.
 Daarnaast moest het ook mogelijk zijn om achternamen van twee auteurs te gebruiken in een sleutel of zelf 'EtAl' indien het er drie of meer waren. Ook hiervoor werden er enkele controles op punt gezet om hier rekening mee te houden, zie code-regel 35 tot en met 41.
@@ -103,6 +111,8 @@ Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van dat
         return False
     return True
 \end{minted}
+\captionof{listing}[bibla: E09 - Correct \texttt{date} formaat]{bibla: E09 - Correct \texttt{date} formaat. Deze regel werd gewijzigd gezien het vermelden van data gewijzigd is. Gebruikt nu \texttt{date} veld in plaats van de \texttt{year}, \texttt{month} en \texttt{day} velden \label{lst:bibla_AR_E09}}
+
 Ook hier is er op meerdere plaatsen weer een \acrfull{REGEX} te zien. \acrshort{REGEX} zijn krachtig voor het controleren van bepaalde vaste tekstuele structuren. In deze use case zijn ze bijvoorbeeld zeer handig om het \texttt{date} veld op te splitsen. Bij de eerste check, zie regel 4, kan al direct gezien worden of het een '4-2-2' formaat is, of toch eerder een '2-2-4' formaat. Gezien zowel de maand als dag met twee getallen voorgesteld worden, is het belangrijk om hier een minimale vorm van controle op uit te voeren. Zo kan het maandnummer nooit groter zijn dan 12 en zijn er maar maximaal 31 dagen tijdens de langste dagen. Hoewel dit niet elke fout kan tegengaan, is het wel handig om deze minimale controles uit te voeren om zoveel mogelijk garantie te bieden dat er geen grove fouten optreden op vlak van consistentie in de \texttt{date} velden. Regels 6 tot en met 18 voeren de controle uit om te zien wanneer de dag en/of maand moest ontbreken, om te zien dat ook dan het formaat zo goed mogelijk gerespecteerd wordt.
 
 
@@ -114,18 +124,19 @@ Zoals bij de aanpassingen gemerkt kon worden, was het gebruik van andere velden 
 Er kan terug gedacht worden aan de \texttt{year}, \texttt{month} en \texttt{day} velden, waarvoor nu de voorkeur gaat om \texttt{date} te gebruiken.
 
 De regel die dit controleert zag er als volgt uit:
+
 \begin{minted}[autogobble, breaklines, linenos]{python3}
-    def register_variant_rule(entry_type, field, variant):
-    rule_id = 'E10{}{}'.format(entry_type.capitalize(), field.capitalize())
-    message = "Entry type {} - use {} instead of {}!".format(entry_type, variant, field)
-
-    @register_entry_rule(rule_id, message)
-    def check_variant_field(key, entry, database, entry_type=entry_type, field=field, variant=variant):
+        def register_variant_rule(entry_type, field, variant):
+        rule_id = 'E10{}{}'.format(entry_type.capitalize(), field.capitalize())
+        message = "Entry type {} - use {} instead of {}!".format(entry_type, variant, field)
+        
+        @register_entry_rule(rule_id, message)
+        def check_variant_field(key, entry, database, entry_type=entry_type, field=field, variant=variant):
         """Raise a linter warning when a specific field is used instead of its variant.
-
+        
         This function checks if the variant field is required and if the specific field is present.
         If these conditions are met, it suggests to use the variant field instead of the specific field.
-
+        
         :param key: The key of the current bibliography entry
         :param entry: The current bibliography entry
         :param database: All bibliography entries
@@ -135,17 +146,20 @@ De regel die dit controleert zag er als volgt uit:
         :return: False if the specific field is used instead of its variant, True otherwise
         """
         if entry.type == entry_type and field in entry.fields:
-            return False
+        return False
         else:
-            return True
+        return True
 \end{minted}
-Net zoals bij de originele regels van bibl, wordt er ook bij de nieuwe aandacht besteed aan een correcte documentatie van de code. Het is namelijk dankzij deze zorgvuldige documentatie dat gebruikers en bijdragers (Engels: Contributors) in staat zijn om te begrijpen wat er gaande is en hun bijdrage te leveren zonder onnodig tijd te moeten verspillen aan het ontcijferen van bestaande code.
+\captionof{listing}[bibla: E10 - Gebruik aanbevolen velden]{bibla: Nieuwe Regel | E10 - Gebruik aanbevolen velden in plaats van gelijkaardigen. \label{lst:bibla_NR_E10}}
 
+Net zoals bij de originele regels van bibl, wordt er ook bij de nieuwe aandacht besteed aan een correcte documentatie van de code. Het is namelijk dankzij deze zorgvuldige documentatie dat gebruikers en bijdragers (Engels: Contributors) in staat zijn om te begrijpen wat er gaande is en hun bijdrage te leveren zonder onnodig tijd te moeten verspillen aan het ontcijferen van bestaande code.
+    
 Bij deze regel kan ook duidelijk gezien worden dat er inspiratie gehaald werd bij een reeds bestaande regels die op een zeer gelijkaardige manier te werk gaan. De regels M01 en M02 zijn een grote inspiratie geweest. De regels zijn simpel maar zeer efficiënt. Er wordt een lijst \emph{dictionary} bijgehouden waarbij de 'oude' velden als \emph{key} dienen en de 'nieuwe' als \emph{value}.
 % ---
 \paragraph{M03 - Speciale karakters}
 
 Deze regel zal wellicht later van naam veranderen, gezien het niet direct onder de meest intuïtieve categorie staat (M). 'M' wordt doorgaans gebruikt voor 'Missing' of ontbrekende zaken aan te duiden. Al kan er gediscussiëerd worden of dit dan niet net toch de juiste categorie zou zijn, gezien het om een ontbrekend karakter gaat. Speciale karakters dienen namelijk vervangen te worden door het commando om ze te genereren. Het commando is doorgaans gewoon een \backslash voor het karakter plaatsen. Dit zorgt ervoor dat LaTeX het speciale karakter niet gaat zien als een commando dat het moet uitvoeren. 
+
 
 \begin{minted}[autogobble, breaklines, linenos]{python3}
     @register_entry_rule('M03', 'Special characters should be replaced by the command to generate them: %, &, $, #, _, \\, ~, ^, |')
@@ -165,6 +179,7 @@ Deze regel zal wellicht later van naam veranderen, gezien het niet direct onder 
                         return False
         return True
 \end{minted}
+\captionof{listing}[bibla: M03 - Speciale karakters dienen gegenereerd te worden]{bibla: Nieuwe Regel | M03 - Speciale karakters dienen met commando gegenereerd te worden. \label{lst:bibla_NR_M03}}
 
 Hoewel deze versie gebruikt wordt in versie 2.0.5 van bibla, zit hier nog een kleine \emph{bug} in. Het is namelijk zo dat deze regel elk veld zal controleren op speciale karakters. Hoewel dit over het algemeen goed is, gooit het hierdoor ook foutieve waarschuwingen op het \texttt{url} veld.
 
@@ -193,11 +208,13 @@ except Exception as e:
     print(f"Error: {e}")
     return []
 \end{minted}
+\captionof{listing}[bibla: Extra foutafhandelingen]{bibla: Diverse aanpassing | Foutafhandelingen om de tool properder te laten werken. \label{lst:bibla_foutafhandelingen_voorbeeld}}
 
 In dit codeblock, genomen uit \texttt{lint.py}, kan er gezien worden dat er aan extra foutafhandelingen gedaan wordt. De regels die hier overtreden worden, staan op dit ogenblik vast gecodeerd en zijn minder dynamisch dan doorheen de rest van de applicatie gewend is, maar ze zijn afgestemd geweest en als de testen als betrouwbaar gezien kunnen worden, zou dit kloppen met wat de oorzaak achterliggend effectief is. Dit was de meest eenvoudige en duidelijke manier om de gebruiker te laten weten wat er mis is zonder kostbare tijd te verliezen voor het verder ontwikkelen van andere delen van de applicatie.
 
 \subsection{Configuratie}
 De standaardconfiguratie van bibl was een zeer goede basis om van verder te gaan voor bibla. Maar zoals al vaker aangegeven, zijn er verschillen tussen bibTeX en bibLaTeX die ervoor zorgen dat er aanpassingen dienen te gebeuren. Op de configuratie van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl/-/blob/master/bibl/bibl.yml}} zijn er zaken veranderd, maar ook extra toegevoegd. Zoals voor bijvoorbeeld regel E10 (\ref{rule:E10-field-preferences}) waar er gekeken werd naar bepaalde velden waarbij er een voorkeur is om er een synoniem van te gebruiken. Waarvan hieronder het stukje configuratie in YAML-formaat.
+
 
 \begin{minted}[autogobble, breaklines, linenos]{yaml}
 alternate_fields:
@@ -206,7 +223,8 @@ alternate_fields:
   journaltitle: [journal]
   institution: [school]
 \end{minted}
-
+\captionof{listing}[bibla: Configuratie | E10 - Gebruik aanbevolen velden]{bibla: Configuratie | E10 - Gebruik aanbevolen velden in plaats van gelijkaardigen. \label{lst:bibla_AR_E00}}
+   
 De overige configuratie kan geraadpleegt worden op de \texttt{bibla} repository in \texttt{bibla.yml}\footnote{\url{https://github.com/MrClassicT/bibla/blob/master/bibla/bibla.yml}}, wat de algemene configuratie voor \texttt{bibla} bevat.
 
 \subsection{Pipelines}
@@ -264,6 +282,7 @@ jobs:
           out/flake8.svg
           out/lint_result.txt
 \end{minted}
+\captionof{listing}[bibla: \acrshort{CI}-pipeline]{bibla: \acrshort{CI}-pipeline | \acrfull{CI} pipeline overzicht \label{lst:bibla_CI}}
 
 Bij het analyseren van deze pipeline, kan er gezien worden dat er vier zaken gebeuren:
 \begin{enumerate}
@@ -326,3 +345,4 @@ jobs:
         password: ${{ secrets.PYPI_API_TOKEN }}
 
 \end{minted}
+\captionof{listing}[bibla: \acrshort{CD}-pipeline]{bibla: \acrshort{CD}-pipeline | \acrfull{CD} pipeline overzicht \label{lst:bibla_CD}}

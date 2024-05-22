@@ -46,11 +46,24 @@
 \usepackage{multirow} % Nodig om de tabel mooi te tonen.
 \usepackage{pdflscape} % Nodig voor de functionele requirements.
 \usepackage[automake]{glossaries}% Nodig voor glossary (afkortingenlijst)
+\usepackage{listings}
+\usepackage{tocbibind}
+
 \makeglossaries %% GLOSSARY_ENTRY
 \newacronym{MVP}{MVP}{Minimum Viable Product}
 \newacronym{POC}{PoC}{Proof of Concept}
 \newacronym{REGEX}{Regex}{Reguliere Expressie}
+\newacronym{AI}{AI}{Artificiële Intelligentie}
+\newacronym{CI}{CI}{Continuous Integration}
+\newacronym{CD}{CD}{Continuous Deployment}
 \glstoctrue
+
+\newcommand{\listofcodelistings}{%
+  \chapter*{Lijst van Codefragmenten} % Unnumbered section
+  \addcontentsline{toc}{chapter}{Lijst van Codefragmenten} % Add to TOC
+  \lstlistoflistings % Generate the list of listings
+}
+
 
 %%---------- Document metadata -------------------------------------------------
 \author{Tristan Cuvelier}
@@ -116,7 +129,8 @@
 % If you included tables and/or source code listings, uncomment the appropriate
 % lines.
 \listoftables
-% \listoflistings
+\renewcommand\listoflistingscaption{Lijst van Codefragmenten}
+\listoflistings
 \printglossaries
 
 
