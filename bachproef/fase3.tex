@@ -184,10 +184,12 @@ Op regel 4, in de \acrshort{REGEX} kan er gezien worden dat er gekeken wordt naa
 % ---
 
 \paragraph{E13 - Enkel kritische pad in \texttt{URL} veld}
-% TODO - Hier verder uitschrijven.
+Naast dat er niet enkel startpagina's gebruikt mogen worden, is het ook ongewenst dat de URL onnodig lang is. Om deze voorvallen te voorkomen, wordt er een check gedaan op enkele karakters die typisch voorkomen in \emph{te lange} URLS. Hieronder worden bijvoorbeeld URL's verstaan waarin er een directe verwijzing gebeurt naar een specifieke zin uit een webpagina. Het wordt met behulp van een opsomming van deze karakters gecontroleerd zoals hieronder te zien is.
 \begin{minted}[autogobble, linenos, breaklines]{python3}
 if ('#' or '?' or '%') in url:
 \end{minted}
+\captionof{listing}[bibla: E13 - Enkel kritische pad van URL]{bibla: Nieuwe Regel | E13 - Gebruik enkel het kritische pad in het \texttt{URL} veld, logica. \label{lst:bibla_NR_E13}}
+
 
 %---
 \paragraph{M03 - Speciale karakters}
