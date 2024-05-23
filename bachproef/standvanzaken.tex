@@ -1,4 +1,4 @@
-\chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
+\chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the Art}}%
 \label{ch:stand-van-zaken}
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het bijzonder aan wat de link is met
@@ -22,22 +22,22 @@
 % Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van
 % een paragraaf.
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Dit hoofdstuk licht toe wat een linter is en wat LaTeX (\LaTeX{}) en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
+Dit hoofdstuk licht toe wat een linter is en wat \LaTeX{} en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters, hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
 
 \section{Wat is een linter?}
-Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het het nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
+Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
 
-\textcite{Kamunya2023} legt uit dat linten verwijst naar het proces van broncode automatisch te controleren op programmatische en stilistische fouten, dit houdt in dat een linter programmatisch je code scant om te controleren of er problemen zijn die kunnen leiden tot bugs of inconsistenties met de code-stijl en -gezondheid. De linter is hierbij de tool die ervoor gebruikt wordt.
+\textcite{Kamunya2023} legt uit dat linten verwijst naar het proces van broncode automatisch controleren op programmatische en stilistische fouten. Dit houdt in dat een linter programmatisch je code scant om te controleren of er problemen zijn die kunnen leiden tot bugs of inconsistenties met de code-stijl en -gezondheid. De linter is hierbij de tool die ervoor gebruikt wordt.
 
 Een linter is een statische analysetool omdat het de broncode of andere gestructureerde data analyseert zonder de code daadwerkelijk uit te voeren \autocite{Moeller2023}. Het voert een \emph{statische} analyse uit, wat betekent dat het de code inspecteert op basis van de geschreven tekst en structuur ervan, zonder rekening te houden met de daadwerkelijke uitvoering van de code.
 
-Een linter is dus een statische analysetool, dat broncode of andere gestructureerde data kan analyseren.
+Een linter is dus een statische analysetool die broncode of andere gestructureerde data kan analyseren.
 
 \section{\LaTeX{}}
-\LaTeX{} (uitspraak: LaTech), een uitbreiding op het \TeX{}-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. \LaTeX{} zelf, ontwikkeld door \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen, en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie \autocite{Oetiker2023}. 
+\LaTeX{} (uitspraak: LaTech), een uitbreiding op het \TeX{}-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. \LaTeX{} zelf, ontwikkeld door \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie \autocite{Oetiker2023}.
 
 \subsection{Werking}
-Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker2023} kunnen bevestigen dat \LaTeX{} functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. \LaTeX{} vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen. 
+Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker2023} kunnen bevestigen dat \LaTeX{} functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. \LaTeX{} vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen.
 
 \subsection{Voordelen}
 \begin{enumerate}
@@ -55,9 +55,8 @@ Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker202
 \end{enumerate}
 
 \subsection{Conclusie}
-\LaTeX{} \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. 
-De blijvende populariteit is te dus te danken aan de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd. 
- 
+\LaTeX{} \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. De blijvende populariteit is te danken aan de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd.
+
 %--- start: BibLaTeX vs BibTeX ---
 
 \section{BibTeX en BibLaTeX}
@@ -145,26 +144,24 @@ Zowel BibTeX als BibLaTeX spelen een belangrijke rol in het beheer van bibliogra
 
 %--- end: BibLaTeX vs BibTeX ---
 \section{Huidige stand van zaken}
-Op het ogenblik van het schrijven, zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTex zijn niet compatibel met BibLaTeX. De enige beschikbare linter, die bestaat voor BibLaTeX voor dit moment, staat op een GitHub-repository van Pez Cuckow\footnote{\label{foot:pezgithub}\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er gemerkt dat er fouten optraden die niet dircet op te lossen waren, zie \ref{fig:biblatex-linter-error}. Het was dus niet mogelijk om zomaar elk .bib bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
+Op het ogenblik van het schrijven zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTeX zijn niet compatibel met BibLaTeX. De enige beschikbare linter voor BibLaTeX op dit moment staat op een GitHub-repository van Pez Cuckow\footnote{\label{foot:pezgithub}\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er gemerkt dat er fouten optraden die niet direct op te lossen waren, zie Figuur~\ref{fig:biblatex-linter-error}. Het was dus niet mogelijk om zomaar elk .bib-bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{./files/Pezmc-LinterError_cropped.png}
-    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX bestand, gebruikmakende van de linter geschreven door Pez Cuckow\footnote[1]{\ref{foot:pezgithub}}.}
+    \caption[Foutmelding BibLaTeX-linter]{Lintingerror bij het valideren van een BibLaTeX-bestand, gebruikmakende van de linter geschreven door Pez Cuckow\footnote[1]{\ref{foot:pezgithub}}.}
     \label{fig:biblatex-linter-error}
 \end{figure}
 
-
-Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waar de proof of concept aan moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
+Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waaraan de proof of concept moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
 
 \section{Andere linters}
-Gezien het wat BibLaTeX linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook als hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en bibl. Net als de proof of concept, waren al de bekeken linters gratis te gebruiken en open source.
+Gezien het wat BibLaTeX-linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en bibl. Net als de proof of concept waren al de bekeken linters gratis te gebruiken en open source.
 
-Daaruit bleek dat naast de manier van implementeren, de taal waaruit de linter opgebouwd is ook van belang is voor de performantie. Dit was het begin naar een onderzoek voor de ideale programmeertaal te vinden voor deze proof of concept. 
+Daaruit bleek dat naast de manier van implementeren, de taal waaruit de linter opgebouwd is ook van belang is voor de performantie. Dit was het begin naar een onderzoek voor de ideale programmeertaal te vinden voor deze proof of concept.
 
 \subsection{Ruff}
-% Ruff is een Python linter die door \textcite{Astral2024} ontwikkeld is. In vergelijking met andere Python linters is Ruff veel performanter. Dit is omdat Ruff in tegenstelling tot de concurrenten, geschreven is in Rust in plaats van Python. Op de website van Astral, makers van Ruff, is er een vergelijking te zien tussen Ruff en andere Python linters die wel in Python geschreven zijn. Astral is niet de enige die dit aantoont, ook \textcite{TurnerTrauring2023} schrijft in een artikel dat de snelheid van Ruff zeker merkbaar is en toont dit aan met behulp van uitgevoerde tests. Vooral bij pipelines op virtuele machines gezien deze vCPU's (virtuele processor units) gebruiken en deze meestal trager zijn dan de processing units die terug te vinden zijn in moderne laptops of desktops.
-Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter ontwikkeld door \textcite{Astral2024}, geschreven in de programmeertaal Rust. Dit onderscheidt Ruff van andere Python linters, die doorgaans in Python zelf zijn geschreven. Rust staat bekend om zijn snelheid en veiligheid, wat het een uitstekende keuze maakt voor een linter. Bovendien is Rust lichter om op hardware te draaien dan Python, aangezien Python een interpretatieve taal is en Rust een gecompileerde taal. Dit maakt Ruff bijzonder geschikt voor gebruik in CI-pipelines. 
+Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter ontwikkeld door \textcite{Astral2024}, geschreven in de programmeertaal Rust. Dit onderscheidt Ruff van andere Python linters, die doorgaans in Python zelf zijn geschreven. Rust staat bekend om zijn snelheid en veiligheid, wat het een uitstekende keuze maakt voor een linter. Bovendien is Rust lichter om op hardware te draaien dan Python, aangezien Python een interpretatieve taal is en Rust een gecompileerde taal. Dit maakt Ruff bijzonder geschikt voor gebruik in CI-pipelines.
 
 Een ander belangrijk voordeel van Rust is de stabiliteit van de taal. Er is slechts één versie van Rust en die wordt continu doorontwikkeld, wat ervoor zorgt dat code die vandaag gecompileerd wordt, ook over tien jaar nog gecompileerd kan worden. Dit biedt een aanzienlijke zekerheid voor de toekomstbestendigheid van software.
 
@@ -172,10 +169,9 @@ Ruff kan op bepaalde taken tien tot wel honderd keer sneller zijn dan zijn concu
 
 \subsection{DirtyRat}
 \label{subsec:dirtyrat}
-DirtyRat is een JavaScript linter waar op gebotst werd tijdens het onderzoeken naar hoe een linter gemaakt kon worden. Het is een linter die zelf in JavaScript geschreven is en waarvan de stapsgewijze opbouw te vinden is in het artikel van \textcite{BorgesLate2021}. Daarnaast is ook de broncode zelf te vinden op GitHub\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}. Dit was ook de reden waarom er besloten werd om JavaScript als kandidaat-programmeertaal te nemen. 
+DirtyRat is een JavaScript linter die werd ontdekt tijdens het onderzoek naar hoe een linter gemaakt kon worden. Het is een linter die zelf in JavaScript geschreven is en waarvan de stapsgewijze opbouw te vinden is in het artikel van \textcite{BorgesLate2021}. Daarnaast is ook de broncode zelf te vinden op GitHub\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}. Dit was ook de reden waarom er besloten werd om JavaScript als kandidaat-programmeertaal te nemen.
 
-Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen zitten met veel meer complexe structureren dan een BibLaTeX bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het dus zeker niet nodig om elke component over te nemen.
-
+Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen hebben veel meer complexe structuren dan een BibLaTeX-bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het niet nodig om elke component over te nemen.
 
 \subsection{bibl}
 bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een linter voor BibTeX, de voorloper van BibLaTeX, geschreven in Python door Arne Van Den Kerchove. Het onderzoeken van een linter voor de voorloper van BibLaTeX leek bijzonder interessant om een goed inzicht te krijgen in wat precies verwacht kan worden van een linter. bibl biedt een uitgebreide lijst van regels, evenals een gedetailleerde projectstructuur en implementatiewijze van zowel de lintercode als de bijbehorende tests.
@@ -192,7 +188,7 @@ Dit impliceert dat pybtex verantwoordelijk is voor het extraheren van gegevens u
 
 Voor de test werd een BibLaTeX-document gebruikt dat door de promotor was gedeeld. Dit document bevatte geldige bronvermeldingen en was daarmee perfect geschikt om te onderzoeken of bibl als basis gebruikt kon worden. bibl werd snel geïnstalleerd via de Python package manager, pip. Vervolgens werd het lint-commando uitgevoerd op het BibLaTeX-document en werd bekeken wat bibl rapporteerde.
 
-bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een positief resultaat. Er waren echter enkele bestaande regels die niet compatibel waren met BibLaTeX-bestanden. 
+bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een positief resultaat. Er waren echter enkele bestaande regels die niet compatibel waren met BibLaTeX-bestanden.
 
 \subsubsection{Algemene structuur}
 \begin{figure}[ht]
@@ -202,7 +198,7 @@ bibl crashte niet en genereerde een uitgebreide lijst opmerkingen; dit was een p
     \label{fig:bibl_repo}
 \end{figure}
 
-De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline (zie \ref{sec:pipelines}), een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python wordt gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip). In een latere sectie (\Ref{sec:bibl-in-depth}) wordt er dieper ingegaan op de volledige werking van de linter.
+De gitlab-repository van bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een goed voorbeeld van hoe een goed gestructureerd project eruit kan zien. Naast de bibl folder, die alle broncode van bibl zelf bevat, zijn er ook: testen, test-data, lintervoorkeuren, een pipeline (zie \ref{sec:pipelines}), een licentie, een duidelijke readme en een installatie-script aanwezig. Ook de .idea, .gitignore en MANIFEST.in zijn niet onbelangrijk. de .idea bevat de voorkeursinstellingen voor de IDE (Integrated development environment, ook gekend als werkomgeving) van de auteur, het .gitignore bestand bevat een opsomming van bestanden of soort bestanden die niet op de repository dienen te komen. Denk hier aan tijdelijke bestanden die vanzelf aangemaakt worden; deze zijn niet nodig op de repository omdat ze onnodig plaats gebruiken. Tot slot wordt het MANIFEST.in bestand in Python gebruikt om aan te geven welke bestanden moeten worden opgenomen bij het maken van een distributiepakket; wat nodig is om het beschikbaar te stellen bij de pakketbeheerder\footnote{\url{https://pypi.org/}} (pip). In een latere sectie (\ref{sec:bibl-in-depth}) wordt er dieper ingegaan op de volledige werking van de linter.
 % ---
 \section{Programmeertaal}
 
@@ -211,8 +207,8 @@ Om de gepaste programmeertaal te vinden, werden diverse kandidaat\babelhyphen{ha
 In een latere fase (sectie \ref{sec:mini-pocs}) werden er beperkte prototypes uitgewerkt in elk van deze talen; deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt zou zijn. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
 
 \subsection{Rust}
-Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen. 
- 
+Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen.
+
 Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is dus een goede eigenschap om te hebben.
 
 \subsection{Python}
@@ -227,7 +223,6 @@ Aan het begin van dit project werd de beslissing genomen om direct met de ontwik
 
 In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter, als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
 
-
 \section{bibl pakket - diepere blik}
 \label{sec:bibl-in-depth}
 \begin{figure}[ht]
@@ -237,7 +232,7 @@ In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsge
     \label{fig:bibl_src}
 \end{figure}
 
-De structuur van bibl \ref{fig:bibl_src} volgt een gebruikelijke pakket-gebaseerde aanpak voor het organiseren van code. Deze aanpak wordt vaak toegepast wanneer een project is opgezet als een herbruikbaar pakket, in plaats van een los script. De aanwezigheid van `\_\_init\_\_.py` zorgt er namelijk voor dat het pakket importeerbaar is \autocite{Loubser2021}. Dit is direct ook een indicator dat het om een pakket gaat.
+De structuur van bibl \ref{fig:bibl_src} volgt een gebruikelijke pakket-gebaseerde aanpak voor het organiseren van code. Deze aanpak wordt vaak toegepast wanneer een project is opgezet als een herbruikbaar pakket, in plaats van een los script. De aanwezigheid van \texttt{\_\_init\_\_.py} zorgt er namelijk voor dat het pakket importeerbaar is \autocite{Loubser2021}. Dit is direct ook een indicator dat het om een pakket gaat.
 
 Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \texttt{bibl} uiteindelijk de basis kon worden van deze proof of concept, was het van groot belang om een zorgvuldige analyse uit te voeren en de codebase zo goed mogelijk te begrijpen.
 
@@ -245,7 +240,7 @@ Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \text
 Zoals eerder vermeld, is dit bestand kenmerkend bij pakketten. Het bestand is namelijk vereist voor Python om de directory als een pakket te behandelen. Het kan leeg zijn, maar het kan ook initialisatiecode of pakket-niveau-definities bevatten; in dit geval bevat het de huidige softwareversie.
 
 \subsection{\_\_main\_\_.py}
-Dit bestand wordt gebruikt wanneer het pakket als een script wordt uitgevoerd (bijvoorbeeld python -m bibl). Het bevat de implementatie van de Command Line Interface (CLI) voor het linten van bibliografische bestanden in BibTeX-formaat. Het script, hiervoor als referentie bestand, maakt gebruik van de \texttt{Click}-bibliotheek om een gebruiksvriendelijke interface te bieden voor het controleren van bibliografische referenties op consistentie en correctheid. Hieronder volgt een overzicht van de verschillende onderdelen binnen dit bestand.
+Dit bestand wordt gebruikt wanneer het pakket als een script wordt uitgevoerd (bijvoorbeeld \texttt{python -m bibl}). Het bevat de implementatie van de Command Line Interface (CLI) voor het linten van bibliografische bestanden in BibTeX-formaat. Het script, hiervoor als referentie bestand, maakt gebruik van de \texttt{Click}-bibliotheek om een gebruiksvriendelijke interface te bieden voor het controleren van bibliografische referenties op consistentie en correctheid. Hieronder volgt een overzicht van de verschillende onderdelen binnen dit bestand.
 
 \subsubsection{Imports en Configuratie}
 
@@ -261,6 +256,7 @@ from bibl.config import load_config_file, set_config
 from bibl.rule import load_rules
 from bibl.text_utils import format_rules_markdown_tables
 \end{minted}
+\captionof{listing}[bibl: \_\_main\_\_.py - Imports ]{bibl: \_\_main\_\_.py - Imports. \label{lst:bibl_main_imports}}
 
 \subsubsection{CLI Basisgroep}
 
@@ -288,6 +284,7 @@ def cli(config, select, ignore, indent_spaces, max_line_length):
     set_config('indent_spaces', indent_spaces)
     set_config('max_line_length', max_line_length)
 \end{minted}
+\captionof{listing}[bibl: \_\_main\_\_.py - CLI parameters ]{bibl: \_\_main\_\_.py - CLI parameters. \label{lst:bibl_main_cli}}
 
 \subsubsection{Lint Commando}
 
@@ -301,6 +298,7 @@ def lint(bibliography):
     for bib in bibliography:
         bibl_lint(bib)
 \end{minted}
+\captionof{listing}[bibl: \_\_main\_\_.py - Commando: lint ]{bibl: \_\_main\_\_.py - Lint commando. \label{lst:bibl_main_lint_command}}
 
 \subsubsection{Lijst Commando's}
 
@@ -327,6 +325,7 @@ def list_enabled(markdown):
         for rule in rules:
             click.echo(rule)
 \end{minted}
+\captionof{listing}[bibl: \_\_main\_\_.py - Commando: toon alle regels]{bibl: \_\_main\_\_.py - Commando om alle regels te tonen. \label{lst:bibl_main_lint_command}}
 
 \subsubsection{Versie Commando}
 
@@ -337,7 +336,7 @@ Het \texttt{version} commando toont de huidige versie van het \texttt{bibl}-pakk
 def version():
     click.echo('bibl version: ' + __version__)
 \end{minted}
-
+\captionof{listing}[bibl: \_\_main\_\_.py - Commando: huidige versie]{bibl: \_\_main\_\_.py - Toon de huidige versie van het pakket. \label{lst:bibl_version_command}}
 \subsubsection{Hoofdprogramma}
 
 Het hoofdprogramma start de CLI met \texttt{cli(prog\_name='bibl')}:
@@ -346,6 +345,7 @@ Het hoofdprogramma start de CLI met \texttt{cli(prog\_name='bibl')}:
 if __name__ == '__main__':
     cli(prog_name='bibl')
 \end{minted}
+\captionof{listing}[bibl: \_\_main\_\_.py - Commando: bibl vanuit CLI]{bibl: \_\_main\_\_.py - Vanuit CLI kan bibl rechtstreeks aangeroepen worden. \label{lst:bibl_cli_command}}
 %---
 \subsection{bibl.yml - Configuratiebestand}
 Het volgende configuratiebestand is een YAML (.yml) bestand dat de standaardinstellingen voor de bibliografische lintingtool definieert. Dit bestand specificeert welke regels ingeschakeld of uitgeschakeld moeten worden, evenals andere configuratie-opties zoals de maximale regellengte en het aantal inspringende spaties.
@@ -370,6 +370,7 @@ type_spec:
     optional: [ volume, number, series, address, edition, month, key, url, file, isbn ]
 # NOTE: Overige entry types weggelaten wegens plaats!
 \end{minted}
+\captionof{listing}[bibl: bibl.yml - Configuratie]{bibl: bibl.yml - Deel code uit het hoofdconfiguratiebestand. Geselecteerde en te negeren regels kunnen hier toegekend worden. Alsook de standaard aantal spaties ter indentatie. Ook kan er gekozen worden of middelnamen afgekort mogen worden met een '.' of niet. Daaronder volgt een lijst van entry types met zowel de verplichte als optionele velden. \label{lst:bibl_config}}
 
 \subsubsection{Beschrijving van de Configuratieopties}
 
@@ -467,7 +468,7 @@ def _validate_and_clean_config(config):
             "enabled rules."
         )
 \end{minted}
-
+\captionof{listing}[bibl: config.py - Configuratielogica]{bibl: config.py - Bevat de configuratielogica, de standaard configuratie wordt ingesteld en indien er achteraf aangepaste configuraties aanwezig zijn van de gebruiker, worden deze ook ingelezen en overschrijven ze de standaard configuraties. \label{lst:bibl_cli_command}}
 \subsubsection{Beschrijving van de Functies}
 
 \begin{itemize}
@@ -486,7 +487,7 @@ Deze gestructureerde benadering voor het laden en beheren van configuraties help
 % --
 \subsection{lint.py - Hoofdlogica}
 
-De hoofdlogica van bibl bevindt zich in liny.py. 
+De hoofdlogica van bibl bevindt zich in lint.py. 
 Hier gebeuren de controles van de bibliografische referenties, zowel consistentie als correctheid worden gecontroleerd op basis van de opgestelde regels.
 
 \begin{minted}[autogobble, breaklines, linenos]{python}
@@ -601,7 +602,7 @@ def _apply_entry_rules(bibliography: str,
                 warnings.append(LintWarning(bibliography, line_number, rule))
     return warnings
 \end{minted}
-
+\captionof{listing}[bibl: lint.py - Hoofdlogica]{bibl: lint.py bevat de hoofdlogica van de linter. Het kan gezien worden als het startpunt van waaruit de regels effectief ingeladen en gecontroleerd zullen worden. \label{lst:bibl_lint_mainlogic}}
 \subsubsection{Beschrijving van de Functies}
 
 \begin{itemize}
@@ -717,6 +718,7 @@ class Rule:
             return True
         return True
 \end{minted}
+\captionof{listing}[bibl: rule.py - Regelstructuur basis]{bibl: rule.py - Bevat de basisstrucuur van de regels binnen de linter, ook wordt er gekeken of een specifieke regel al dan niet verwacht wordt om uitgevoerd te worden. \label{lst:bibl_rule_structure_init}}
 
 \subsubsection{De \texttt{EntryRule} en \texttt{TextRule} Klassen}
 
@@ -750,6 +752,8 @@ class TextRule(Rule):
         """
         super().__init__(rule_id, description, rule)
 \end{minted}
+\captionof{listing}[bibl: rule.py - Regels voor bibliografie entry en tekstlijn evaluatie]{bibl: rule.py - Bevat de definitie van EntryRule en TextRule klassen, die respectievelijk een bibliografie entry en een tekstlijn in de bibliografie evalueren. \label{lst:bibl_rule_types_init}}
+
 
 \subsubsection{De \texttt{RuleStore} Klasse}
 
@@ -794,6 +798,7 @@ class RuleStore:
         """Return all loaded text rules."""
         return [rule for rule in self.enabled if isinstance(rule, TextRule)]
 \end{minted}
+\captionof{listing}[bibl: rule.py - Regelcontainer en registratiemechanisme]{bibl: rule.py - Definieert de RuleStore klasse die verantwoordelijk is voor het opslaan, registreren en ophalen van regels, inclusief geactiveerde entry en tekstregels. \label{lst:bibl_rule_store}}
 
 \subsubsection{Registratie en Laden van Regels}
 
@@ -825,6 +830,7 @@ def load_rules() -> RuleStore:
     del module
     return _ALL_RULES
 \end{minted}
+\captionof{listing}[bibl: rule.py - Registratie en laden van regels]{bibl: rule.py - Bevat functies voor het registreren van entry en tekstregels, evenals het laden van alle regels vanuit de `bibl/rules` package. \label{lst:bibl_rule_registration}}
 
 \subsubsection{Logica en Validatie}
 
@@ -867,6 +873,7 @@ MONTH_NAMES = {
     'dec': 'dec'
 }
 \end{minted}
+\captionof{listing}[bibl: text\_utils.py - Hulpmiddelen en constanten]{bibl: text\_utils.py - Bevat hulpfuncties en constanten, inclusief de maandnaam dictionary voor pybtex. \label{lst:bibl_utils_constants}}
 
 De declaratie van \texttt{MONTH\_NAMES} (regel 9 en volgende) zorgt voor een gestandaardiseerde verwerking van maandnamen in bibliografische gegevens. Dit biedt consistentie, eenvoudige toegang, compatibiliteit met externe bibliotheken zoals in dit geval \texttt{pybtex}, en verbetert de leesbaarheid en onderhoudbaarheid van de code.
 
@@ -894,6 +901,7 @@ def find_match_line_number(text: str, pattern: str, group: int) -> (int, int):
         offset = start
     return lineno + 1, offset + 1
 \end{minted}
+\captionof{listing}[bibl: tex\_utils.py - Regelnummer en offset zoeken met regex]{bibl: tex\_utils.py - Definieert de functie find\_match\_line\_number die het regelnummer en de offset van een regex match binnen een tekst retourneert. \label{lst:bibl_tex_utils_find_match}}
 
 \subsubsection{Functie \texttt{find\_entry\_line\_number}}
 
@@ -911,6 +919,7 @@ def find_entry_line_number(text: str, key: str) -> (int, int):
     pattern = r'\s*@[a-zA-Z]+\s*{\s*(' + key + r')\s*,'
     return find_match_line_number(text, pattern, 1)
 \end{minted}
+\captionof{listing}[bibl: tex\_utils.py - Regelnummer zoeken van een BibTeX entry]{bibl: tex\_utils.py - Definieert de functie find\_entry\_line\_number die het regelnummer en de offset van een BibTeX entry key binnen een tekst retourneert. \label{lst:bibl_tex_utils_find_entry}}
 
 \subsubsection{Functie \texttt{format\_rules\_markdown\_tables}}
 
@@ -939,6 +948,7 @@ def format_rules_markdown_tables(rules: List[Rule]) -> str:
     result += markdown_table.render(headers, matrix)
     return result
 \end{minted}
+\captionof{listing}[bibl: tex\_utils.py - Markdown tabellen formatteren voor regels]{bibl: tex\_utils.py - Definieert de functie format\_rules\_markdown\_tables die een lijst van regels formatteert als een Markdown tabel. \label{lst:bibl_tex_utils_format_rules}}
 
 \subsubsection{Beschrijving van de Functies}
 
@@ -989,6 +999,7 @@ def line_length(line_number, line, text):
     regex = re.compile(r'^\s*@preamble')
     return not regex.match(line.lower()) or line_number == 0
 \end{minted}
+\captionof{listing}[bibl: database\_rules.py - Regel voor preamble op eerste regel]{bibl: database\_rules.py - Definieert de regel line\_length die een waarschuwing geeft als de preamble niet op de eerste regel van het document begint. \label{lst:bibl_rules_text_preamble}}
 
 \paragraph{Regel voor Mogelijke Duplicaten op Basis van Titels}
 
@@ -1016,6 +1027,7 @@ def title_duplicate(key, entry, database):
             return False
     return True
 \end{minted}
+\captionof{listing}[bibl: database\_rules.py - Regel voor mogelijke dubbele invoer op basis van vergelijkbare titels]{bibl: database\_rules.py - Definieert de regel title\_duplicate die een waarschuwing geeft wanneer invoer met vergelijkbare titels aanwezig is. \label{lst:bibl_rules_entry_duplicate}}
 
 %---
 
@@ -1048,6 +1060,7 @@ def author_et_al(key, entry, database):
         return True
     return 'et al' not in entry.fields['author'].lower()
 \end{minted}
+\captionof{listing}[bibl: entry\_rules.py - Regel voor vervanging van `et al.` in auteurveld]{bibl: entry\_rules.py - Definieert de regel author\_et\_al die een waarschuwing geeft wanneer `et al.` wordt gebruikt in het auteursveld en moet worden vervangen door een lijst van alle auteurs. \label{lst:bibl_entry_rules_author_et_al}}
 
 Net zoals bij de database regels, is het duidelijk dat er regels op een consistente en duidelijke manier gedefinieerd kunnen worden.
 
@@ -1094,6 +1107,7 @@ for entry_type, spec in get_config()['type_spec'].items():
             else:
                 return True
 \end{minted}
+\captionof{listing}[bibl: field\_rules.py - Regel voor ontbrekend verplicht veld]{bibl: field\_rules.py - Definieert regels om een linterwaarschuwing te geven wanneer niet alle verplichte velden aanwezig zijn voor een specifiek invoertype, zoals gespecificeerd in de configuratie. \label{lst:bibl_field_rules_required}}
 
 \paragraph{Beschrijving van de regel}
 
