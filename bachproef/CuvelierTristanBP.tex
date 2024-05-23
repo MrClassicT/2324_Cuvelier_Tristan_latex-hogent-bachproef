@@ -58,11 +58,7 @@
 \newacronym{CD}{CD}{Continuous Deployment}
 \glstoctrue
 
-\newcommand{\listofcodelistings}{%
-  \chapter*{Lijst van Codefragmenten} % Unnumbered section
-  \addcontentsline{toc}{chapter}{Lijst van Codefragmenten} % Add to TOC
-  \lstlistoflistings % Generate the list of listings
-}
+
 
 
 %%---------- Document metadata -------------------------------------------------
@@ -129,6 +125,10 @@
 % If you included tables and/or source code listings, uncomment the appropriate
 % lines.
 \listoftables
+% Insert the list of code listings on a new page
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Lijst van Codefragmenten}
 \renewcommand\listoflistingscaption{Lijst van Codefragmenten}
 \listoflistings
 \printglossaries
