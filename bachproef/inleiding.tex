@@ -4,40 +4,40 @@
 
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
-
-LaTeX (\LaTeX) uitspraak: la-tech; is een populair softwaresysteem in de wetenschappelijke wereld omdat het uitblinkt in het zetten van technische documenten,
+\LaTeX{} uitspraak: la-tech; is een populair softwaresysteem in de wetenschappelijke wereld omdat het uitblinkt in het zetten van technische documenten
 en beschikbaar is voor bijna alle computersystemen \autocite{Oetiker2023}.
 
-Niet alleen in de wereld van de wetenschap wordt LaTeX gebruikt. Ook studenten op hogescholen en universiteiten maken er gebruik van voor het schrijven van bachelor- en/of masterproeven.
+Niet alleen in de wereld van de wetenschap wordt \LaTeX{} gebruikt. Ook studenten op hogescholen en universiteiten maken er gebruik van voor het schrijven van bachelor- en/of masterproeven.
 
 Bij het schrijven van, al dan niet wetenschappelijke, teksten is het uitermate belangrijk om aan een correcte vorm van bronvermelding te doen.
 
-Binnen LaTeX zijn er verschillende manieren om dit aan te pakken. Eén van deze manieren is met behulp van BibLaTeX, een package speciaal gebouwd voor deze taak.
+Binnen \LaTeX{} zijn er verschillende manieren om dit aan te pakken. Eén van deze manieren is met behulp van BibLaTeX, een package speciaal gebouwd voor deze taak.
 
-Studenten te HOGENT dienen gebruik te maken van deze combinatie bij het schrijven van hun bachelorproef. Ondanks dat lectoren veel moeite steken in het bondig toelichten van het correcte gebruik, worden er nog veel fouten gemaakt op het correct bijhouden van bronnen. 
-Op deze groep zal deze bachelorproef zich focussen, met behulp van een statische analysetool, ook wel linter genoemd, zouden er al veel van de herhalende fouten voorkomen kunnen worden. Een linter is een programma dat broncode of gestructureerde dataformaten kan controleren op stijl, syntax en logische fouten \autocite{Kamunya2023}.
+Studenten te HOGENT dienen gebruik te maken van deze combinatie bij het schrijven van hun bachelorproef. Ondanks dat lectoren veel moeite steken in het bondig toelichten van het correcte gebruik, worden er nog veel fouten gemaakt bij het correct bijhouden van bronnen. 
+
+Op deze groep zal deze bachelorproef zich focussen. Met behulp van een statische analysetool, ook wel linter genoemd, zouden al veel van de herhalende fouten voorkomen kunnen worden. Een linter is een programma dat broncode of gestructureerde dataformaten kan controleren op stijl, syntax en logische fouten \autocite{Kamunya2023}.
 
 Het zou dus uitermate geschikt zijn om de studenten een linter te laten gebruiken om hen zo te helpen bij het voorkomen of opsporen van de gemaakte fouten. Zo dienen lectoren hen niet keer op keer op dezelfde fouten te wijzen.
 
-BibLaTeX is voortkomende uit BibTex en biedt meer opties om bibliografieën en citaten te configureren \autocite{Cassidy2013}. Hoewel er voor BibTex reeds een linter bestaat, is deze niet compatibel met BibLaTeX.
+BibLaTeX is voortgekomen uit BibTeX en biedt meer opties om bibliografieën en citaten te configureren \autocite{Cassidy2013}. Hoewel er voor BibTeX reeds een linter bestaat, is deze niet compatibel met BibLaTeX.
 
-Het doel van deze bachelorproef is om een proof of concept, analyse \& de software-architectuur uit te werken voor een BibLaTeX linter en er een prototype voor te schrijven in een passende programmeertaal. 
+Het doel van deze bachelorproef is om een proof of concept, analyse en de software-architectuur uit te werken voor een BibLaTeX-linter en er een prototype voor te schrijven in een passende programmeertaal. 
 
 Concreet betekent dit:
 \begin{itemize}
-  \item De lijst van gewenste functionele en niet-functionele requirements aanvullen en structureren naar prioriteiten
-  \item De werking van bestaande linters bestuderen als inspiratiebron
-  \item Een gemotiveerde keuze maken voor de te gebruiken programmeertaal en eventuele libraries
-  \item Een prototype met een minimale set van linting-regels implementeren
-  \item Unit tests schrijven met zo compleet mogelijke code coverage
-  \item CI-pipeline opzetten voor packaging en testing
-  \item Documentatie schrijven voor het gebruik en uitbreiden van de linting-regels
+  \item De lijst van gewenste functionele en niet-functionele requirements aanvullen en structureren naar prioriteiten.
+  \item De werking van bestaande linters bestuderen als inspiratiebron.
+  \item Een gemotiveerde keuze maken voor de te gebruiken programmeertaal en eventuele libraries.
+  \item Een prototype met een minimale set van linting-regels implementeren.
+  \item Unit tests schrijven met zo compleet mogelijke code coverage.
+  \item CI-pipeline opzetten voor packaging en testing.
+  \item Documentatie schrijven voor het gebruik en uitbreiden van de linting-regels.
 \end{itemize}
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Studenten van HOGENT en derden die teksten schrijven in LaTeX en BibLaTeX gebruiken voor hun bronvermeldingen in orde te houden, kunnen baat hebben bij deze proof of concept. Er wordt een (open source) linter gemaakt die ervoor zorgt dat er makkelijker fouten kunnen opgespoord en opgelost worden binnen de bronnenlijst. Merk wel op: de linter proof of concept wordt opgesteld met de regels die door HOGENT worden opgelegd aan haar studenten. Dit wilt zeggen dat er meer dan strikt noodzakelijke velden verwacht worden bij bepaalde types bronnen. Eventueel wordt er een parameter voorzien om dit al dan niet aan te passen.
+Studenten van HOGENT en derden die teksten schrijven in \LaTeX{} en BibLaTeX gebruiken voor hun bronvermeldingen, kunnen baat hebben bij deze proof of concept. Er wordt een (open source) linter gemaakt die ervoor zorgt dat er makkelijker fouten kunnen worden opgespoord en opgelost binnen de bronnenlijst. Merk wel op: de linter proof of concept wordt opgesteld met de regels die door HOGENT worden opgelegd aan haar studenten. Dit betekent dat er meer dan strikt noodzakelijke velden verwacht worden bij bepaalde types bronnen. Eventueel wordt er een parameter voorzien om dit al dan niet aan te passen.
 
 %Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
 
@@ -48,7 +48,7 @@ Studenten van HOGENT en derden die teksten schrijven in LaTeX en BibLaTeX gebrui
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
-Deze bachelorproef heeft als doel een open source proof of concept op te zetten waar iedereen die een bijdrage wenst te leveren dit ook kan doen. Op deze manier zal er een bruikbare linter ontstaan voor de studenten van HOGENT en derden die baat hebben aan een linter voor BibLaTeX.
+Deze bachelorproef heeft als doel een open source proof of concept op te zetten waar iedereen die een bijdrage wenst te leveren dit ook kan doen. Op deze manier zal er een bruikbare linter ontstaan voor de studenten van HOGENT en derden die baat hebben bij een linter voor BibLaTeX.
 % Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}} 
