@@ -89,7 +89,7 @@ Gezien bij bibTeX de datum opgesplitst werd in \texttt{year}, \texttt{month} en 
 Daarnaast moest het ook mogelijk zijn om achternamen van twee auteurs te gebruiken in een sleutel of zelf 'EtAl' indien het er drie of meer waren. Ook hiervoor werden er enkele controles op punt gezet om hier rekening mee te houden, zie code-regel 35 tot en met 41.
 
 \paragraph{E08 - \texttt{pages} veld formaat}
-Deze test leek niet te werken vanwege het veld waarop gecontroleerd werd. Er werd naar het \texttt{page} veld gezocht, maar het veld waar effectief naar gezocht diende te worden staat gekend als \texttt{pages} in BibLaTeX. Uiteindelijk werd deze regel een samenvoeging van de voormalige regel E08 (pagina formaat moet xx--yy zijn) en E09 (eindpagina dient groter te zijn dan de startpagina) uit \texttt{bibl}.
+Deze regel leek niet te werken vanwege het veld waarop gecontroleerd werd. Er werd naar het \texttt{page} veld gezocht, maar het veld waar effectief naar gezocht diende te worden staat gekend als \texttt{pages} in BibLaTeX. Uiteindelijk werd deze regel een samenvoeging van de voormalige regel E08 (pagina formaat moet xx--yy zijn) en E09 (eindpagina dient groter te zijn dan de startpagina) uit \texttt{bibl}.
 
 \paragraph{E09 - Correct \texttt{date} formaat}
 Zoals bij regel E00 (\ref{rule:E00}) reeds besproken was, is het gebruik van data wat veranderd. Nu er geen apart veld meer gebruikt wordt voor \texttt{year}, \texttt{month} en \texttt{day}, dient er een extra controle te gebeuren om te zien of de datum van een bron wel goed geformatteerd is. Waar de originele regel van bibl enkel keek of de maand weldegelijk in 'MMM' formaat was, dient er nu gekeken te worden dat het formaat gelijk is aan 'YYYY-MM-DD'. Deze regel vervangt de in \texttt{bibl} gekende regel E10 waarbij de maand in \texttt{mmm}-formaat diende te zijn.
@@ -385,3 +385,9 @@ jobs:
 
 \end{minted}
 \captionof{listing}[bibla: \acrshort{CD}-pipeline]{bibla: \acrshort{CD}-pipeline | \acrfull{CD} pipeline overzicht \label{lst:bibla_CD}}
+
+\subsection{Testen}
+Wat de testen betreft bij deze \acrlong{POC}, werd er zich gebaseerd op de manier waarop \texttt{bibl} gebruikt wordt. Er werden test.bib-bestanden aangemaakt die elk voor een bepaalde regel verantwoordelijk dienden te zijn. Zo kon er tijdens het ontwikkelen getest worden of de regel al dan niet werkt zoals verwacht. Uiteindelijk bleek wel dat deze test.bib-bestanden wat vaker revisies mochten ondergaan om accuraat en representatief te blijven. \acrshort{AI} heeft hier ook deels geholpen om deze te genereren, maar gezien er wel relevante bronnen en input nodig waren, was het niet altijd de beste tactiek. Vooral omdat online heel veel BibTeX-bronnen staan en die dus ook vaker aanbevolen worden door \acrshort{AI}.
+
+Testen werden manueel uitgevoerd door het \mintinline{python3}{bibla lint test.bib} commando uit te voeren.
+
