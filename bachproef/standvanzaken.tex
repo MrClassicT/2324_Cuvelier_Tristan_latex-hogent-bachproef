@@ -37,7 +37,7 @@ Een linter is dus een statische analysetool die broncode of andere gestructureer
 \LaTeX{} (uitspraak: LaTech), een uitbreiding op het \TeX{}-typesetting systeem van Donald E. \textcite{Knuth1984}, is bedoeld voor het opmaken van tekst en wiskundige formules. TeX werd ontwikkeld in 1977 met als doel de typografische kwaliteit te verbeteren. De stabiele versie van TeX kwam uit in 1982 en ondersteunt meerdere talen en 8-bit karakters. \LaTeX{} zelf, ontwikkeld door \textcite{Lamport1994} in 1985, voegt een reeks macro's toe om het gebruik van TeX te vereenvoudigen en heeft zich ontwikkeld tot een standaard voor het produceren van wetenschappelijke en wiskundige documentatie \autocite{Oetiker2023}.
 
 \subsection{Werking}
-Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker2023} kunnen bevestigen dat \LaTeX{} functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische WYSIWYG (What You See Is What You Get) tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. \LaTeX{} vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen.
+Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker2023} kunnen bevestigen dat \LaTeX{} functioneert door middel van commando's die de logische structuur van een document definiëren (zoals hoofdstukken, secties, en paragrafen) en dat dit anders is dan de typische \acrfull{WYSIWYG} tekstverwerkers zoals Microsoft Office Word, waar de lay-out interactief wordt bepaald tijdens het typen. \LaTeX{} vereist dat de auteur zijn tekst structureert met behulp van vooraf gedefinieerde commando's die de inleiding van het document bepalen.
 
 \subsection{Voordelen}
 \begin{enumerate}
@@ -51,7 +51,7 @@ Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker202
 \begin{enumerate}
     \item Het instellen van een volledig nieuwe lay-out kan ingewikkeld en tijdrovend zijn.
     \item Niet ideaal voor zeer ongestructureerde documenten.
-    \item Leercurve, de \emph{slechte} gewoontes afleren van typische WYSIWYG programma's vergt enige tijd om aan te wennen.
+    \item Leercurve, de \emph{slechte} gewoontes afleren van typische \acrshort{WYSIWYG} programma's vergt enige tijd om aan te wennen.
 \end{enumerate}
 
 \subsection{Conclusie}
@@ -144,7 +144,7 @@ Zowel BibTeX als BibLaTeX spelen een belangrijke rol in het beheer van bibliogra
 
 %--- end: BibLaTeX vs BibTeX ---
 \section{Huidige stand van zaken}
-Op het ogenblik van het schrijven zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTeX zijn niet compatibel met BibLaTeX. De enige beschikbare linter voor BibLaTeX op dit moment staat op een GitHub-repository van Pez Cuckow\footnote{\label{foot:pezgithub}\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er gemerkt dat er fouten optraden die niet direct op te lossen waren, zie Figuur~\ref{fig:biblatex-linter-error}. Het was dus niet mogelijk om zomaar elk .bib-bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
+Op het ogenblik van het schrijven zijn er nog geen \emph{optimale} BibLaTeX-Linters beschikbaar en de linters van de voorganger BibTeX zijn niet compatibel met BibLaTeX. De enige beschikbare linter voor BibLaTeX op dit moment staat op een GitHub-repository van Pez Cuckow\footnote{\label{foot:pezgithub}\url{https://github.com/Pezmc/BibLaTeX-Linter}}. Deze hoort functioneel te zijn, maar lijkt niet optimaal wat de code betreft. Er is dus duidelijk mogelijkheid tot verbetering. De BibLaTeX-Linter van Pez Cuckow is geschreven in Python en heeft een webinterface. Naast het feit dat deze lastig werkend te krijgen was, werkt deze ook zeker niet zonder fouten. Het is mogelijk om deze effectief uit te testen, maar bij het testen werd er gemerkt dat er fouten optraden die niet direct op te lossen waren, zie Figuur~\ref{fig:biblatex-linter-error}. Het was niet mogelijk om zomaar elk .bib-bestand te gebruiken bij deze checker, wat het niet gunstig maakt om te gebruiken. Wel was het interessant om te kijken hoe Cuckow bepaalde aspecten interpreteerde en uitvoerde. Dit was uiteindelijk ook een bron waaruit inspiratie gehaald kon worden.
 
 \begin{figure}[ht]
     \centering
@@ -184,7 +184,7 @@ Gezien de verschillen tussen BibTeX en BibLaTeX, was er enige twijfel over de ha
 
 \begin{quote}\emph{Pybtex is a BibTeX-compatible bibliography processor written in Python.}\end{quote}
 
-Dit impliceert dat pybtex verantwoordelijk is voor het extraheren van gegevens uit bibliografiebestanden. Hoewel de quote niet expliciet vermeldt dat het alleen voor BibTeX-bestanden werkt, wordt compatibiliteit met BibLaTeX nergens expliciet genoemd. Het was dus noodzakelijk om dit zelf te testen.
+Dit impliceert dat pybtex verantwoordelijk is voor het extraheren van gegevens uit bibliografiebestanden. Hoewel de quote niet expliciet vermeldt dat het alleen voor BibTeX-bestanden werkt, wordt compatibiliteit met BibLaTeX nergens expliciet genoemd. Daarom was het noodzakelijk om dit zelf te testen.
 
 Voor de test werd een BibLaTeX-document gebruikt dat door de promotor was gedeeld. Dit document bevatte geldige bronvermeldingen en was daarmee perfect geschikt om te onderzoeken of bibl als basis gebruikt kon worden. bibl werd snel geïnstalleerd via de Python package manager, pip. Vervolgens werd het lint-commando uitgevoerd op het BibLaTeX-document en werd bekeken wat bibl rapporteerde.
 
@@ -209,14 +209,14 @@ In een latere fase (sectie \ref{sec:mini-pocs}) werden er beperkte prototypes ui
 \subsection{Rust}
 Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen.
 
-Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is dus een goede eigenschap om te hebben.
+Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is daarom een goede eigenschap om te hebben.
 
 \subsection{Python}
 Python was wellicht stukken trager in vergelijking met Rust in de test die gevonden werd, maar het blijft wel een taal waar iedereen gemakkelijk mee kan beginnen te werken. Voor het gemak van uitbreidbaarheid is dit dan weer een interessante optie om deze taal in optie te nemen. Zoals eerder vermeld door \textcite{TurnerTrauring2023} zou de performantie vooral bij de pipeline te merken zijn.
 De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zijn een grote zorg zal worden voor deze proof of concept.
 
 \subsection{JavaScript}
-Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of GUI gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
+Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of \acrshort{GUI} gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
 
 \section{Opbouw linter}
 Aan het begin van dit project werd de beslissing genomen om direct met de ontwikkeling van een prototype aan de slag te gaan, wat leidde tot de zoektocht naar geschikte bronnen. Deze beslissing werd genomen gezien de beperkte tijd en de hoeveelheid aan onderzoek die diende te gebeuren. Indien Rust de taal zou moeten worden, moest deze nog volledig aangeleerd worden en zou er immers geen kostbare tijd verloren mogen gaan.
@@ -228,7 +228,7 @@ In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsge
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{./files/bibl_src.png}
-    \caption[bibl repository - source code]{Repository overzicht bibl broncode.}
+    \caption[bibl repository - Source code]{Repository overzicht bibl broncode.}
     \label{fig:bibl_src}
 \end{figure}
 
@@ -240,11 +240,11 @@ Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \text
 Zoals eerder vermeld, is dit bestand kenmerkend bij pakketten. Het bestand is namelijk vereist voor Python om de directory als een pakket te behandelen. Het kan leeg zijn, maar het kan ook initialisatiecode of pakket-niveau-definities bevatten; in dit geval bevat het de huidige softwareversie.
 
 \subsection{\_\_main\_\_.py}
-Dit bestand wordt gebruikt wanneer het pakket als een script wordt uitgevoerd (bijvoorbeeld \texttt{python -m bibl}). Het bevat de implementatie van de Command Line Interface (CLI) voor het linten van bibliografische bestanden in BibTeX-formaat. Het script, hiervoor als referentie bestand, maakt gebruik van de \texttt{Click}-bibliotheek om een gebruiksvriendelijke interface te bieden voor het controleren van bibliografische referenties op consistentie en correctheid. Hieronder volgt een overzicht van de verschillende onderdelen binnen dit bestand.
+Dit bestand wordt gebruikt wanneer het pakket als een script wordt uitgevoerd (bijvoorbeeld \texttt{python -m bibl}). Het bevat de implementatie van de \acrfull{CLI} voor het linten van bibliografische bestanden in BibTeX-formaat. Het script, hiervoor als referentie bestand, maakt gebruik van de \texttt{Click}-bibliotheek om een gebruiksvriendelijke interface te bieden voor het controleren van bibliografische referenties op consistentie en correctheid. Hieronder volgt een overzicht van de verschillende onderdelen binnen dit bestand.
 
 \subsubsection{Imports en Configuratie}
 
-Het script begint met het importeren van noodzakelijke modules en functies, waaronder \texttt{Click} voor het CLI-framework, en functies uit de \texttt{bibl}-module voor linting, configuratie en regels:
+Het script begint met het importeren van noodzakelijke modules en functies, waaronder \texttt{Click} voor het \acrshort{CLI}-framework, en functies uit de \texttt{bibl}-module voor linting, configuratie en regels:
 
 \begin{minted}[autogobble, breaklines, linenos, samepage]{python3}
 import os
@@ -258,9 +258,9 @@ from bibl.text_utils import format_rules_markdown_tables
 \end{minted}
 \captionof{listing}[bibl: \_\_main\_\_.py - Imports ]{bibl: \_\_main\_\_.py - Imports. \label{lst:bibl_main_imports}}
 
-\subsubsection{CLI Basisgroep}
+\subsubsection{\acrshort{CLI} Basisgroep}
 
-Een CLI basisgroep functioneert als een container, of groepering, voor meerdere gerelateerde command-line commando's. Hiermee wordt het mogelijk gemaakt om een hoofdcommando te definiëren waaraan subcommando's kunnen worden toegevoegd.
+Een \acrshort{CLI} basisgroep functioneert als een container, of groepering, voor meerdere gerelateerde command-line commando's. Hiermee wordt het mogelijk gemaakt om een hoofdcommando te definiëren waaraan subcommando's kunnen worden toegevoegd.
 De basisgroep wordt gedefinieerd met behulp van de \texttt{@click.group()} decorator. Deze groep fungeert als een container voor subcommando's die specifieke taken uitvoeren. De subcommando's kunnen tegelijkertijd ook als parameter beschouwd worden. Opties die van toepassing zijn op de gehele groep kunnen hier ook worden gespecificeerd. Een voorbeeld van de definitie van een basisgroep in het script is als volgt:
 
 \begin{minted}[autogobble, breaklines, linenos]{python3}
@@ -284,7 +284,7 @@ def cli(config, select, ignore, indent_spaces, max_line_length):
     set_config('indent_spaces', indent_spaces)
     set_config('max_line_length', max_line_length)
 \end{minted}
-\captionof{listing}[bibl: \_\_main\_\_.py - CLI parameters ]{bibl: \_\_main\_\_.py - CLI parameters. \label{lst:bibl_main_cli}}
+\captionof{listing}[bibl: \_\_main\_\_.py - \acrshort{CLI} parameters ]{bibl: \_\_main\_\_.py - \acrshort{CLI} parameters. \label{lst:bibl_main_cli}}
 
 \subsubsection{Lint Commando}
 
@@ -339,13 +339,13 @@ def version():
 \captionof{listing}[bibl: \_\_main\_\_.py - Commando: huidige versie]{bibl: \_\_main\_\_.py - Toon de huidige versie van het pakket. \label{lst:bibl_version_command}}
 \subsubsection{Hoofdprogramma}
 
-Het hoofdprogramma start de CLI met \texttt{cli(prog\_name='bibl')}:
+Het hoofdprogramma start de \acrshort{CLI} met \texttt{cli(prog\_name='bibl')}:
 
 \begin{minted}[autogobble, breaklines, linenos, samepage]{python3}
 if __name__ == '__main__':
     cli(prog_name='bibl')
 \end{minted}
-\captionof{listing}[bibl: \_\_main\_\_.py - Commando: bibl vanuit CLI]{bibl: \_\_main\_\_.py - Vanuit CLI kan bibl rechtstreeks aangeroepen worden. \label{lst:bibl_cli_command}}
+\captionof{listing}[bibl: \_\_main\_\_.py - Commando: bibl vanuit \acrshort{CLI}]{bibl: \_\_main\_\_.py - Vanuit \acrshort{CLI} kan bibl rechtstreeks aangeroepen worden. \label{lst:bibl_cli_command}}
 %---
 \subsection{bibl.yml - Configuratiebestand}
 Het volgende configuratiebestand is een YAML (.yml) bestand dat de standaardinstellingen voor de bibliografische lintingtool definieert. Dit bestand specificeert welke regels ingeschakeld of uitgeschakeld moeten worden, evenals andere configuratie-opties zoals de maximale regellengte en het aantal inspringende spaties.

@@ -3,18 +3,15 @@
 %%=============================================================================
 \chapter{Technische Analyse en Experimenten}
 \label{ch:fase2}
-%%In deze fase was het doel om de lijst van gewenste functionele en niet-functionele requirements aan te vullen en deze te structureren naargelang hun prioriteit. Onder andere de keuze van de programmeertaal, eventuele libraries en andere softwaretools die gebruikt konden en zouden worden voor het maken en opzetten van de proof of concept werden hier gemaakt. De keuze van de programmeertaal werd bereikt door het opstellen van kleine prototypes in elke kandidaat-programmeertaal. Deze kregen werden dan getimed en daarnaast werden ook andere voor- en nadelen van elk bekeken om zo tot de beste optie te komen.
 
-Net zoals bij alle software, was het ook hier van belang om eerst grondig onderzoek te doen naar wat er effectief nodig was en naar welke technologieën er best gebruikt konden worden.
-Deze fase was van groot belang voor het verdere verloop van het project. Het was de bedoeling om een duidelijk beeld te krijgen van wat er nodig was en hoe dit het best kon worden aangepakt. Een duidelijk overzicht van de functionele en niet-functionele requirements was hierbij van groot belang. 
+Net zoals bij alle software, was het ook hier van belang om eerst grondig onderzoek te doen naar wat er effectief nodig was en naar welke technologieën er best gebruikt konden worden. Deze fase was van groot belang voor het verdere verloop van het project. Het was de bedoeling om een duidelijk beeld te krijgen van wat er nodig was en hoe dit het best kon worden aangepakt. Een duidelijk overzicht van de functionele en niet-functionele requirements was hierbij van groot belang.
 
 Als eerste werd er onderzocht wat een linter nu eigenlijk was en hoe deze werkte. Daarnaast werd er ook gekeken naar de verschillende soorten linters die er bestonden en naar de programmeertalen waarin deze gemaakt waren. Zodra duidelijk was wat er verwacht werd, werd er een lijst opgesteld van de gewenste functionele en niet-functionele requirements. Deze werden dan gestructureerd naargelang hun prioriteit zodat er bepaald kon worden wat er al dan niet tot de \acrfull{MVP} zou behoren.
 
-Met deze lijst kon er dan gekeken worden naar de keuze van de programmeertaal die gebruikt kon en zou worden voor het maken en opzetten van de proof of concept. De keuze van de programmeertaal werd bereikt door het opstellen van kleine prototypes in elke kandidaat-programmeertaal. Deze kregen werden dan getimed en daarnaast werden ook andere voor- en nadelen van elk bekeken om zo tot de beste optie te komen.
+Met deze lijst kon er dan gekeken worden naar de keuze van de programmeertaal die gebruikt kon en zou worden voor het maken en opzetten van de proof of concept. De keuze van de programmeertaal werd bereikt door het opstellen van kleine prototypes in elke kandidaat-programmeertaal. Deze werden dan getimed en daarnaast werden ook andere voor- en nadelen van elk bekeken om zo tot de beste optie te komen.
 
 Uit de lijst van functionaliteiten werden er twee gekozen die als eerste uitgewerkt zouden worden om zo een eerste versie van de linter te bekomen. Deze functionaliteiten waren: het detecteren van duplicaten en de detectie om te zien of alle required fields wel aanwezig waren.
 
-% ---
 \section{Functionele en Niet-Functionele Requirements}
 Nadat de volledige reeks linters was geanalyseerd, kon een lijst van zowel functionele als niet-functionele vereisten worden opgesteld. Dankzij de promotor van deze thesis werd dat proces versneld. Een informatieve lijst werd verstrekt, waarin onder andere een opsomming van de gewenste regels stond. Aangezien de promotor uitgebreide technische kennis van het onderwerp heeft en beschouwd kan worden als de \emph{klant} bij de ontwikkeling van deze tool, werd gefocust op de uitwerking van de specifieke regels volgens zijn wensen.\newline
 
@@ -22,8 +19,8 @@ Een overzicht van de \textbf{functionele requirements} kan in tabel \ref{tab:fun
 
 Wat de \textbf{niet-functionele} requirements betreft:
 \begin{itemize}
-    \item Er wordt gewenst dat de linter gebruikt kan worden vanuit de \textbf{CLI} zodat deze in pipelines gebruikt kan worden.
-    \item De linter dient \textbf{vlot} te werken, zodat de tool strict als handig beschouwd kan worden en zeker niet als iets storend.
+    \item Er wordt gewenst dat de linter gebruikt kan worden vanuit de \textbf{\acrshort{CLI}} zodat deze in pipelines gebruikt kan worden.
+    \item De linter dient \textbf{vlot} te werken, zodat de tool strikt als handig beschouwd kan worden en zeker niet als iets storends.
     \item De linter dient \textbf{uitbreidbaar} te zijn eens deze proef-periode is afgelopen. Er wordt duidelijke, gestructureerde en gedocumenteerde code verwacht.
     \item Er wordt verwacht dat het \textbf{eenvoudig} te gebruiken is, begrijp hieronder dat het beschikbaar zal zijn via een pip-installatie gelijk andere Python modules.
 \end{itemize}
@@ -74,7 +71,7 @@ Wat de \textbf{niet-functionele} requirements betreft:
         & - Geef de voorkeur aan "institution" boven "school". \\
         \bottomrule
     \end{tabular}
-    \caption{Geprioriteerde Functionele Vereisten met behulp van de MoSCoW-methode}
+    \caption[Geprioriteerde Functionele Vereisten | MoSCoW]{Geprioriteerde Functionele Vereisten met behulp van de MoSCoW-methode}
     \label{tab:functional_requirements}
     \end{table}
 
@@ -88,11 +85,11 @@ Het test .bib bestand dat gebruik werd, zag er als volgt uit:
 
 \inputminted[autogobble, breaklines, linenos, samepage]{bibtex} % bibtex taal wordt hier gebruikt omdat dit het dichtste aansluit bij bibLaTeX van de beschikbare opties.
 {./files/test.bib} % Het test bestand van de proof of concept linters in de 3 programmeertalen.
+\captionof{listing}[Mini-\acrshort{POC}: Test bestand]{Mini-\acrshort{POC}: Test bestand.}
 
 \subsection{JavaScript}
-% Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of GUI gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
 
-JavaScript is een programmeertaal die zeer toegankelijk en gekend is onder de meeste developers. Dit was ook de eerste programmeertaal waarin een testversie werd opgesteld, deze werd dan achteraf verteld naar zowel Python als Rust om te kijken welke van de drie talen het meest geschikt was voor deze case. 
+JavaScript is een programmeertaal die zeer toegankelijk en gekend is onder de meeste developers. Dit was ook de eerste programmeertaal waarin een testversie werd opgesteld, deze werd dan achteraf vertaald naar zowel Python als Rust om te kijken welke van de drie talen het meest geschikt was voor deze case.
 
 De JavaScript versie was van een persoonlijk perspectief de beste om mee te beginnen gezien dit de meest vertrouwde taal was. Direct kan er al opgemerkt worden dat er gebruik gemaakt werd van modules, dit was noodzakelijk om de linter overzichtelijk, uitbreidbaar en onderhoudbaar te maken. Moest alles in éénzelfde bestand zitten, zou het veel te groot en onoverzichtelijk worden.
 
@@ -105,6 +102,8 @@ const { checkForDuplicates } = require('./checks/duplicates.js');
 const { entryPattern } = require('./components/regex.js');
 const { toFileUrl } = require('./helper/getFileUrl.js')
 \end{minted}
+\captionof{listing}[Mini-\acrshort{JS}-\acrshort{POC} - Importeren van submodules]{Mini-\acrshort{JS}-\acrshort{POC} - Importeert submodules voor het uitvoeren van controles op ontbrekende velden en duplicaten, en definieert een reguliere expressie voor het patroon van BibLaTeX vermeldingen. \label{lst:minipocjs_imports}}
+
 
 Als eerste wordt er een bestand ingelezen. Eens dat gebeurt is, dient er een onderscheid gemaakt te worden tussen alle verschillende bronnen binnen dit bestand. De bronnen in dit bestand, worden ook wel 'entries' genoemd. Dit werd op de volgende manier gedaan:
 \begin{minted}[autogobble, breaklines, linenos, samepage]{javascript}
@@ -116,6 +115,8 @@ Als eerste wordt er een bestand ingelezen. Eens dat gebeurt is, dient er een ond
         position: match.index
     }));
 \end{minted}
+\captionof{listing}[Mini-\acrshort{JS}-\acrshort{POC} - Extractie van alle vermeldingen]{Mini-\acrshort{JS}-\acrshort{POC} - Haalt alle vermeldingen uit het bestand op, waarbij elk item wordt geformatteerd als een object met type, citationName, inhoud en positie. \label{lst:minipocjs_extract_entries}}
+
 Op deze wijze werd niet alleen een 'entry' ontdekt, maar werd ook meteen onderscheid gemaakt tussen de bronsoort, de sleutel, de inhoud en de positie van waar deze voorkomt in het bestand. Om dit te doen, werd er gebruik gemaakt van een reguliere expressie. Met een reguliere expressie is het mogelijk om patronen binnen teksten te vinden. Gezien de structurele vorm van een .bib bestand, is het mogelijk om reguliere expressies op een eenvoudige manier te benutten om zo een krachtige analyse uit te voeren op de input.
 
 In detail zal er niet ingegaan worden op hoe deze reguliere expressies werken, maar de twee reguliere expressies die nodig waren binnen deze mini-\acrshort{POC} waren de volgende:
@@ -125,6 +126,7 @@ const entryPattern = /@(\w+)\{([^,]+),\s*(.*?)\},\s*\}/sg;
 // Extract each field from the entry.
 const fieldPattern = /(\w+)\s*=\s*(?:\{(.*?)\}|(\S+))/sg;
 \end{minted}
+\captionof{listing}[Mini-\acrshort{JS}-\acrshort{POC} - Reguliere expressies voor entries en fields]{Mini-\acrshort{JS}-\acrshort{POC} - Definieert reguliere expressies voor het patroon van BibLaTeX vermeldingen en velden. \label{lst:minipocjs_regex_patterns}}
 
 De eerste zorgt ervoor dat elke bron van elkaar onderscheden kan worden. De tweede gaat dan weer van toepassing zijn op een iets lager niveau. Daarmee kan er binnen een bron gekeken worden naar de individuele velden data die ervan bijgehouden worden, of juist om te kijken naar welke velden er missen bijvoorbeeld.
 
@@ -151,6 +153,8 @@ function checkForMissingFields(entry) {
 return missingFields;
 }
 \end{minted}
+\captionof{listing}[Mini-\acrshort{JS}-\acrshort{POC} - Controleren op ontbrekende velden]{Mini-\acrshort{JS}-\acrshort{POC} - Controleert op ontbrekende velden in een BibLaTeX-vermelding en retourneert een lijst met ontbrekende velden. \label{lst:minipocjs_check_missing_fields}}
+
 Hier wordt er een lijst gebruikt van velden die binnen de entry voor dienen te komen. Indien er gemerkt wordt dat er een bepaald veld niet in voorkomt, wordt de naam van het ontbrekende veld toegevoegd aan een lijst die teruggegeven wordt eens alles gecontroleerd is. Deze lijst wordt dan getoond aan de user.
 
 Vóór het onderzoek naar ontbrekende velden wordt eerst gecontroleerd op eventuele duplicate entries. Ook wordt onderzocht of er mogelijk entries zijn die licht verschillen maar toch dezelfde verwijzingssleutel bevatten. Gezien het feit dat een duplicaat sleutel niet is toegestaan, wordt deze controle als eerste uitgevoerd.
@@ -175,13 +179,15 @@ function checkForDuplicates(entries) {
     }
 }
 \end{minted}
+\captionof{listing}[Mini-\acrshort{JS}-\acrshort{POC} - Controleren op duplicaten]{Mini-\acrshort{JS}-\acrshort{POC} - Controleert op duplicaten in de citatienamen van BibLaTeX-vermeldingen en geeft een waarschuwing als duplicaten worden gevonden. \label{lst:minipocjs_check_duplicates}}
 \end{minipage}
 In deze controle valt op dat er een gebrek aan consistentie is in de manier waarop informatie aan de gebruiker wordt gepresenteerd. In tegenstelling tot de andere controle, waarbij dit pas achteraf gebeurde, gebeurt dit hier onmiddellijk zodra we het detecteren. Dit kan worden toegeschreven aan het feit dat dit een testversie is, ontworpen om een eerste indruk te krijgen. Bovendien zou een directe presentatie van de informatie mogelijk efficiënter kunnen zijn dan wanneer deze eerst wordt teruggestuurd naar een hoger niveau in het programma.
 
 \subsection{Python}
 \label{subsec:python}
-Gezien het grote aanbod aan linters die in Python geschreven zijn en de ruime gekendheid ervan, werd er besloten om ook Python een kans te geven. Omdat de Python-kennis wat afgezwakt was, werd er beroep gedaan op de krachten van AI. De linter \acrfull{POC} geschreven in JavaScript werd aan ChatGPT-4 gegeven en stapsgewijs werd er gevraagd om deze code om te vormen naar een werkend Python alternatief. Op enkele uren tijd werd erin geslaagd om een eerste versie werkende te krijgen. Het was zeer knap om te zien hoe goed ChatGPT met de Python syntax effectief kon omgaan. Ook de reguliere expressies die gebruikt werden, hebben op een bepaald moment in de handen van ChatGPT of zelfs github-copilot gezeten. AI-tools zijn zeer handig om complexe zaken enerzijds te verduidelijken als anderzijds erbij te assisteren om suggesties te doen van hoe een bepaald probleem aangepakt kan worden. Het potentiëel van AI was dus hier zeker merkbaar en werd ten volste benut waar mogelijk.
-\pagebreak
+Gezien het grote aanbod aan linters die in Python geschreven zijn en de ruime gekendheid ervan, werd er besloten om ook Python een kans te geven. Omdat de Python-kennis wat afgezwakt was, werd er beroep gedaan op de krachten van \acrshort{AI}. De linter \acrfull{POC} geschreven in JavaScript werd aan ChatGPT-4 gegeven en stapsgewijs werd er gevraagd om deze code om te vormen naar een werkend Python alternatief. Op enkele uren tijd werd erin geslaagd om een eerste versie werkende te krijgen. Het was zeer knap om te zien hoe goed ChatGPT met de Python syntax effectief kon omgaan. Ook de reguliere expressies die gebruikt werden, hebben op een bepaald moment in de handen van ChatGPT of zelfs GitHub Copilot gezeten. \acrshort{AI}-tools zijn zeer handig om complexe zaken enerzijds te verduidelijken als anderzijds erbij te assisteren om suggesties te doen van hoe een bepaald probleem aangepakt kan worden. Het potentiëel van \acrshort{AI} was hier zeker merkbaar en werd ten volste benut, hetzij door code te vertalen, hetzij om bugs op te lossen.
+
+
 \begin{minted}[autogobble, breaklines, linenos, samepage]{python3}
     entries = [match.groups() for match in entry_pattern.finditer(file_content)]
     formatted_entries = [{
@@ -190,8 +196,8 @@ Gezien het grote aanbod aan linters die in Python geschreven zijn en de ruime ge
         'content': entry[2],
         'position': match.start()
     } for match, entry in zip(entry_pattern.finditer(file_content), entries)]
-
 \end{minted}
+\captionof{listing}[Mini-Python-\acrshort{POC} - Verwerking van BibLaTeX vermeldingen]{Mini-Python-\acrshort{POC} - Verwerkt BibLaTeX vermeldingen uit een bestand, waarbij elk item wordt geformatteerd als een dict met type, citationName, inhoud en positie. \label{lst:mini_python_poc_file_content_processing}}
 
 Als deze pythoncode vergeleken wordt met de javascript-code, kan er direct opgemerkt worden dat er gelijkaardige logica achter zit. Dit is uiteindelijk ook het geval want de javascript-code is simpelweg vertaald naar Python code.
 
@@ -220,8 +226,9 @@ def check_for_duplicates(entries):
         print(f'Caution: {"A duplicate key" if not plural else "Duplicate keys"} {"has" if not plural else "have"} been found: {", ".join(duplicates)}!')
         exit(1)
 \end{minted}
+\captionof{listing}[Mini-Python-\acrshort{POC} - Controleren op ontbrekende velden en duplicaten]{Mini-Python-\acrshort{POC} - Controleert op ontbrekende velden in een BibLaTeX-vermelding en op duplicaten in de citatienamen van BibLaTeX-vermeldingen. \label{lst:mini_python_poc_check_functions}}
 
-Nadelen zijn er natuurlijk ook aan het vertalen van bestaande code naar een andere programmeertaal met behulp van AI. Zo zullen fouten die in de ene taal bestaan, hoogstwaarschijnlijk ook gewoon mee vertaald worden. Dit was bijvoorbeeld het geval wat de reguliere expressie betrefde. Bij een eerste iteratie van deze \acrfull{POC}, werkte één van de twee controles niet. Dit bleek achteraf te komen doordat de reguliere expressie iets te gevoelig was aan de hoeveelheid witruimte die er was. Gelukkig kon deze fout relatief snel achterhaald en opgelost worden.
+Nadelen zijn er natuurlijk ook aan het vertalen van bestaande code naar een andere programmeertaal met behulp van \acrshort{AI}. Zo zullen fouten die in de ene taal bestaan, hoogstwaarschijnlijk ook gewoon mee vertaald worden. Dit was bijvoorbeeld het geval wat de reguliere expressie betrefde. Bij een eerste iteratie van deze \acrfull{POC}, werkte één van de twee controles niet. Dit bleek achteraf te komen doordat de reguliere expressie iets te gevoelig was aan de hoeveelheid witruimte die er was. Gelukkig kon deze fout relatief snel achterhaald en opgelost worden.
 
 Ook is het interessant om te weten dat bij deze \acrfull{POC} het programma minder modulair was. Dit kwam door een kennisbarrière waarbij niet gekend was hoe modules echt goed werken in Python. Echter was dit geen dramatisch probleem gezien het maar een kleine \acrshort{POC} was en de zekerheid er was dat dit met wat grondiger onderzoek op een later tijdstip opgelost zou kunnen worden.
 
@@ -230,11 +237,11 @@ De eerste signalen dat een goede syntax-kennis niet onbelangrijk is, doken hier 
 \subsection{Rust}
 Hoewel Rust een grote kans leek te maken om de programmeertaal te worden waarin de linter geschreven zou worden, werd er dan ook vol enthousiasme aan begonnen. Snelheid is niet de enige belangrijke factor. Ook kennis is van groot belang zoals al gemerkt werd bij de Python \acrshort{POC}. Een taal kan nog zo snel zijn, als er niemand is die er mee kan werken, dan is het nutteloos. Rust is een taal die nog niet zo lang (sinds 2015) bestaat en waar nog niet zoveel mensen mee werken, ondanks dat deze al in de top 20 meest populaire programmeertalen staat in de TIOBE Index\footnote{\url{https://www.tiobe.com/tiobe-index/}}.
 
-Zoals eerder al enkele keren vermeld werd, was de keuze van de programmeertaal van groot belang zodat er ook na deze proef verder kon gewerkt worden aan de linter. Rust heeft daarbij de minst gunstige positie. Het was dus van groot belang om te kijken of het potentiëel in snelheid merkbaar genoeg was om de keuze te maken.
+Zoals eerder al enkele keren vermeld werd, was de keuze van de programmeertaal van groot belang zodat er ook na deze proef verder kon gewerkt worden aan de linter. Rust heeft daarbij de minst gunstige positie. Het was van groot belang om te kijken of het potentiëel in snelheid merkbaar genoeg was om de keuze te maken.
 
 Ondanks dat er kennis opgedaan werd over de programmeertaal zelf en dat de capaciteiten van \acrshort{AI} ingeschakeld werden, was het niet mogelijk om beide functionaliteiten werkende te krijgen binnen de Rust-\acrshort{POC}. De kennis was simpelweg nog altijd te beperkt; ook voor \acrshort{AI} was dit het geval. Met dat de programmeertaal recenter is en minder populair is dan Python, hebben de \acrshort{AI}-modellen (ChatGPT-4 en Microsoft's Copilot) veel minder \emph{referenties} om zich op te baseren voor het oplossen van de problemen die optreden. Dit legt direct een nadruk op het belang van een goede programmeerkennis en dat \acrfull{AI} niet zomaar elke programmeur zijn beroep zal kunnen innemen.
 
-Gezien de tijd beperkt was, werd er besloten om de enige werkende functionaliteit te testen en vergelijken met de snelste andere \acrshort{POC}, waarbij ook daar slechts enkel die éne controle gebruikt zou worden. De enige functionaleit die werkend gekregen was in Rust, was de controle op duplicaten. 
+Gezien de tijd beperkt was, werd er besloten om de enige werkende functionaliteit te testen en vergelijken met de snelste andere \acrshort{POC}, waarbij ook daar slechts enkel die éne controle gebruikt zou worden. De enige functionaleit die werkend gekregen was in Rust, was de controle op duplicaten.
 
 Net zoals bij de andere twee \acrshort{POC}'s, werd er een soortgelijke werkwijze gehanteerd. Eerst worden de veschillende entries van elkaar gescheiden en vervolgens worden er de controles, of in dit geval de controle, op uitgevoerd.
 \begin{minted}[autogobble, breaklines, linenos, samepage]{rust}
@@ -259,6 +266,7 @@ Net zoals bij de andere twee \acrshort{POC}'s, werd er een soortgelijke werkwijz
         &file_path,
     );
 \end{minted}
+\captionof{listing}[Mini-Rust-\acrshort{POC} - Verwerking van BibLaTeX vermeldingen en controle op duplicaten]{Mini-Rust-\acrshort{POC} - Verwerkt BibLaTeX vermeldingen uit een bestand, waarbij elk item wordt geformatteerd als een tuple met type, citationName, inhoud en regelnummer, en controleert op duplicaten in de citatienamen van BibLaTeX-vermeldingen. \label{lst:mini_rust_poc_entry_processing}}
 
 Elke programmeur kan zelf ook inzien dat deze code ver van optimaal is. Maar opnieuw, de kennisbarrière was eenmaal aanwezig en met een beperkte tijd, diende er compromis gemaakt te worden. Merk op dat er veel lussen gebeuren, lussen die hoogstwaarschijnlijk overbodig of toch zeker weg te werken zijn. Er werden veel transformaties gemaakt met de data waarbij het leek dat er van het éne type naar het andere gegaan werd om dan vervolgens terug naar het éne type te gaan. Duidelijk veel overbodigheden. Voorgaande code bevatte niet eens de volledige check op duplicaten, dat was slechts het begin-bestand waaruit de applicatie start. Hieronder volgt de effectieve controle. Merk ook daar op dat er twee lussen in de methode zitten. Hoewel het grotendeels is voor zaken op een mooie manier te tonen is, blijft het merkwaardig dat er geen efficiëntere manier gevonden kon worden. ChatGPT of Copilot konden hier beide niet beter mee helpen dan ze tot dit punt al gedaan hebben.
 
@@ -292,8 +300,10 @@ Elke programmeur kan zelf ook inzien dat deze code ver van optimaal is. Maar opn
         }
     }
 \end{minted}
-\pagebreak  
- 
+\captionof{listing}[Mini-Rust-\acrshort{POC} - Controleren op duplicaten]{Mini-Rust-\acrshort{POC} - Controleert op duplicaten in de citatienamen van BibLaTeX-vermeldingen en geeft een waarschuwing als duplicaten worden gevonden, inclusief het bestandspad en het regelnummer waar de duplicaten zijn gevonden. \label{lst:mini_rust_poc_check_duplicates}}
+
+\pagebreak
+
 \subsection{Keuze}
 Na het opstellen van kleine prototypes in elke kandidaat-programmeertaal, werd er gekeken naar de voor- en nadelen van elk, en alsook naar de uitvoeringstijden. Hierbij werd er aan het begin van elk scriptje een timer gestart in de code en werd deze op het einde van de uitvoering gestopt waarna er nog een printfunctie gebeurde om het resultaat te tonen. De resultaten worden weergegeven in bijhorende tabel \ref{tabel:uitvoeringstijden}.
 
@@ -325,19 +335,19 @@ Na het opstellen van kleine prototypes in elke kandidaat-programmeertaal, werd e
         \bottomrule
     \end{tabular}
     }
-    \caption[Tabel met de uitvoeringstijden van elke \acrshort{POC} (in milliseconden)]{De tabel met uitvoeringstijden van elke \acrshort{POC} in vergelijking met een andere. Eerst werden JavaScript en Python met elkaar vergeleken omdat deze als eerste waren opgesteld. Achteraf werd een laatst \acrshort{POC} in Rust opgezet. Wegens gebrek aan kennis en de tijd om deze kennis op te doen, kon er slechts één van beide controles geïmplementeerd worden. Vandaar dat bij de Rust testen genoteerd staat dat er enkel op duplicaten gecontroleerd werd. Gezien snelheid van belang was, werd JavaScript al uitgeschakeld door Python en was het dus niet nodig om deze nog eens te vergelijken met Rust.}
+    \caption[Tabel met de uitvoeringstijden van elke \acrshort{POC} (in milliseconden)]{De tabel met uitvoeringstijden van elke \acrshort{POC} in vergelijking met een andere. Eerst werden JavaScript en Python met elkaar vergeleken omdat deze als eerste waren opgesteld. Achteraf werd een laatst \acrshort{POC} in Rust opgezet. Wegens gebrek aan kennis en de tijd om deze kennis op te doen, kon er slechts één van beide controles geïmplementeerd worden. Vandaar dat bij de Rust testen genoteerd staat dat er enkel op duplicaten gecontroleerd werd. Gezien snelheid van belang was, werd JavaScript al uitgeschakeld door Python en was het niet nodig om deze nog eens te vergelijken met Rust.}
     \label{tabel:uitvoeringstijden}
     \end{table}
 
-De linters werden allemaal op eenzelfde bestand gebruikt. Hierbij werd er eerst driemaal het Python commando achter elkaar uitgevoerd en daarna driemaal de JavaScript versie. Het concept van caching, opslaan van bepaalde data in snel beschikbaar geheugen, is hier zichtbaar. De eerste keer dat er iets gebeurd, duurt het langer dan de eerstvolgende keer dat het plaatsvindt.
+De linters werden allemaal op eenzelfde bestand gebruikt. Hierbij werd er eerst driemaal het Python commando achter elkaar uitgevoerd en daarna driemaal de JavaScript versie. Het concept van caching, opslaan van bepaalde data in snel beschikbaar geheugen, is hier zichtbaar. De eerste keer dat er iets gebeurde, duurde het langer dan de eerstvolgende keer dat het plaatsvindt.
 Opmerkelijk is hier dat de JavaScript versie tot wel 12 keer \emph{trager} is dan de Python versie.
 
-In een poging om het caching aspect te vermijden, werd het bestand nogmaals meerdere keren gecontroleerd, maar dit keer afwisselend JavaScript en Python. Eerst werd er tweemaal JavaScript als eerste uitgevoerd en vervolgens werd hetzelfde gedaan met Python als eerste. Wat hier extra opmerkelijk is, is dat JavaScript deze keer uitzonderlijk lang duurde in vergelijking met eerdere keren. 27 milliseconden in vergelijking met de Python versie die het in minder dan 2 milliseconden kon. Hoewel het bij de tweede poging niet veel verschil maakte, kan er opnieuw gemerkt worden dat er een vorm van caching zal plaatsvinden waarbij het voorgaande resultaat nog altijd (deels) opgeslagen bleef. Hierdoor was de JavaScript linter in staat om het bestand meer dan dubbel zo snel uit te voeren. Wat wel nog altijd meer dan vijf keer trager was dan de Python versie. Python is dus een duidelijke winnaar in vergelijking met JavaScript op vlak van snelheid. Gezien Python daarnaast ook op de \emph{eerste} plaatst staat in de TIOBE Index (mei 2024), is het veilig om ervanuit te gaan dat er genoeg mensen de taal kennen om zeker te zijn dat de linter onderhoudbaar blijft nadat dit onderzoek afgelopen is.
+In een poging om het caching aspect zoveel mogelijk te vermijden en elke taal een zo gelijk mogelijke kans te geven, werd het bestand meerdere keren gecontroleerd, maar dit keer afwisselend met JavaScript en Python. Eerst werd er tweemaal JavaScript als eerste uitgevoerd en vervolgens werd hetzelfde gedaan met Python als eerste. Wat hier extra opmerkelijk is, is dat JavaScript deze keer uitzonderlijk lang duurde in vergelijking met eerdere keren. 27 milliseconden in vergelijking met de Python versie die het in minder dan 2 milliseconden kon. Hoewel het bij de tweede poging niet veel verschil maakte, kan er opnieuw gemerkt worden dat er een vorm van caching zal plaatsvinden waarbij het voorgaande resultaat nog altijd (deels) opgeslagen bleef. Hierdoor was de JavaScript linter in staat om het bestand meer dan dubbel zo snel uit te voeren. Wat wel nog altijd meer dan vijf keer trager was dan de Python versie. Python is een duidelijke winnaar in vergelijking met JavaScript op vlak van snelheid. Gezien Python daarnaast ook op de \emph{eerste} plaats staat in de TIOBE Index\footnote{\url{https://www.tiobe.com/tiobe-index/}} (mei 2024), is het veilig om ervanuit te gaan dat er genoeg mensen de taal kennen om zeker te zijn dat de linter onderhoudbaar blijft nadat dit onderzoek afgelopen is.
 
-Tot slot rest er nog Rust. Zoals eerder vermeld werd er niet in geslaagd om beide functionaliteiten werkende te krijgen. Daarom werd er besloten om enkel de controle op duplicaten uit te voeren. De snelheid van deze uitvoeringstijd, werd dan vergeleken met die van de Python versie, gezien deze de snelste van de twee was. Hoewel het internet deed geloven dat Rust mogelijk sneller zou zijn, bleek dit bij deze test verre van de waarheid te zijn. Python was ook in vergelijking met Rust sneller. Zoals eerder aangehaald, is de implementatiewijze van groot belang en mogelijks de oorzaak van deze resultaten. Echter geeft het nog altijd een realistisch beeld van de verwachten, moest er een linter in gemaakt worden. Door het gebrek aan kennis, zou de taal nooit tot het volle potentiëel benut kunnen worden en dus zou de linter nooit zo snel kunnen werken, als dat in theorie mogelijk zou moeten zijn.
+Tot slot rest er nog Rust. Zoals eerder vermeld werd er niet in geslaagd om beide functionaliteiten werkende te krijgen. Daarom werd er besloten om enkel de controle op duplicaten uit te voeren. De snelheid van deze uitvoeringstijd, werd dan vergeleken met die van de Python versie, gezien deze de snelste van de twee was. Hoewel het internet deed geloven dat Rust mogelijk sneller zou zijn, bleek dit bij deze test verre van de waarheid te zijn. Python was ook in vergelijking met Rust sneller. Zoals eerder aangehaald, is de implementatiewijze van groot belang en mogelijks de oorzaak van deze resultaten. Echter geeft het nog altijd een realistisch beeld van de verwachtingen, moest er een linter in gemaakt worden. Door het gebrek aan kennis, zou de taal nooit tot het volle potentiëel benut kunnen worden en zou de linter nooit zo snel kunnen werken, als dat in theorie mogelijk zou moeten zijn.
 
 Het is in principe wel nog perfect mogelijk dat Rust zich beter schaalt naar grotere bestanden toe. Het testbestand bevatte slechts één bron, maar wat als er honderden bronnen in zouden staan? Zou Python's uitvoertijd lineair vergroten of eerder exponentieel? Zou Rust sub-lineair evolueren? Deze vragen zullen binnen dit onderzoek onbeantwoord blijven. Kwestie dat er simpelweg onvoldoende tijd is om in deze scope op te nemen.\newline
-Python is dus de winnaar uit dit onderzoek en zal gebruikt worden om de rest van deze proof of concept mee uit te werken.
+Python is de winnaar uit dit onderzoek en zal gebruikt worden om de rest van deze proof of concept mee uit te werken.
 
 \section{Gebruik van bibl als Basis}
 Met Python als programmeertaal was het mogelijk om terug te denken aan bibl, dat uitgebreid werd bestudeerd (\ref{sec:bibl-in-depth}). Zou het mogelijk zijn om bibl om te vormen tot een BibLaTeX-compatibele linter? Gezien de eerdere positieve ervaringen met bibl, werd besloten dit te onderzoeken. Een geldig BibLaTeX-bestand werd door bibl gehaald om de resultaten te analyseren. bibl crashte niet; het genereerde enkele linterwaarschuwingen op het bestand. Dit was een positieve uitkomst. Aangezien bibl open-source is en een goed gestructureerde codebasis heeft, was het eenvoudig om regels aan te passen, te verwijderen of nieuwe toe te voegen.
@@ -357,14 +367,14 @@ Nadat een geldig BibLaTeX-bestand door bibl was gelind, werd het duidelijk welke
 \end{itemize}
 
 Regel D00 kon direct worden uitgeschakeld. De volgorde van de bronnen is in deze use case niet relevant; daarom staat deze regel op de lijst van te negeren regels. 
-Het was logisch dat de regels M01 en M02 in eerste instantie als overtreding werden beschouwd. BibTeX-bestanden gebruiken namelijk andere velden die niet langer nodig zijn in BibLaTeX, waardoor deze velden als ontbrekend werden gemarkeerd. De lijst van entry types en hun velden moet dus zorgvuldig worden nagekeken. Dit geldt ook voor regel U00, aangezien BibLaTeX meer entry types kent dan BibTeX. 
+Het was logisch dat de regels M01 en M02 in eerste instantie als overtreding werden beschouwd. BibTeX-bestanden gebruiken namelijk andere velden die niet langer nodig zijn in BibLaTeX, waardoor deze velden als ontbrekend werden gemarkeerd. De lijst van entry types en hun velden moeten zorgvuldig worden nagekeken. Dit geldt ook voor regel U00, aangezien BibLaTeX meer entry types kent dan BibTeX. 
 Regel T00 kan worden verwijderd, aangezien BibLaTeX non-ascii characters ondersteunt. Regel T01 vereist meer aandacht; het aantal karakters dat als tab worden gebruikt, verschilt namelijk per omgeving. Voor deze proef werd de tab ingesteld op twee spaties. Omdat dit niet altijd het geval is, biedt bibl gelukkig een optie om dit eenvoudig in te stellen in de configuratie.
 Regel T02 verwijst naar spaties aan het einde van de regel. Nadat deze spaties waren verwijderd, was dit probleem opgelost. Deze regel kan blijven bestaan, afhankelijk van persoonlijke voorkeur.
 Regel T03 controleert het aantal karakters per regel. In deze use case werd hier minder aandacht aan besteed, aangezien het niet van groot belang was.
 Regel E05 is handig voor persoonlijke organisatie. Het verwijst naar een ontbrekend bestand dat aan een bron is gekoppeld. Aangezien de lijst met geldige referenties door de promotor werd geleverd, is het logisch dat sommige bestanden niet beschikbaar waren.
 
 \subsection{Overbodige regels}
-Zoals eerder vermeld, is regel T00 overbodig omdat deze controleert op non-ascii characters. In BibTeX mochten alleen ascii-characters worden gebruikt, maar in BibLaTeX zijn non-ascii characters toegestaan. Deze regel kan dus worden verwijderd. De overige regels kunnen wel nog als relevant beschouwd worden afhankelijk van de persoonlijke voorkeur.
+Zoals eerder vermeld, is regel T00 overbodig omdat deze controleert op non-ascii characters. In BibTeX mochten alleen ascii-characters worden gebruikt, maar in BibLaTeX zijn non-ascii characters toegestaan. Deze regel kan worden verwijderd. De overige regels kunnen wel nog als relevant beschouwd worden afhankelijk van de persoonlijke voorkeur.
 \\
 \\
 Met deze veranderingen kon de uitwerkingsfase officiëel van start gaan.

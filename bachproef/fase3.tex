@@ -5,7 +5,7 @@
 %Aan het einde van deze fase stond er dus een werkende proof of concept beschikbaar op een GitHub-repository van de auteur van dit onderzoek, Tristan Cuvelier. 
 %Er werd verwacht dat deze fase wel enige tijd in beslag zou nemen gezien het verwachte resultaat en met een marge die ruim genoeg was voor problemen die opdoken tijdens het ontwikkelen van de software.
 
-Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstormen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er dus gekozen voor bibla.
+Deze fase vond iets later plaats dan initiëel verwacht, maar verliep ook vlotter dan verwacht. Dat allemaal dankzij het ontdekken van bibl. Een gepaste \emph{rebrand} naam vinden voor bibl was misschien geen prioriteit, maar er werd toch besloten er eentje te vinden. Na wat brainstormen werd de naam bibla bedacht. Waar bibl wellicht stond voor bibTeX-Linter of iets soortgelijk, zal bibla simpelweg refereren naar BibLaTeX. Gezien Biblal minder leuk klonk, werd er gekozen voor bibla.
 
 Nu deze lastige zaak afgehandeld is, werd er eerst een hele rebrand uitgevoerd op de fork van bibl; bibla was geboren.
 \\
@@ -267,7 +267,7 @@ alternate_fields:
 De overige configuratie kan geraadpleegt worden op de \texttt{bibla} repository in \texttt{bibla.yml}\footnote{\url{https://github.com/MrClassicT/bibla/blob/master/bibla/bibla.yml}}, wat de algemene configuratie voor \texttt{bibla} bevat.
 
 \subsection{Pipelines}
-\texttt{bibl} werkte met GitLab, \texttt{bibla} werkt met GitHub. Het is dus niet onlogisch dat er nog enkele andere zaken aangepast dienen te worden om alles vlot te laten verlopen. Hierbij denken we vooral aan de pipelines die gebruikt worden. \texttt{bibl} bevat slechts één pipeline bestand\footnote{\url{https://gitlab.com/arnevdk/bibl/-/blob/master/.gitlab-ci.yml}}, een continuous integration. Al gebeurt er in deze pipeline ook een \emph{deploy} van een statische website die alle linterregels bevat.
+\texttt{bibl} werkte met GitLab, \texttt{bibla} werkt met GitHub. Het is daarom niet onlogisch dat er nog enkele andere zaken aangepast dienen te worden om alles vlot te laten verlopen. Hierbij denken we vooral aan de pipelines die gebruikt worden. \texttt{bibl} bevat slechts één pipeline bestand\footnote{\url{https://gitlab.com/arnevdk/bibl/-/blob/master/.gitlab-ci.yml}}, een continuous integration. Al gebeurt er in deze pipeline ook een \emph{deploy} van een statische website die alle linterregels bevat.
 
 Op GitHub worden pipelines gekend onder \emph{workflows}, wat reflecteert naar wat een pipeline effectief inhoudt. Gezien de \emph{workflows} iets anders zijn dan de gewone pipelines op GitLab, diende er enkele wijzigingen te gebeuren. Zo diende de pipelines te komen in een folder \texttt{.github/workflows} om herkend te worden. Hierin werd er een omgevormde CI-pipeline geplaatst, gebaseerd op de originele van \texttt{bibl}.
 
@@ -336,7 +336,7 @@ Hoewel in deze pipeline net gelijk bij \texttt{bibl} Flake8 gebruikt wordt om de
 
 
 \paragraph{CD-pipeline}
-Om ervoor te zorgen dat bij elke \emph{release} (of uitgave in het Nederlands) \texttt{bibla} eenvoudig en consistent naar de pakketmanager gestuurd kon worden, werd er ook een CD-pipeline voorzien. Het opzetten van deze pipeline ging dankzij de templates die GitHub voorziet in minder dan vijf minuten! Het enige dat zelf diende te gebeuren, was een API-token (een vorm van zowel identificatie en authenticatie) voorzien en de CD-pipeline-template deed de rest.
+Om ervoor te zorgen dat bij elke \emph{release} (of uitgave in het Nederlands) \texttt{bibla} eenvoudig en consistent naar de pakketmanager gestuurd kon worden, werd er ook een CD-pipeline voorzien. Het opzetten van deze pipeline ging dankzij de templates die GitHub voorziet in minder dan vijf minuten! Het enige dat zelf diende te gebeuren, was een \acrshort{API}-token (een vorm van zowel identificatie en authenticatie) voorzien en de CD-pipeline-template deed de rest.
 
 \begin{minted}[autogobble, breaklines, linenos]{yaml}
 # This workflow will upload a Python Package using Twine when a release is created
