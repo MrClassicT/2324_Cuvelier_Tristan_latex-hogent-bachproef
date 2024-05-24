@@ -1,10 +1,6 @@
 %%=============================================================================
 %% Methodologie
 %%=============================================================================
-
-\chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
-\label{ch:methodologie}
-
 %% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
 %% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
 %% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
@@ -26,29 +22,26 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-Deze \acrlong{POC} werd opgesplitst in meerdere fasen. Voor het onderzoeken en effectief opstellen van hiervan waren enkel toegang tot een computer, technisch inzicht en logisch redeneren vereist. Het doel was om een open-source \acrlong{POC} te bekomen die kon dienen als basis om een effectieve volledig functionele linter op verder uit te bouwen.
+\chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
+\label{ch:methodologie}
 
-Voor het gehele proces werden 14 weken ter beschikking gesteld. Het was de bedoeling om de fasen te verdelen over deze weken en om alsnog een week of twee over te houden ter 
-reserve voor moesten er fouten bij de schattingen ingeslopen zijn.
-De inschatting van de benodigde tijd werd bepaald op basis van het aantal onderzoek dat er moest gebeuren en van het verwachte resultaat aan het einde van deze fase. 
+Deze \acrlong{POC} is opgesplitst in meerdere fasen. Voor het onderzoeken en effectief opstellen hiervan waren alleen toegang tot een computer, technisch inzicht en logisch redeneren vereist. Het doel was om een open-source \acrlong{POC} te ontwikkelen die als basis kon dienen voor een volledig functionele linter.
+
+Voor het gehele proces waren 14 weken beschikbaar. De fasen zijn verdeeld over deze periode met een buffer van twee weken om eventuele fouten in de schattingen op te vangen. De benodigde tijd werd ingeschat op basis van het aantal vereiste onderzoeken en het verwachte resultaat aan het einde van elke fase.
 
 \section{Fase 1: Literatuurstudie}
-Hier werd er onderzoek gedaan naar reeds bestaande linters, al dan niet gerelateerd aan LaTeX. Er werd gekeken naar de programmeertalen waarin deze gemaakt waren, hun werking, specificaties en functionaliteiten. Daarnaast mocht er ook niet vergeten worden om te kijken hoe een CI-pipeline effectief in zijn werk ging, zodat het mogelijk was om de linter op een efficiënte manier te integreren in workflows. Ook het verschil tussen BibLaTeX en BibTex werd onderzocht om te zien waar de oorzaak lag waardoor ze niet compatibel waren met elkaar.
-Indien er andere relevante zaken opdoken die belang konden hebben aan het onderzoek, werden deze ook opgenomen om te onderzoeken. Op deze manier werd er geprobeerd een zo volledig mogelijk onderzoek te voeren. 
-Een kijk naar hoe een linter \emph{echt} werkte. Deze kennis werd gebruikt als inspiratiebron voor het uiteindelijke \acrlong{POC} dat opgesteld werd in een latere fase. 
-Hoewel de focus op deze fase het grootst was gedurende de aanvang van de onderzoeksperiode, was het een fase die parallel bleef doorlopen gezien er altijd extra info nodig kon zijn doorheen de andere fasen.
-Het resultaat van deze fase was een (informeel) document waarin alle ondervindingen, onderzoeken en handige informatiebronnen bijgehouden werden over reeds bestaande linters en andere zaken die van pas kwamen tijdens zowel het onderzoeken als het ontwikkelen van deze \acrlong{POC}. Het document was een bron van kennis die gebruikt kon worden in verdere fasen.
+In deze fase werd onderzoek gedaan naar bestaande linters, met en zonder betrekking tot \LaTeX{}. Er werd gekeken naar de programmeertalen waarin deze linters waren geschreven, hun werking, specificaties en functionaliteiten. Daarnaast werd onderzocht hoe een \acrshort{CI}-pipeline effectief werkt om de linter efficiënt te kunnen integreren in workflows. Ook werd het verschil tussen BibLaTeX en BibTex onderzocht om de oorzaak van hun incompatibiliteit te achterhalen. Eventuele andere relevante zaken die tijdens het onderzoek naar voren kwamen, werden ook meegenomen.
+
+Het resultaat van deze fase was een informeel document met alle bevindingen, onderzoeken en nuttige informatiebronnen over bestaande linters en andere relevante onderwerpen. Dit document diende als kennisbron voor de volgende fasen en werd uiteindelijk verwerkt in de literatuurstudie.
 
 \section{Fase 2: Technische Analyse en Experimenten}
-In deze fase was het doel om de lijst van gewenste functionele en niet-functionele requirements aan te vullen en deze te structureren naargelang hun prioriteit. Onder andere de keuze van de programmeertaal, eventuele libraries en andere softwaretools die gebruikt konden en zouden worden voor het maken en opzetten van de \acrlong{POC} werden hier gemaakt. De keuze van de programmeertaal werd bereikt door het opstellen van kleine prototypes in elke kandidaat-programmeertaal. Deze kregen werden dan getimed en daarnaast werden ook andere voor- en nadelen van elk bekeken om zo tot de beste optie te komen.
-
+In deze fase was het doel om de lijst van functionele en niet-functionele requirements aan te vullen en te prioriteren. De keuze van de programmeertaal, libraries en andere softwaretools werd hier gemaakt. Deze keuzes werden gebaseerd op experimenten met kleine prototypes in elke kandidaat-programmeertaal, waarbij zowel de snelheid als andere voor- en nadelen werden geëvalueerd.
 
 \section{Fase 3: Software Ontwikkeling | \acrlong{POC}}
-In deze fase gebeurde het uitdagende werk. De \acrlong{POC} werd ontwikkeld op basis van de verkregen bronnen. Een werkende versie werd opgesteld, inclusief testen om de werking te garanderen en om het eenvoudig uitbreidbaar te maken. Niettemin werd er ook documentatie geschreven, zodat alles wat er gebeurde duidelijk was voor elke vrijwilliger die een bijdrage wenste te leveren. Hoewel dit misschien al in fase 2 had mogen plaatsvinden, werd er ook een kanbanbord opgesteld om net iets meer overzicht te bewaren in de vooruitgang van de \acrlong{POC} en zodat er een duidelijk zicht was op de haalbaarheid van de MVP.
+In deze fase werd de \acrlong{POC} ontwikkeld op basis van de verzamelde bronnen. Een werkende versie werd opgesteld, inclusief testen om de werking te garanderen en de uitbreidbaarheid te vergemakkelijken. Er werd ook documentatie geschreven om duidelijkheid te verschaffen aan iedereen die bijdroeg aan het project. Een kanbanbord werd opgezet om het overzicht over de voortgang te behouden en de haalbaarheid van de MVP te bewaken.
 
-Aan het einde van deze fase stond er een werkende \acrlong{POC} beschikbaar op een GitHub-repository\footnote{\url{https://github.com/MrClassicT/bibla}} van de auteur van dit onderzoek, Tristan Cuvelier. 
-Er werd verwacht dat deze fase wel enige tijd in beslag zou nemen gezien het verwachte resultaat en met een marge die ruim genoeg was voor problemen die opdoken tijdens het ontwikkelen van de software.
+Aan het einde van deze fase was een werkende \acrlong{POC} beschikbaar op een GitHub-repository\footnote{\url{https://github.com/MrClassicT/bibla}} van de auteur van dit onderzoek, Tristan Cuvelier. Deze fase nam aanzienlijke tijd in beslag vanwege het verwachte resultaat, met een ruime marge voor eventuele problemen tijdens de ontwikkeling.
 
 \section{Conclusie}
 
-Tot slot wordt er nog een conclusie getrokken waarin er bepaald wordt in hoeverre deze \acrlong{POC} een succes was. Er zal gekeken worden naar de opgeleverde functionaliteiten en zal er gekeken worden tot in hoeverre er aan de niet-functionele requirements voldaan werd. Alsook de overblijvende werkpunten zullen er besproken worden, samen met de toekomst visie van deze \acrlong{POC}.
+Tot slot wordt er een conclusie getrokken waarin de mate van succes van deze \acrlong{POC} wordt bepaald. De opgeleverde functionaliteiten worden geëvalueerd, evenals de mate waarin aan de niet-functionele requirements is voldaan. Daarnaast worden de resterende werkpunten en de toekomstvisie van deze \acrlong{POC} besproken.

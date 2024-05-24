@@ -219,11 +219,34 @@ De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zij
 Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of \acrshort{GUI} gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
 
 \section{Opbouw linter}
+\label{sec:linteropbouw}
 Aan het begin van dit project werd de beslissing genomen om direct met de ontwikkeling van een prototype aan de slag te gaan, wat leidde tot de zoektocht naar geschikte bronnen. Deze beslissing werd genomen gezien de beperkte tijd en de hoeveelheid aan onderzoek die diende te gebeuren. Indien Rust de taal zou moeten worden, moest deze nog volledig aangeleerd worden en zou er immers geen kostbare tijd verloren mogen gaan.
 
-In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter, als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
+In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter (\texttt{DirtyRat\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}}), als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
 
-\section{bibl pakket - diepere blik}
+Om een idee te krijgen van een algemene structuur, werd er gekeken naar zowel DirtyRat, gemaakt door \textcite{BorgesLate2021} en naar Flake8\footnote{\url{https://github.com/PyCQA/flake8}}. Dit onderzoek liet blijken dat een algemene structuur van een linter bestaat uit verschillende essentiële componenten die gezamenlijk zorgen voor een effectieve werking en uitbreidbaarheid van de tool. Deze componenten omvatten:
+
+\begin{itemize}
+    \item \textbf{Kernfunctionaliteitsbestanden:} Deze bestanden bevatten de hoofdlogica en de hoofdingangen van de linter, zoals \texttt{main.js} en \texttt{rat.js} in DirtyRat, en \texttt{\_\_main\_\_.py} en de \texttt{main/} map in Flake8.
+    
+    \item \textbf{Parsen en Tokenisatie:} Deze modules zijn verantwoordelijk voor het lezen, parsen en tokeniseren van de code die geanalyseerd moet worden. Voorbeelden hiervan zijn \texttt{parser.js} en \texttt{tokenizer.js} in DirtyRat, en \texttt{processor.py} en \texttt{checker.py} in Flake8.
+    
+    \item \textbf{Helper- en Hulpprogramma's:} Hulpprogramma's ondersteunen diverse taken binnen de linter. \texttt{helper.js} in DirtyRat en \texttt{utils.py} in Flake8 zijn hier voorbeelden van.
+    
+    \item \textbf{Regeldefinities en Controles:} Deze bestanden definiëren de specifieke linting regels en de logica om de code aan deze regels te toetsen. Voorbeelden zijn \texttt{check-names.js} en \texttt{expression.js} in DirtyRat, en \texttt{style\_guide.py} en \texttt{violation.py} in Flake8.
+    
+    \item \textbf{Configuratie en Standaarden:} Bestanden zoals \texttt{defaults.py} en de \texttt{options/} map in Flake8 bevatten instellingen en standaardwaarden voor de werking van de linter. DirtyRat kan ook vergelijkbare configuratiebestanden hebben, hoewel ze niet direct zichtbaar zijn in de screenshot.
+    
+    \item \textbf{Documentatie:} Documentatiebestanden zoals \texttt{README.md} in DirtyRat bieden informatie over de linter en het gebruik ervan. Flake8 heeft mogelijk ook documentatiebestanden die niet zichtbaar zijn in de screenshot.
+    
+    \item \textbf{Plugin- en Extensieondersteuning:} Ondersteuning voor plugins maakt het mogelijk om de functionaliteit van de linter uit te breiden. Flake8 bevat bijvoorbeeld een \texttt{plugins/} map voor dit doel.
+\end{itemize}
+
+Deze componenten zorgen ervoor dat linters modulair, onderhoudbaar en uitbreidbaar zijn, waardoor ze effectief code kunnen analyseren en codestandaarden kunnen handhaven voor hun respectieve programmeertalen. Het zijn dus ook belangrijke componenten voor de eigen \acrlong{POC}.
+
+% ---
+
+\section{bibl pakket - Diepere blik}
 \label{sec:bibl-in-depth}
 \begin{figure}[ht]
     \centering
@@ -1132,9 +1155,9 @@ De architectuur van \texttt{bibl} maakt het mogelijk om eenvoudig nieuwe regels 
 
 De gestructureerde opzet van de configuratiebestanden en de modulariteit van de regels dragen bij aan de onderhoudbaarheid en uitbreidbaarheid van het systeem. Door het volgen van best practices in softwareontwikkeling, zoals het gebruik van duidelijke en gedocumenteerde functies, wordt de leesbaarheid en het begrip van de code vergroot.
 
-Naast het bezitten van een goed doordachte structuur en opbouw is \texttt{bibl} een waardevol hulpmiddel voor iedereen die werkt met BibTeX-bestanden, en draagt het bij aan de professionalisering en kwaliteit van academisch schrijven en onderzoek.
+Naast het bezitten van een goed doordachte structuur en opbouw, is \texttt{bibl} een waardevol hulpmiddel voor iedereen die werkt met BibTeX-bestanden, en draagt het bij aan de professionalisering en kwaliteit van academisch schrijven en onderzoek.
 
-Gezien al deze eigenschappen, is \texttt{bibl} zeker een geschikt voorbeeld voor deze proof of concept. 
+Gezien al deze eigenschappen en in vergelijking met wat er onder een algemene linteropbouw (zie \ref{sec:linteropbouw}) verstaan wordt, is \texttt{bibl} zeker een geschikt voorbeeld voor deze proof of concept. 
 
 % ----
 \section{Open-source}
