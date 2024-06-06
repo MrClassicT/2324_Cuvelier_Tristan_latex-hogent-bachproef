@@ -22,10 +22,10 @@
 % Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van
 % een paragraaf.
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Dit hoofdstuk licht toe wat een linter is en wat \LaTeX{} en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze proof of concept uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters, hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
+Dit hoofdstuk licht toe wat een linter is en wat \LaTeX{} en BibLaTeX zijn. Daarnaast wordt er meer verteld over de huidige stand van zaken binnen de wereld van BibLaTeX-linters, het toont aan waarom het gepast is om deze \acrlong{POC} uit te werken en de opportuniteiten die zich bieden binnen dit onderwerp. Alsook wordt er een diepere kijk gegeven aan andere linters, hun functionaliteiten en performantie om een beter inzicht te verwerven in aspecten die van belang kunnen zijn voor het uitwerken van een eigen linter.
 
 \section{Wat is een linter?}
-Alvorens er uitgelegd wordt waarom het nuttig is om deze proof of concept uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het nut ervan is. Het doel van deze proof of concept is om een linter te maken. Maar wat is dat juist?
+Alvorens er uitgelegd wordt waarom het nuttig is om deze \acrlong{POC} uit te werken, is het belangrijk om een goed begrip te hebben van wat er effectief gemaakt wordt en wat het nut ervan is. Het doel van deze \acrlong{POC} is om een linter te maken. Maar wat is dat juist?
 
 \textcite{Kamunya2023} legt uit dat linten verwijst naar het proces van broncode automatisch controleren op programmatische en stilistische fouten. Dit houdt in dat een linter programmatisch je code scant om te controleren of er problemen zijn die kunnen leiden tot bugs of inconsistenties met de code-stijl en -gezondheid. De linter is hierbij de tool die ervoor gebruikt wordt.
 
@@ -55,7 +55,7 @@ Personen die al ervaring hebben met \LaTeX{} zullen net als \textcite{Oetiker202
 \end{enumerate}
 
 \subsection{Conclusie}
-\LaTeX{} \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. De blijvende populariteit is te danken aan de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd.
+\LaTeX{} \autocite{Oetiker2023} wordt vooral gewaardeerd in academische en technische kringen waar de precisie van de inhoud en de structuur voorop staan. Eens er een lay-out template bestaat, is het zeer eenvoudig om veel professionele documenten op te maken op eenzelfde manier. Met dank aan: de uitbreidbaarheid, consistentie, brede ondersteuning van wiskundige formules, en de mogelijkheid om complexe documenten zoals proefschriften en wetenschappelijke artikelen nauwkeurig op te maken, ook wel typesetten genoemd blijft \LaTeX{} relevant.
 
 %--- start: BibLaTeX vs BibTeX ---
 
@@ -140,7 +140,7 @@ BibTeX is meer gevestigd en heeft daarom een bredere compatibiliteit met oudere 
 \end{itemize}
 
 \subsection{Conclusie}
-Zowel BibTeX als BibLaTeX spelen een belangrijke rol in het beheer van bibliografieën binnen \LaTeX{}-documenten. BibTeX is geschikt voor gebruikers die een eenvoudige, gevestigde oplossing nodig hebben met brede compatibiliteit. BibLaTeX daarentegen is ideaal voor degenen die geavanceerde functies, uitgebreide aanpassing en moderne mogelijkheden zoals Unicode-ondersteuning en dynamisch bibliografiebeheer nodig hebben. Gebruikers moeten het hulpmiddel kiezen dat het beste aansluit bij hun technische vereisten en document specificaties. Bij HOGENT is het gebruik van BibLaTeX verplicht. Deze proof of concept is daarom bijzonder relevant, aangezien het kan bijdragen aan het voldoen aan de behoeften van zowel studenten als docenten door te zorgen dat de gebruikte BibLaTeX-bestanden optimaal georganiseerd en correct zijn.
+Zowel BibTeX als BibLaTeX spelen een belangrijke rol in het beheer van bibliografieën binnen \LaTeX{}-documenten. BibTeX is geschikt voor gebruikers die een eenvoudige, gevestigde oplossing nodig hebben met brede compatibiliteit. BibLaTeX daarentegen is ideaal voor degenen die geavanceerde functies, uitgebreide aanpassing en moderne mogelijkheden zoals Unicode-ondersteuning en dynamisch bibliografiebeheer nodig hebben. Gebruikers moeten het hulpmiddel kiezen dat het beste aansluit bij hun technische vereisten en document specificaties. Bij HOGENT is het gebruik van BibLaTeX verplicht. Deze \acrlong{POC} is daarom bijzonder relevant, aangezien het kan bijdragen aan het voldoen aan de behoeften van zowel studenten als docenten door te zorgen dat de gebruikte BibLaTeX-bestanden optimaal georganiseerd en correct zijn.
 
 %--- end: BibLaTeX vs BibTeX ---
 \section{Huidige stand van zaken}
@@ -153,15 +153,15 @@ Op het ogenblik van het schrijven zijn er nog geen \emph{optimale} BibLaTeX-Lint
     \label{fig:biblatex-linter-error}
 \end{figure}
 
-Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waaraan de proof of concept moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
+Daarnaast leek de aanpak van de geschreven code ook niet optimaal te zijn op vlak van leesbaarheid en uitbreidbaarheid. Gezien dit echter wel criteria zijn waaraan de \acrlong{POC} moest voldoen, werd er besloten om deze linter niet verder te onderzoeken. Er werd wel gekeken naar de functionaliteiten die deze linter aanbood en andere zaken die handig leken om over te nemen in de eigen implementatie.
 
 \section{Andere linters}
-Gezien het wat BibLaTeX-linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en bibl. Net als de proof of concept waren al de bekeken linters gratis te gebruiken en open source.
+Gezien het wat BibLaTeX-linters betreft zeer beperkt is, werd er op zoek gegaan naar andere soorten linters. Bijvoorbeeld een linter voor JavaScript, Python of andere programmeertalen. Er werd gekeken naar het soort features dat de linters aanbieden, hun performantie, alsook hun broncode indien deze toegankelijk was. Enkele linters die bekeken werden zijn: JSHint, Stylelint, Ruff, PyType en bibl. Net als de \acrlong{POC} waren al de bekeken linters gratis te gebruiken en open source.
 
-Daaruit bleek dat naast de manier van implementeren, de taal waaruit de linter opgebouwd is ook van belang is voor de performantie. Dit was het begin naar een onderzoek voor de ideale programmeertaal te vinden voor deze proof of concept.
+Daaruit bleek dat naast de manier van implementeren, de taal waaruit de linter opgebouwd is ook van belang is voor de performantie. Dit was het begin naar een onderzoek voor de ideale programmeertaal te vinden voor deze \acrlong{POC}.
 
 \subsection{Ruff}
-Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter ontwikkeld door \textcite{Astral2024}, geschreven in de programmeertaal Rust. Dit onderscheidt Ruff van andere Python linters, die doorgaans in Python zelf zijn geschreven. Rust staat bekend om zijn snelheid en veiligheid, wat het een uitstekende keuze maakt voor een linter. Bovendien is Rust lichter om op hardware te draaien dan Python, aangezien Python een interpretatieve taal is en Rust een gecompileerde taal. Dit maakt Ruff bijzonder geschikt voor gebruik in CI-pipelines.
+Ruff\footnote{\url{https://astral.sh/ruff}} is een Python linter ontwikkeld door \textcite{Astral2024}, geschreven in de programmeertaal Rust. Dit onderscheidt Ruff van andere Python linters, die doorgaans in Python zelf zijn geschreven. Rust staat bekend om zijn snelheid en veiligheid, wat het een uitstekende keuze maakt voor een linter. Bovendien is Rust lichter om op hardware te draaien dan Python, aangezien Python een interpretatieve taal is en Rust een gecompileerde taal. Dit maakt Ruff bijzonder geschikt voor gebruik in \acrshort{CI}-pipelines.
 
 Een ander belangrijk voordeel van Rust is de stabiliteit van de taal. Er is slechts één versie van Rust en die wordt continu doorontwikkeld, wat ervoor zorgt dat code die vandaag gecompileerd wordt, ook over tien jaar nog gecompileerd kan worden. Dit biedt een aanzienlijke zekerheid voor de toekomstbestendigheid van software.
 
@@ -171,14 +171,14 @@ Ruff kan op bepaalde taken tien tot wel honderd keer sneller zijn dan zijn concu
 \label{subsec:dirtyrat}
 DirtyRat is een JavaScript linter die werd ontdekt tijdens het onderzoek naar hoe een linter gemaakt kon worden. Het is een linter die zelf in JavaScript geschreven is en waarvan de stapsgewijze opbouw te vinden is in het artikel van \textcite{BorgesLate2021}. Daarnaast is ook de broncode zelf te vinden op GitHub\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}. Dit was ook de reden waarom er besloten werd om JavaScript als kandidaat-programmeertaal te nemen.
 
-Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze proof of concept. JavaScript en andere programmeertalen hebben veel meer complexe structuren dan een BibLaTeX-bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het niet nodig om elke component over te nemen.
+Hoewel het artikel zeer in detail gaat en het grondig onderzocht werd, werd er vastgesteld dat het toch wat te uitgebreid is voor deze \acrlong{POC}. JavaScript en andere programmeertalen hebben veel meer complexe structuren dan een BibLaTeX-bestand. Dus hoewel het interessant was om te zien hoe een linter in JavaScript gemaakt kon worden, was het niet nodig om elke component over te nemen.
 
 \subsection{bibl}
 bibl\footnote{\url{https://gitlab.com/arnevdk/bibl}} is een linter voor BibTeX, de voorloper van BibLaTeX, geschreven in Python door Arne Van Den Kerchove. Het onderzoeken van een linter voor de voorloper van BibLaTeX leek bijzonder interessant om een goed inzicht te krijgen in wat precies verwacht kan worden van een linter. bibl biedt een uitgebreide lijst van regels, evenals een gedetailleerde projectstructuur en implementatiewijze van zowel de lintercode als de bijbehorende tests.
 
-bibl werd ontdekt net voordat er begonnen werd met de ontwikkeling van een eigen linter. Na een grondige analyse bleek dat bibl een goed opgebouwde, modulaire en efficiënte open-source linter is. bibl voldeed aan vrijwel alle criteria die voor de proof of concept linter waren opgesteld, wat leidde tot een nieuwe visie.
+bibl werd ontdekt net voordat er begonnen werd met de ontwikkeling van een eigen linter. Na een grondige analyse bleek dat bibl een goed opgebouwde, modulaire en efficiënte open-source linter is. bibl voldeed aan vrijwel alle criteria die voor de \acrlong{POC} linter waren opgesteld, wat leidde tot een nieuwe visie.
 
-Het maken van een linter zoals bibl, maar dan voor BibLaTeX in plaats van BibTeX, leek een haalbaar einddoel. Echter, vanwege een achterstand op de planning, zou het niet mogelijk zijn om een eigen linter even uitgebreid uit te werken. Hoewel het concept van een proof of concept wellicht bereikt kon worden, leek het voordeliger om bibl te proberen gebruiken en compatibel te maken met BibLaTeX.
+Het maken van een linter zoals bibl, maar dan voor BibLaTeX in plaats van BibTeX, leek een haalbaar einddoel. Echter, vanwege een achterstand op de planning, zou het niet mogelijk zijn om een eigen linter even uitgebreid uit te werken. Hoewel het concept van een \acrlong{POC} wellicht bereikt kon worden, leek het voordeliger om bibl te proberen gebruiken en compatibel te maken met BibLaTeX.
 
 Gezien de verschillen tussen BibTeX en BibLaTeX, was er enige twijfel over de haalbaarheid hiervan, vooral omdat bibl gebruik maakt van pybtex als parser. Op de site van pybtex\footnote{\url{https://pybtex.org/}} staat het volgende vermeld:
 
@@ -207,22 +207,22 @@ Om de gepaste programmeertaal te vinden, werden diverse kandidaat\babelhyphen{ha
 In een latere fase (sectie \ref{sec:mini-pocs}) werden er beperkte prototypes uitgewerkt in elk van deze talen; deze werden met elkaar vergeleken om te bepalen welke taal het meest geschikt zou zijn. Alle opties zijn cross-platform, wat belangrijk is gezien de linter bruikbaar dient te zijn voor iedereen. Alsook dient het een programmeertaal te zijn die gekend is, hiermee wordt er bedoeld dat het een programmeertaal moet zijn die al matuur is en door een groot aantal mensen gekend is.
 
 \subsection{Rust}
-Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de proof of concept kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen.
+Gezien de performantie van Ruff, leek Rust een gepaste optie om de linter in te maken. Ook de stijgende populariteit van de taal maakt dit een aantrekkelijke optie. Ondanks dat dit een onbekende taal is, leek het zeker wel een interessante taal om te leren. De haalbaarheid van de \acrlong{POC} kwam echter meer in gevaar door deze keuze. Hoewel de populariteit stijgt, blijft het wel nog een taal die niet door iedereen gekend is, in tegenstelling tot bijvoorbeeld JavaScript of Python. Een ander groot pluspunt aan Rust is dat code die vandaag compiled, ook nog binnen vijf of tien jaar zal kunnen compilen. Dit omdat de makers ervoor streven dat het een super compatibele programmeertaal is. Wat men niet met volle zekerheid van bijvoorbeeld Python\footnote{\url{https://devguide.python.org/versions/}} zou kunnen zeggen.
 
 Dankzij \textcite{Klabnik2022} kan er geleerd worden dat Rust een nadruk legt op typeveiligheid (typesafety) en geheugenveiligheid. Wanneer een taal of systeem geheugenveilig is, betekent dit dat het ontworpen is om toegangsfouten zoals bufferoverlopen, dangling pointers (verwijzingen naar vrijgegeven geheugen), en dubbele bevrijdingen van geheugen (double frees) te voorkomen. Deze soorten fouten kunnen leiden tot onvoorspelbaar gedrag, crashes, en beveiligingslekken zoals het uitvoeren van willekeurige code of informatie-lekken. Het is daarom een goede eigenschap om te hebben.
 
 \subsection{Python}
-Python was wellicht stukken trager in vergelijking met Rust in de test die gevonden werd, maar het blijft wel een taal waar iedereen gemakkelijk mee kan beginnen te werken. Voor het gemak van uitbreidbaarheid is dit dan weer een interessante optie om deze taal in optie te nemen. Zoals eerder vermeld door \textcite{TurnerTrauring2023} zou de performantie vooral bij de pipeline te merken zijn.
-De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zijn een grote zorg zal worden voor deze proof of concept.
+Python was misschien significant (tot meer dan tien keer) trager in vergelijking met Rust in de test die gevonden werd, maar het blijft wel een taal waar iedereen gemakkelijk mee kan beginnen te werken. Voor het gemak van uitbreidbaarheid is dit dan weer een interessante optie om deze taal in optie te nemen. Zoals eerder vermeld door \textcite{TurnerTrauring2023} zou de performantie vooral bij de pipeline te merken zijn.
+De echte vraag blijft momenteel nog altijd in hoeverre het minder performant zijn een grote zorg zal worden voor deze \acrlong{POC}.
 
 \subsection{JavaScript}
-Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of \acrshort{GUI} gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze proof of concept\autocite{Simpson2023}.
+Een zeer gekende scripting taal dat cross-platform gebruikt kan worden. Hoewel het eerder gericht is voor het gebruik in websites of \acrshort{GUI} gerichte scripts, is het ook mogelijk om er cli-tools mee te maken. De performantie werd onderzocht. JavaScript is ook een dynamisch typerende taal, wat in theorie voor problemen zou kunnen zorgen in sommige use-cases, al leek dit geen zorg te zijn voor deze \acrlong{POC}\autocite{Simpson2023}.
 
 \section{Opbouw linter}
 \label{sec:linteropbouw}
 Aan het begin van dit project werd de beslissing genomen om direct met de ontwikkeling van een prototype aan de slag te gaan, wat leidde tot de zoektocht naar geschikte bronnen. Deze beslissing werd genomen gezien de beperkte tijd en de hoeveelheid aan onderzoek die diende te gebeuren. Indien Rust de taal zou moeten worden, moest deze nog volledig aangeleerd worden en zou er immers geen kostbare tijd verloren mogen gaan.
 
-In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter (\texttt{DirtyRat\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}}), als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter proof of concept.
+In dit proces werden de artikelen van \textcite{BorgesLate2021}, die een stapsgewijze handleiding bieden voor het bouwen van een JavaScript-linter (\texttt{DirtyRat\footnote{\url{https://github.com/JoanaBLate/dirtyrat}}}), als bijzonder nuttig beschouwd. Ondanks dat de lectuur van deze serie aanvankelijk de indruk wekte dat het project complexer zou zijn dan verwacht, veranderde dit vermoeden na verder onderzoek naar de structuur van .bib-bestanden. Het werd duidelijk dat de ontwikkeling van een linter voor BibLaTeX minder complex is dan voor programmeertalen. Dit is te wijten aan het feit dat programmeertalen loops, conditionele statements en een scala aan andere complexe elementen bevatten, terwijl BibLaTeX gekenmerkt wordt door een consistente en gestandaardiseerde structuur, waardoor de noodzaak voor het opleggen van regels aanzienlijk vermindert. Het was echter wel zeer nuttig om alle componenten te zien die aan bod kunnen komen bij het bouwen van een linter en om deze in gedachte te houden voor de effectieve uitwerking van de BibLaTeX-linter \acrlong{POC}.
 
 Om een idee te krijgen van een algemene structuur, werd er gekeken naar zowel DirtyRat, gemaakt door \textcite{BorgesLate2021} en naar Flake8\footnote{\url{https://github.com/PyCQA/flake8}}. Dit onderzoek liet blijken dat een algemene structuur van een linter bestaat uit verschillende essentiële componenten die gezamenlijk zorgen voor een effectieve werking en uitbreidbaarheid van de tool. Deze componenten omvatten:
 
@@ -257,7 +257,7 @@ Deze componenten zorgen ervoor dat linters modulair, onderhoudbaar en uitbreidba
 
 De structuur van bibl \ref{fig:bibl_src} volgt een gebruikelijke pakket-gebaseerde aanpak voor het organiseren van code. Deze aanpak wordt vaak toegepast wanneer een project is opgezet als een herbruikbaar pakket, in plaats van een los script. De aanwezigheid van \texttt{\_\_init\_\_.py} zorgt er namelijk voor dat het pakket importeerbaar is \autocite{Loubser2021}. Dit is direct ook een indicator dat het om een pakket gaat.
 
-Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \texttt{bibl} uiteindelijk de basis kon worden van deze proof of concept, was het van groot belang om een zorgvuldige analyse uit te voeren en de codebase zo goed mogelijk te begrijpen.
+Om bibl te begrijpen, wordt de broncode van bibl zelf geanalyseerd. Gezien \texttt{bibl} uiteindelijk de basis kon worden van deze \acrlong{POC}, was het van groot belang om een zorgvuldige analyse uit te voeren en de codebase zo goed mogelijk te begrijpen.
 
 \subsection{\_\_init\_\_.py}
 Zoals eerder vermeld, is dit bestand kenmerkend bij pakketten. Het bestand is namelijk vereist voor Python om de directory als een pakket te behandelen. Het kan leeg zijn, maar het kan ook initialisatiecode of pakket-niveau-definities bevatten; in dit geval bevat het de huidige softwareversie.
@@ -1157,11 +1157,11 @@ De gestructureerde opzet van de configuratiebestanden en de modulariteit van de 
 
 Naast het bezitten van een goed doordachte structuur en opbouw, is \texttt{bibl} een waardevol hulpmiddel voor iedereen die werkt met BibTeX-bestanden, en draagt het bij aan de professionalisering en kwaliteit van academisch schrijven en onderzoek.
 
-Gezien al deze eigenschappen en in vergelijking met wat er onder een algemene linteropbouw (zie \ref{sec:linteropbouw}) verstaan wordt, is \texttt{bibl} zeker een geschikt voorbeeld voor deze proof of concept. 
+Gezien al deze eigenschappen en in vergelijking met wat er onder een algemene linteropbouw (zie \ref{sec:linteropbouw}) verstaan wordt, is \texttt{bibl} zeker een geschikt voorbeeld voor deze \acrlong{POC}. 
 
 % ----
 \section{Open-source}
-Net als bibl, heeft deze proof of concept als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
+Net als bibl, heeft deze \acrlong{POC} als visie om open source te zijn zodat iedereen er gebruik van kan maken en ook iedereen in staat is om een bijdrage te leveren.
 Open-source software voldoet aan specifieke criteria die het een waardevolle en veelzijdige keuze maken. Onder deze criteria wordt er iets als open-source erkend:
 \begin{itemize}
     \item \textbf{Vrij verspreid} kan worden, waardoor het voor iedereen toegankelijk is.
@@ -1181,11 +1181,11 @@ Kortom, open-source is toegankelijk, krachtig en bevordert innovatie in de digit
 \section{Pipelines}
 \label{sec:pipelines}
 
-Pipelines spelen een cruciale rol in de automatisering van het bouwen, testen en implementeren van applicaties. Ze maken het mogelijk om verschillende processen te orkestreren, zodat code consistent en betrouwbaar van ontwikkeling naar productie kan worden verplaatst. Ook voor deze proof of concept kan een pipeline als een essentieel onderdeel beschouwd worden.
+Pipelines spelen een cruciale rol in de automatisering van het bouwen, testen en implementeren van applicaties. Ze maken het mogelijk om verschillende processen te orkestreren, zodat code consistent en betrouwbaar van ontwikkeling naar productie kan worden verplaatst. Ook voor deze \acrlong{POC} kan een pipeline als een essentieel onderdeel beschouwd worden.
 
 \subsubsection{Functie van Pipelines}
 
-Pipelines automatiseren en stroomlijnen het proces van softwareontwikkeling door de workflow op te delen in afzonderlijke fasen. Elke fase voert een specifieke taak uit, zoals het bouwen van de code, het uitvoeren van tests, het voorbereiden en distribueren van de software, alsook het implementeren ervan in verschillende omgevingen. Deze automatisering vermindert de handmatige inspanning, zorgt voor consistentie en versnelt de feedbackloop voor ontwikkelaars. Hoewel CI (Continuous Integration) en CD (Continuous Deployment) pipelines vaak de eerste soorten zijn die opkomen, zijn pipelines ook voor vele andere zaken in te schakelen. Denk maar aan verschillende operationele taken, zoals het vernieuwen van certificaten, het detecteren van infrastructuurdrift en het uitvoeren van gezondheidscontroles op geïmplementeerde applicaties \autocite{Merode2023}.
+Pipelines automatiseren en stroomlijnen het proces van softwareontwikkeling door de workflow op te delen in afzonderlijke fasen. Elke fase voert een specifieke taak uit, zoals het bouwen van de code, het uitvoeren van tests, het voorbereiden en distribueren van de software, alsook het implementeren ervan in verschillende omgevingen. Deze automatisering vermindert de handmatige inspanning, zorgt voor consistentie en versnelt de feedbackloop voor ontwikkelaars. Hoewel \acrfull{CI} en \acrfull{CD} pipelines vaak de eerste soorten zijn die opkomen, zijn pipelines ook voor vele andere zaken in te schakelen. Denk maar aan verschillende operationele taken, zoals het vernieuwen van certificaten, het detecteren van infrastructuurdrift en het uitvoeren van gezondheidscontroles op geïmplementeerde applicaties \autocite{Merode2023}.
 
 \subsubsection{Structuur van Pipelines}
 
@@ -1218,10 +1218,10 @@ De resultaten van pipeline-uitvoeringen zijn cruciaal voor verschillende belangh
 Pipelines kunnen ook worden ontworpen om complexe workflows te ondersteunen, zoals multi-branch en multi-stage configuraties, die verschillende takken van code en verschillende fasen van ontwikkeling tegelijkertijd verwerken \autocite{Merode2023}.
 
 Samengevat zijn pipelines een essentieel onderdeel van moderne softwareontwikkeling. Ze bieden automatisering, consistentie en efficiëntie in de continue integratie- en leveringsprocessen. Ze helpen bij het handhaven van de codekwaliteit, verminderen handmatige interventie en versnellen de implementatiecycli, wat uiteindelijk leidt tot meer betrouwbare en onderhoudbare softwaresystemen. 
-Binnen deze proof of concept zouden een CI en een CD pipeline goed benut kunnen worden.
+Binnen deze \acrlong{POC} zouden een \acrshort{CI} en een \acrshort{CD} pipeline goed benut kunnen worden.
 
 \section{Kanban}
-Overzichtelijk te werk gaan is voor elk project van belang. Ook bij het ontwikkelen van deze proof of concept was er geen uitzondering. Om een simplistisch maar effectief overzicht te behouden, werd er een kanbanbord gebruikt.
+Overzichtelijk te werk gaan is voor elk project van belang. Ook bij het ontwikkelen van deze \acrlong{POC} was er geen uitzondering. Om een simplistisch maar effectief overzicht te behouden, werd er een kanbanbord gebruikt.
 
 Een Kanban-bord is een visueel hulpmiddel dat teams gebruikt voor het beheren van projecttaken.
 
